@@ -267,10 +267,18 @@ export default function IndustriesMarkets() {
         @media (max-width: 767px) {
           .markets-grid {
             grid-template-columns: 1fr;
-          }
-          .markets-col {
             padding-left: 24px !important;
             padding-right: 24px !important;
+          }
+          .markets-col {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            padding-top: 0 !important;
+            padding-bottom: 40px !important;
+          }
+          .markets-col:last-of-type {
+            padding-top: 40px !important;
+            border-top: 1px solid rgba(204, 166, 98, 0.3);
           }
           .markets-col :global(a) {
             width: 100% !important;

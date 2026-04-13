@@ -176,9 +176,12 @@ export default function JobsDualCTA() {
             padding-right: 0;
           }
           .jobs-dual-col:first-of-type {
-            padding-bottom: 60px;
-            margin-bottom: 60px;
+            padding-bottom: 48px;
+            margin-bottom: 0;
             border-bottom: 1px solid #cca662;
+          }
+          .jobs-dual-col:last-of-type {
+            padding-top: 48px;
           }
           .jobs-dual-col :global(a) {
             width: 100% !important;
