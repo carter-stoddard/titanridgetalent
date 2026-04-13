@@ -45,7 +45,7 @@ export default function Navbar() {
             ? "bg-titan-navy/95 backdrop-blur-md shadow-lg shadow-black/20"
             : "bg-transparent"
         }`}
-        style={{ paddingTop: "env(safe-area-inset-top)" }}
+        style={{ paddingTop: scrolled || menuOpen ? "env(safe-area-inset-top)" : "0" }}
       >
         <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-5 sm:px-10 lg:px-16">
           <Link href="/" className="group flex items-center">
