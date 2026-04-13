@@ -56,6 +56,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       className="relative flex min-h-dvh items-start justify-start overflow-hidden"
+      style={{ paddingTop: "env(safe-area-inset-top)" }}
     >
       {/* Background — cinematic hero image */}
       <div className="absolute inset-0 z-0">

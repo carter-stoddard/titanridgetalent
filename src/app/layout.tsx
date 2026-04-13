@@ -44,6 +44,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -56,7 +57,7 @@ export default function RootLayout({
       lang="en"
       className={`${barlowCondensed.variable} ${lora.variable} antialiased`}
     >
-      <body className="text-titan-offwhite" style={{ background: "transparent" }}>
+      <body className="bg-titan-navy text-titan-offwhite">
         <LoaderGate>{children}</LoaderGate>
       </body>
     </html>
