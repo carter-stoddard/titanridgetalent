@@ -2,7 +2,7 @@ export default function TestimonialsHero() {
   return (
     <section
       className="relative w-full flex items-center overflow-hidden"
-      style={{ height: "55vh", minHeight: "440px", backgroundColor: "#1E2D45", paddingTop: "env(safe-area-inset-top)" }}
+      style={{ height: "55vh", minHeight: "440px", backgroundColor: "#1E2D45" }}
     >
       <img
         src="/images/testimonials-hero.jpg"
