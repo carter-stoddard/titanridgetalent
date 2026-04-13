@@ -27,10 +27,6 @@ export const metadata: Metadata = {
     icon: "/favicon.svg",
     apple: "/favicon.svg",
   },
-  other: {
-    "apple-mobile-web-app-capable": "yes",
-    "apple-mobile-web-app-status-bar-style": "black-translucent",
-  },
   description:
     "Titan Ridge Talent connects industrial and corporate employers with people who actually fit the role. Relationship-first recruiting with 30+ years of combined experience.",
   metadataBase: new URL("https://titanridgetalent.com"),
@@ -48,8 +44,6 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  viewportFit: "cover",
-  themeColor: "#F5F4F0",
 };
 
 export default function RootLayout({
@@ -62,7 +56,7 @@ export default function RootLayout({
       lang="en"
       className={`${barlowCondensed.variable} ${lora.variable} antialiased`}
     >
-      <body className="bg-titan-offwhite text-titan-offwhite">
+      <body className="text-titan-offwhite" style={{ background: "transparent" }}>
         <LoaderGate>{children}</LoaderGate>
       </body>
     </html>

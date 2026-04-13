@@ -23,7 +23,7 @@
 
 html, body {
   overscroll-behavior: none;
-  background-color: var(--titan-offwhite);
+  background-color: transparent;
   color: var(--titan-offwhite);
   margin: 0 !important;
   padding: 0 !important;
