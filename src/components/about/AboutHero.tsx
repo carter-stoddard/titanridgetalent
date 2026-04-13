@@ -1,0 +1,60 @@
+export default function AboutHero() {
+  return (
+    <section
+      className="relative w-full flex items-center overflow-hidden"
+      style={{ height: "55vh", minHeight: "440px", backgroundColor: "#1E2D45" }}
+    >
+      <img
+        src="/images/about-hero.png"
+        alt="Cinematic industrial workplace at golden hour"
+        className="absolute inset-0 h-full w-full object-cover"
+        style={{ objectPosition: "center" }}
+      />
+
+      {/* Dark overlay */}
+      <div
+        className="absolute inset-0"
+        style={{ backgroundColor: "rgba(20, 31, 49, 0.85)" }}
+      />
+
+      {/* Content */}
+      <div
+        className="about-hero-content relative w-full"
+        style={{ paddingLeft: "80px", paddingRight: "80px" }}
+      >
+        <div className="max-w-3xl">
+          <p
+            className="font-display font-medium uppercase"
+            style={{
+              fontSize: "11px",
+              letterSpacing: "4px",
+              color: "#CCA662",
+              marginBottom: "16px",
+            }}
+          >
+            Our Story
+          </p>
+          <h1
+            className="font-display font-bold uppercase"
+            style={{
+              fontSize: "clamp(42px, 6vw, 64px)",
+              lineHeight: 0.95,
+              color: "#FFFFFF",
+            }}
+          >
+            Built Different. On Purpose.
+          </h1>
+        </div>
+      </div>
+
+      <style>{`
+        @media (max-width: 767px) {
+          .about-hero-content {
+            padding-left: 24px !important;
+            padding-right: 24px !important;
+          }
+        }
+      `}</style>
+    </section>
+  );
+}

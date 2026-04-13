@@ -1,26 +1,95 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --titan-navy: #141F31;
+  --titan-gold: #CCA662;
+  --titan-offwhite: #F5F4F0;
+  --titan-charcoal: #2A2A2A;
+  --titan-card: #1E2D45;
+  --gold-start: #C09958;
+  --gold-mid: #CCA662;
+  --gold-end: #DCB86A;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-titan-navy: var(--titan-navy);
+  --color-titan-gold: var(--titan-gold);
+  --color-titan-offwhite: var(--titan-offwhite);
+  --color-titan-charcoal: var(--titan-charcoal);
+  --color-titan-card: var(--titan-card);
+  --font-display: var(--font-barlow-condensed);
+  --font-body: var(--font-lora);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html, body {
+  overscroll-behavior: none;
+  background-color: var(--titan-navy);
+  color: var(--titan-offwhite);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: clip;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+/* Prevent white flash on overscroll */
+html {
+  background-color: var(--titan-navy);
+}
+
+/* Safe area padding for notched devices */
+.safe-top { padding-top: env(safe-area-inset-top); }
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+
+/* Gold gradient text utility */
+.text-gold-gradient {
+  background: linear-gradient(135deg, var(--gold-start), var(--gold-mid), var(--gold-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gold gradient background utility */
+.bg-gold-gradient {
+  background: linear-gradient(135deg, var(--gold-start), var(--gold-mid), var(--gold-end));
+}
+
+/* Loader styles */
+.loader-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--titan-navy);
+}
+
+/* Hero scroll indicator looping line */
+@keyframes scroll-indicator {
+  0% {
+    transform: translateY(-100%);
+  }
+  60% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.scroll-indicator-line {
+  animation: scroll-indicator 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* SVG stroke animation base */
+.logo-stroke path {
+  fill: none;
+  stroke: var(--titan-gold);
+  stroke-width: 2;
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
 }
