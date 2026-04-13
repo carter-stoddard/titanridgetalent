@@ -45,18 +45,6 @@ export default function JobsHero() {
           >
             Find Your Next Role.
           </h1>
-          <p
-            className="font-body italic"
-            style={{
-              fontSize: "17px",
-              lineHeight: 1.6,
-              color: "rgba(255, 255, 255, 0.65)",
-              maxWidth: "640px",
-            }}
-          >
-            We work with industrial and corporate employers across multiple
-            sectors. Every role we post is one we&apos;ve personally vetted.
-          </p>
         </div>
       </div>
 

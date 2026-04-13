@@ -45,18 +45,6 @@ export default function TestimonialsHero() {
           >
             Don&apos;t Take Our Word For It.
           </h1>
-          <p
-            className="font-body italic"
-            style={{
-              fontSize: "17px",
-              lineHeight: 1.6,
-              color: "rgba(255, 255, 255, 0.65)",
-              maxWidth: "640px",
-            }}
-          >
-            Real results from the companies we&apos;ve helped build — and the
-            people we&apos;ve helped place.
-          </p>
         </div>
       </div>
 

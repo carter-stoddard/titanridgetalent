@@ -138,7 +138,7 @@ export default function Testimonials() {
         paddingBottom: "120px",
       }}
     >
-      <div style={{ paddingLeft: "80px", paddingRight: "80px", textAlign: "center" }}>
+      <div className="testimonials-inner" style={{ paddingLeft: "80px", paddingRight: "80px", textAlign: "center" }}>
         {/* Eyebrow */}
         <p
           ref={eyebrowRef}
@@ -232,7 +232,7 @@ export default function Testimonials() {
           </p>
 
           {/* Attribution */}
-          <div className="flex items-center justify-center gap-4">
+          <div className="testimonials-attribution flex items-center justify-center gap-4">
             <div
               className="flex items-center justify-center flex-shrink-0"
               style={{
@@ -311,9 +311,16 @@ export default function Testimonials() {
 
       <style jsx>{`
         @media (max-width: 767px) {
-          div[style*="paddingLeft: \"80px\""] {
+          .testimonials-inner {
             padding-left: 24px !important;
             padding-right: 24px !important;
+            text-align: left !important;
+          }
+          .testimonials-attribution {
+            justify-content: flex-start !important;
+          }
+          .testimonials-inner :global(.flex.items-center.justify-center[style*="gap"]) {
+            justify-content: flex-start !important;
           }
         }
       `}</style>

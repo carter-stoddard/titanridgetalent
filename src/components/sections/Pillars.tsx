@@ -148,7 +148,7 @@ export default function Pillars() {
               colsRef.current[i] = el;
             }}
             className={`relative flex flex-col items-center text-center ${
-              i < stats.length - 1 ? "md:border-r" : ""
+              i < stats.length - 1 ? "border-b md:border-b-0 md:border-r" : ""
             }`}
             style={{
               opacity: 0,
@@ -246,9 +246,14 @@ export default function Pillars() {
             padding-left: 24px !important;
             padding-right: 24px !important;
           }
+          .pillars-grid {
+            gap: 0 !important;
+          }
           .pillars-grid > div {
             text-align: left !important;
             align-items: flex-start !important;
+            padding-top: 40px !important;
+            padding-bottom: 40px !important;
           }
           .pillars-grid > div p {
             max-width: none !important;

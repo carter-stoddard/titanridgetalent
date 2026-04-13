@@ -83,7 +83,7 @@ export default function HowItWorks() {
         paddingBottom: "120px",
       }}
     >
-      <div style={{ paddingLeft: "80px", paddingRight: "80px" }}>
+      <div className="how-it-works-inner" style={{ paddingLeft: "80px", paddingRight: "80px" }}>
         {/* Eyebrow */}
         <p
           ref={eyebrowRef}
@@ -101,10 +101,9 @@ export default function HowItWorks() {
         {/* Headline */}
         <h2
           ref={headlineRef}
-          className="font-display uppercase"
+          className="font-display font-semibold uppercase"
           style={{
             fontSize: "clamp(36px, 4.5vw, 52px)",
-            fontWeight: 700,
             lineHeight: 0.95,
             color: "#FFFFFF",
             marginTop: "12px",
@@ -186,6 +185,16 @@ export default function HowItWorks() {
         </div>
 
       </div>
+
+      <style jsx>{`
+        @media (max-width: 767px) {
+          .how-it-works-inner {
+            padding-left: 24px !important;
+            padding-right: 24px !important;
+            text-align: left;
+          }
+        }
+      `}</style>
     </section>
   );
 }

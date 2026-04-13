@@ -45,18 +45,6 @@ export default function IndustriesHero() {
           >
             From the Floor to the Boardroom.
           </h1>
-          <p
-            className="font-body italic"
-            style={{
-              fontSize: "17px",
-              lineHeight: 1.6,
-              color: "rgba(255, 255, 255, 0.65)",
-              maxWidth: "640px",
-            }}
-          >
-            Thirty years of experience across industrial operations and
-            corporate organizations. We know both worlds from the inside.
-          </p>
         </div>
       </div>
 

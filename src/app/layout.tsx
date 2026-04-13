@@ -49,7 +49,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#141F31",
+  themeColor: "#F5F4F0",
 };
 
 export default function RootLayout({
@@ -62,7 +62,7 @@ export default function RootLayout({
       lang="en"
       className={`${barlowCondensed.variable} ${lora.variable} antialiased`}
     >
-      <body className="bg-titan-navy text-titan-offwhite">
+      <body className="bg-titan-offwhite text-titan-offwhite">
         <LoaderGate>{children}</LoaderGate>
       </body>
     </html>
