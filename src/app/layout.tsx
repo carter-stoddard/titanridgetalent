@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Barlow_Condensed, Lora } from "next/font/google";
 import "./globals.css";
 import LoaderGate from "@/components/animations/LoaderGate";
@@ -38,6 +38,12 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     images: ["/images/titan-ridge-hero.webp"],
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
