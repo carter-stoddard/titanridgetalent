@@ -148,7 +148,7 @@ export default function ClosingCTA() {
               style={{ gap: "16px", opacity: 0 }}
             >
               <a
-                href="#jobs"
+                href="/jobs"
                 className="font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
                 style={{
                   height: "52px",

@@ -117,7 +117,7 @@ export default function Hero() {
               I&apos;m Hiring
             </a>
             <a
-              href="#jobs"
+              href="/jobs"
               className="font-display inline-flex items-center justify-center rounded-full px-8 py-3.5 text-sm font-bold uppercase tracking-[0.15em] text-titan-navy transition-all duration-300 hover:border-titan-gold hover:text-titan-gold hover:-translate-y-0.5 active:translate-y-0"
               style={{ border: "2px solid #141F31" }}
             >

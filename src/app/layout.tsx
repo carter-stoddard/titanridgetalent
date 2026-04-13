@@ -25,6 +25,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
+  other: {
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "black-translucent",
   },
   description:
     "Titan Ridge Talent connects industrial and corporate employers with people who actually fit the role. Relationship-first recruiting with 30+ years of combined experience.",
@@ -44,6 +49,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
+  themeColor: "#141F31",
 };
 
 export default function RootLayout({

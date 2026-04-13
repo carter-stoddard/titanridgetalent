@@ -246,6 +246,13 @@ export default function Pillars() {
             padding-left: 24px !important;
             padding-right: 24px !important;
           }
+          .pillars-grid > div {
+            text-align: left !important;
+            align-items: flex-start !important;
+          }
+          .pillars-grid > div p {
+            max-width: none !important;
+          }
         }
       `}</style>
     </section>

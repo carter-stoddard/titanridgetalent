@@ -45,6 +45,7 @@ export default function Navbar() {
             ? "bg-titan-navy/95 backdrop-blur-md shadow-lg shadow-black/20"
             : "bg-transparent"
         }`}
+        style={{ paddingTop: "env(safe-area-inset-top)" }}
       >
         <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-5 sm:px-10 lg:px-16">
           <Link href="/" className="group flex items-center">
@@ -78,7 +79,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3 sm:gap-4">
             <Link
               href="/contact"
-              className="font-display rounded-full bg-gold-gradient px-5 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-[0.15em] text-titan-navy transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
+              className="hidden lg:inline-flex font-display rounded-full bg-gold-gradient px-5 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-[0.15em] text-titan-navy transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
             >
               Hire Talent
             </Link>
@@ -180,10 +181,29 @@ export default function Navbar() {
             ))}
           </ul>
 
+          <Link
+            href="/contact"
+            onClick={() => setMenuOpen(false)}
+            className="font-display font-bold uppercase inline-flex items-center justify-center w-full transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25"
+            style={{
+              marginTop: "32px",
+              height: "52px",
+              borderRadius: "9999px",
+              backgroundColor: "#CCA662",
+              color: "#141F31",
+              fontSize: "14px",
+              letterSpacing: "3px",
+              opacity: menuOpen ? 1 : 0,
+              transition: `opacity 0.4s ease ${navLinks.length * 0.06}s`,
+            }}
+          >
+            Hire Talent
+          </Link>
+
           <div
             className="w-full"
             style={{
-              marginTop: "48px",
+              marginTop: "32px",
               height: "1px",
               backgroundColor: "rgba(204, 166, 98, 0.4)",
             }}

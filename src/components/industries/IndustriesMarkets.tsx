@@ -153,7 +153,7 @@ export default function IndustriesMarkets() {
           />
           <StatRow stats={industrialStats} />
           <a
-            href="#industrial"
+            href="/jobs"
             className="font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
             style={{
               marginTop: "32px",
@@ -224,7 +224,7 @@ export default function IndustriesMarkets() {
           />
           <StatRow stats={corporateStats} />
           <a
-            href="#corporate"
+            href="/jobs"
             className="font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
             style={{
               marginTop: "32px",

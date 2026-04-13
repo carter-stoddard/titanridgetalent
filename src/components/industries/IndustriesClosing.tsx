@@ -63,8 +63,6 @@ export default function IndustriesClosing() {
           </Link>
           <a
             href="/jobs"
-            target="_blank"
-            rel="noopener noreferrer"
             className="closing-cta font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 active:translate-y-0"
             style={{
               height: "52px",

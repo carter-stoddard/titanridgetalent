@@ -29,7 +29,9 @@ html, body {
   padding: 0;
   min-height: 100%;
   min-height: 100dvh;
+  -webkit-overflow-scrolling: touch;
 }
+
 
 body {
   overflow-x: clip;
