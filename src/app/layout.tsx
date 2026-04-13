@@ -32,9 +32,11 @@ export const metadata: Metadata = {
   openGraph: {
     siteName: "Titan Ridge Talent",
     type: "website",
+    images: [{ url: "/images/titan-ridge-hero.webp", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
+    images: ["/images/titan-ridge-hero.webp"],
   },
 };
 

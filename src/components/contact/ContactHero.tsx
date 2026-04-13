@@ -5,7 +5,7 @@ export default function ContactHero() {
       style={{ height: "55vh", minHeight: "440px", backgroundColor: "#1E2D45" }}
     >
       <img
-        src="/images/contact-hero.png"
+        src="/images/contact-hero.jpg"
         alt="Two professionals in genuine conversation — contact Titan Ridge"
         className="absolute inset-0 h-full w-full object-cover"
         style={{ objectPosition: "center" }}

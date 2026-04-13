@@ -5,7 +5,7 @@ export default function JobsHero() {
       style={{ height: "55vh", minHeight: "440px", backgroundColor: "#1E2D45" }}
     >
       <img
-        src="/images/jobs-hero.png"
+        src="/images/jobs-hero.jpg"
         alt="Professional reviewing career opportunity in warm environment"
         className="absolute inset-0 h-full w-full object-cover"
         style={{ objectPosition: "center" }}

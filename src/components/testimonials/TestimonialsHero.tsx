@@ -5,7 +5,7 @@ export default function TestimonialsHero() {
       style={{ height: "55vh", minHeight: "440px", backgroundColor: "#1E2D45" }}
     >
       <img
-        src="/images/testimonials-hero.png"
+        src="/images/testimonials-hero.jpg"
         alt="Warm genuine connection moment — what clients and candidates say about Titan Ridge"
         className="absolute inset-0 h-full w-full object-cover"
         style={{ objectPosition: "center 30%" }}

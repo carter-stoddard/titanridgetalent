@@ -172,7 +172,7 @@ export default function Industries() {
               }}
             >
               <img
-                src="/images/where-we-work.png"
+                src="/images/where-we-work.jpg"
                 alt="Industrial and corporate landscape — where Titan Ridge works"
                 className="absolute inset-0 h-full w-full object-cover"
                 style={{ objectPosition: "center" }}

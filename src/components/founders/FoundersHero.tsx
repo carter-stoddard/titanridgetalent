@@ -5,7 +5,7 @@ export default function FoundersHero() {
       style={{ height: "55vh", minHeight: "440px", backgroundColor: "#1E2D45" }}
     >
       <img
-        src="/images/founders-hero.png"
+        src="/images/founders-hero.jpg"
         alt="Cinematic professional environment — Titan Ridge founders"
         className="absolute inset-0 h-full w-full object-cover"
         style={{ objectPosition: "center" }}

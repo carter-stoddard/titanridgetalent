@@ -5,7 +5,7 @@ export default function IndustriesHero() {
       style={{ height: "55vh", minHeight: "440px", backgroundColor: "#1E2D45" }}
     >
       <img
-        src="/images/industries-hero.png"
+        src="/images/industries-hero.jpg"
         alt="Wide cinematic view of industrial and corporate environments"
         className="absolute inset-0 h-full w-full object-cover"
         style={{ objectPosition: "center" }}

@@ -5,7 +5,7 @@ export default function AboutHero() {
       style={{ height: "55vh", minHeight: "440px", backgroundColor: "#1E2D45" }}
     >
       <img
-        src="/images/about-hero.png"
+        src="/images/about-hero.jpg"
         alt="Cinematic industrial workplace at golden hour"
         className="absolute inset-0 h-full w-full object-cover"
         style={{ objectPosition: "center" }}

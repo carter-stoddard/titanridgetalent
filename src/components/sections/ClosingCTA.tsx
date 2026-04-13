@@ -196,7 +196,7 @@ export default function ClosingCTA() {
               }}
             >
               <img
-                src="/images/right-role.png"
+                src="/images/right-role.jpg"
                 alt="Summit view at golden hour — ridge looking out over horizon"
                 className="absolute inset-0 h-full w-full object-cover"
                 style={{ objectPosition: "center" }}
