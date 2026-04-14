@@ -25,7 +25,7 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
       onComplete: () => {
         gsap.to(loaderRef.current, {
           opacity: 0,
-          duration: 0.7,
+          duration: 0.45,
           ease: "power2.inOut",
           onComplete,
         });
@@ -33,30 +33,18 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
     });
 
     // Start: logo hidden, slightly scaled down
-    gsap.set(svg, { opacity: 0, scale: 0.92 });
+    gsap.set(svg, { opacity: 0, scale: 0.94 });
 
     // Cinematic fade + scale in
     tl.to(svg, {
       opacity: 1,
       scale: 1,
-      duration: 1.4,
+      duration: 0.8,
       ease: "power3.out",
     });
 
-    // Subtle breathing pulse
-    tl.to(svg, {
-      scale: 1.03,
-      duration: 0.5,
-      ease: "power2.out",
-    });
-    tl.to(svg, {
-      scale: 1,
-      duration: 0.5,
-      ease: "power2.inOut",
-    });
-
-    // Hold briefly before exit
-    tl.to({}, { duration: 0.4 });
+    // Brief hold for presence
+    tl.to({}, { duration: 0.2 });
 
     return () => {
       tl.kill();

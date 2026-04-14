@@ -65,13 +65,7 @@ export default function Hero() {
           className="hero-image h-full w-full object-cover"
         />
         {/* Directional gradient overlay — dark left, transparent right */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to right, rgba(245, 244, 240, 0.55) 0%, rgba(245, 244, 240, 0.45) 50%, rgba(245, 244, 240, 0.05) 100%)",
-          }}
-        />
+        <div className="hero-overlay absolute inset-0" />
       </div>
 
       {/* Content */}
@@ -131,9 +125,25 @@ export default function Hero() {
         .hero-image {
           object-position: center;
         }
+        .hero-overlay {
+          background: linear-gradient(
+            to right,
+            rgba(245, 244, 240, 0.55) 0%,
+            rgba(245, 244, 240, 0.45) 50%,
+            rgba(245, 244, 240, 0.05) 100%
+          );
+        }
         @media (max-width: 767px) {
           .hero-image {
             object-position: 20% center;
+          }
+          .hero-overlay {
+            background: linear-gradient(
+              to bottom,
+              rgba(245, 244, 240, 0.78) 0%,
+              rgba(245, 244, 240, 0.55) 70%,
+              rgba(245, 244, 240, 0.25) 100%
+            );
           }
           .hero-content {
             padding-left: 24px !important;
