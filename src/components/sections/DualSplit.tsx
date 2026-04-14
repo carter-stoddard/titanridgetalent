@@ -308,14 +308,13 @@ export default function DualSplit() {
               >
                 <Link
                   href="/jobs"
-                  className="font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:bg-titan-navy hover:text-titan-offwhite hover:-translate-y-0.5 active:translate-y-0 candidate-cta"
+                  className="font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-navy/25 hover:-translate-y-0.5 active:translate-y-0 candidate-cta"
                   style={{
                     height: "56px",
                     padding: "0 36px",
                     borderRadius: "9999px",
-                    backgroundColor: "transparent",
-                    border: "2px solid #141F31",
-                    color: "#141F31",
+                    backgroundColor: "#141F31",
+                    color: "#F5F4F0",
                     fontSize: "15px",
                     letterSpacing: "3px",
                   }}

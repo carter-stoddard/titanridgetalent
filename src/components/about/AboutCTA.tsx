@@ -62,7 +62,7 @@ export default function AboutCTA() {
             letterSpacing: "3px",
           }}
         >
-          Meet the Team
+          Meet the Founder
         </Link>
       </div>
     </section>

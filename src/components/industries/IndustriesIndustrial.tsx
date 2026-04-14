@@ -193,24 +193,18 @@ export default function IndustriesIndustrial() {
             style={{ padding: "24px" }}
           >
             <div
-              className="relative w-full overflow-hidden flex items-center justify-center"
+              className="relative w-full overflow-hidden"
               style={{
                 aspectRatio: "1 / 1",
                 borderRadius: "8px",
-                backgroundColor: "#C4B89A",
               }}
             >
-              <p
-                className="font-display uppercase text-center px-6"
-                style={{
-                  fontSize: "13px",
-                  letterSpacing: "2px",
-                  color: "#141F31",
-                }}
-              >
-                Industrial Image — job site, operations floor, cinematic warm
-                light
-              </p>
+              <img
+                src="/images/industrial-jobs.jpg"
+                alt="Industrial job site — operations floor in cinematic warm light"
+                className="absolute inset-0 h-full w-full object-cover"
+                style={{ objectPosition: "center" }}
+              />
             </div>
           </div>
         </div>
@@ -221,7 +215,7 @@ export default function IndustriesIndustrial() {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 60px;
-          align-items: start;
+          align-items: center;
         }
         .sectors-grid {
           display: grid;

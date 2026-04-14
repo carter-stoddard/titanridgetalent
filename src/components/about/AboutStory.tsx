@@ -116,7 +116,7 @@ export default function AboutStory() {
                 marginTop: "40px",
               }}
             >
-              Meet the Team
+              Meet the Founder
             </Link>
           </div>
 

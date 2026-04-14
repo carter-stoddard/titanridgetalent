@@ -61,18 +61,31 @@ export default function Navbar() {
 
           {/* Desktop Nav Links */}
           <ul className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={`font-display text-[13px] font-semibold uppercase tracking-[0.15em] transition-colors duration-300 hover:text-titan-gold ${
-                    scrolled ? "text-titan-offwhite/70" : darkHero ? "text-titan-offwhite/70" : "text-titan-navy"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className={`relative font-display text-[13px] font-semibold uppercase tracking-[0.15em] transition-colors duration-300 hover:text-titan-gold ${
+                      isActive
+                        ? "text-titan-gold"
+                        : scrolled
+                        ? "text-titan-offwhite/70"
+                        : darkHero
+                        ? "text-titan-offwhite/70"
+                        : "text-titan-navy"
+                    }`}
+                    style={{
+                      paddingBottom: "6px",
+                      borderBottom: isActive ? "1px solid #CCA662" : "1px solid transparent",
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
 
           {/* Right side — CTA + mobile toggle */}

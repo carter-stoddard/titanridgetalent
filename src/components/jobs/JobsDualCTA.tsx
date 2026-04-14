@@ -23,62 +23,7 @@ export default function JobsDualCTA() {
             aria-hidden="true"
           />
 
-          {/* LEFT — Candidates */}
-          <div className="jobs-dual-col">
-            <p
-              className="font-display font-medium uppercase"
-              style={{
-                fontSize: "11px",
-                letterSpacing: "4px",
-                color: "#CCA662",
-                marginBottom: "16px",
-              }}
-            >
-              For Candidates
-            </p>
-            <h3
-              className="font-display font-semibold uppercase"
-              style={{
-                fontSize: "clamp(28px, 3.5vw, 36px)",
-                lineHeight: 0.95,
-                color: "#141F31",
-                marginBottom: "16px",
-              }}
-            >
-              Don&apos;t See the Right Role?
-            </h3>
-            <p
-              className="font-body"
-              style={{
-                fontSize: "16px",
-                lineHeight: 1.7,
-                color: "#2A2A2A",
-                marginBottom: "32px",
-              }}
-            >
-              Send us your resume directly. We work active searches across
-              multiple sectors and we keep strong candidates in mind for roles
-              as they come in. The right opportunity might be one conversation
-              away.
-            </p>
-            <a
-              href="mailto:support@titanridgetalent.com"
-              className="jobs-dual-cta-button font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
-              style={{
-                height: "52px",
-                padding: "0 32px",
-                borderRadius: "9999px",
-                backgroundColor: "#CCA662",
-                color: "#141F31",
-                fontSize: "14px",
-                letterSpacing: "3px",
-              }}
-            >
-              Send Your Resume
-            </a>
-          </div>
-
-          {/* RIGHT — Employers */}
+          {/* LEFT — Employers */}
           <div className="jobs-dual-col">
             <p
               className="font-display font-medium uppercase"
@@ -130,6 +75,61 @@ export default function JobsDualCTA() {
             >
               Let&apos;s Talk Hiring
             </Link>
+          </div>
+
+          {/* RIGHT — Candidates */}
+          <div className="jobs-dual-col">
+            <p
+              className="font-display font-medium uppercase"
+              style={{
+                fontSize: "11px",
+                letterSpacing: "4px",
+                color: "#CCA662",
+                marginBottom: "16px",
+              }}
+            >
+              For Candidates
+            </p>
+            <h3
+              className="font-display font-semibold uppercase"
+              style={{
+                fontSize: "clamp(28px, 3.5vw, 36px)",
+                lineHeight: 0.95,
+                color: "#141F31",
+                marginBottom: "16px",
+              }}
+            >
+              Don&apos;t See the Right Role?
+            </h3>
+            <p
+              className="font-body"
+              style={{
+                fontSize: "16px",
+                lineHeight: 1.7,
+                color: "#2A2A2A",
+                marginBottom: "32px",
+              }}
+            >
+              Send us your resume directly. We work active searches across
+              multiple sectors and we keep strong candidates in mind for roles
+              as they come in. The right opportunity might be one conversation
+              away.
+            </p>
+            <a
+              href="mailto:support@titanridgetalent.com"
+              className="jobs-dual-cta-button font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-navy/25 hover:-translate-y-0.5 active:translate-y-0"
+              style={{
+                height: "52px",
+                padding: "0 32px",
+                borderRadius: "9999px",
+                backgroundColor: "#141F31",
+                color: "#F5F4F0",
+                fontSize: "14px",
+                letterSpacing: "3px",
+              }}
+            >
+              Send Your Resume
+            </a>
           </div>
         </div>
       </div>

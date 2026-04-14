@@ -62,14 +62,14 @@ export default function Hero() {
         <img
           src="/images/titan-ridge-hero.jpg"
           alt="Dramatic ridge landscape at golden hour"
-          className="h-full w-full object-cover object-center"
+          className="hero-image h-full w-full object-cover"
         />
         {/* Directional gradient overlay — dark left, transparent right */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to right, rgba(245, 244, 240, 0.72) 0%, rgba(245, 244, 240, 0.65) 50%, rgba(245, 244, 240, 0.1) 100%)",
+              "linear-gradient(to right, rgba(245, 244, 240, 0.55) 0%, rgba(245, 244, 240, 0.45) 50%, rgba(245, 244, 240, 0.05) 100%)",
           }}
         />
       </div>
@@ -128,7 +128,13 @@ export default function Hero() {
       </div>
 
       <style jsx>{`
+        .hero-image {
+          object-position: center;
+        }
         @media (max-width: 767px) {
+          .hero-image {
+            object-position: 20% center;
+          }
           .hero-content {
             padding-left: 24px !important;
             padding-right: 24px !important;

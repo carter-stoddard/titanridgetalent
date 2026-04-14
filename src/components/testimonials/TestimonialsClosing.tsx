@@ -3,14 +3,25 @@ import Link from "next/link";
 export default function TestimonialsClosing() {
   return (
     <section
-      className="testimonials-closing relative w-full"
+      className="testimonials-closing relative w-full overflow-hidden"
       style={{
-        backgroundColor: "#F5F4F0",
+        backgroundColor: "#141F31",
         paddingTop: "120px",
         paddingBottom: "120px",
       }}
     >
-      <div className="testimonials-closing-inner flex flex-col items-center text-center" style={{ paddingLeft: "80px", paddingRight: "80px" }}>
+      <img
+        src="/images/cta-section.jpg"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full object-cover"
+        style={{ objectPosition: "center" }}
+      />
+      <div
+        className="absolute inset-0"
+        style={{ backgroundColor: "rgba(20, 31, 49, 0.75)" }}
+      />
+      <div className="testimonials-closing-inner relative flex flex-col items-center text-center" style={{ paddingLeft: "80px", paddingRight: "80px" }}>
         <p
           className="font-display font-medium uppercase"
           style={{
@@ -28,7 +39,7 @@ export default function TestimonialsClosing() {
           style={{
             fontSize: "clamp(40px, 5vw, 52px)",
             lineHeight: 0.95,
-            color: "#141F31",
+            color: "#FFFFFF",
             marginBottom: "16px",
           }}
         >
@@ -40,7 +51,7 @@ export default function TestimonialsClosing() {
           style={{
             fontSize: "17px",
             lineHeight: 1.6,
-            color: "#2A2A2A",
+            color: "rgba(255, 255, 255, 0.7)",
             marginBottom: "40px",
             maxWidth: "640px",
           }}
@@ -67,14 +78,14 @@ export default function TestimonialsClosing() {
           </Link>
           <a
             href="/jobs"
-            className="closing-cta font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:bg-titan-navy hover:text-titan-offwhite hover:-translate-y-0.5 active:translate-y-0"
+            className="closing-cta font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 active:translate-y-0"
             style={{
               height: "52px",
               padding: "0 32px",
               borderRadius: "9999px",
               backgroundColor: "transparent",
-              border: "1.5px solid #141F31",
-              color: "#141F31",
+              border: "1.5px solid #FFFFFF",
+              color: "#FFFFFF",
               fontSize: "14px",
               letterSpacing: "3px",
             }}
