@@ -7,11 +7,15 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const sectors = [
+  { name: "Aerospace", descriptor: "Production leads, quality engineers, assembly supervisors" },
+  { name: "Automotive", descriptor: "Plant managers, production supervisors, tooling leads" },
+  { name: "Food & Beverage", descriptor: "Operations managers, quality assurance, food safety leads" },
+  { name: "Pharmaceuticals", descriptor: "Production supervisors, compliance leads, validation engineers" },
+  { name: "Light Industrial", descriptor: "Warehouse leads, assembly supervisors, shift managers" },
   { name: "Manufacturing", descriptor: "Production supervisors, plant managers, quality leads" },
   { name: "Logistics", descriptor: "Distribution managers, fleet supervisors, supply chain leads" },
   { name: "Skilled Trades", descriptor: "Electricians, welders, machinists, HVAC technicians" },
   { name: "Operations", descriptor: "Operations managers, continuous improvement, safety leads" },
-  { name: "Oil & Gas", descriptor: "Field supervisors, drilling engineers, HSE managers" },
   { name: "Construction", descriptor: "Project managers, site superintendents, estimators" },
 ];
 

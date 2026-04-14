@@ -7,7 +7,8 @@ import Image from "next/image";
 
 const navLinks = [
   { label: "About", href: "/about" },
-  { label: "Founders", href: "/founders" },
+  { label: "Mission", href: "/mission" },
+  { label: "Founder", href: "/founders" },
   { label: "Jobs", href: "/jobs" },
   { label: "Industries", href: "/industries" },
   { label: "Testimonials", href: "/testimonials" },
@@ -227,7 +228,7 @@ export default function Navbar() {
               Get in Touch
             </p>
             <a
-              href="mailto:hello@titanridgetalent.com"
+              href="mailto:support@titanridgetalent.com"
               className="font-body italic block"
               style={{
                 fontSize: "15px",
@@ -235,7 +236,7 @@ export default function Navbar() {
                 marginBottom: "6px",
               }}
             >
-              hello@titanridgetalent.com
+              support@titanridgetalent.com
             </a>
             <a
               href="tel:+18005551234"

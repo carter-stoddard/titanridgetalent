@@ -124,7 +124,7 @@ export default function FoundersCTA() {
             </h3>
 
             <a
-              href="mailto:hello@titanridgetalent.com"
+              href="mailto:support@titanridgetalent.com"
               className="cta-email font-body italic"
               style={{
                 fontSize: "14px",
@@ -134,7 +134,7 @@ export default function FoundersCTA() {
                 transition: "color 0.2s ease",
               }}
             >
-              hello@titanridgetalent.com
+              support@titanridgetalent.com
             </a>
             <a
               href="tel:+18005551234"
@@ -149,6 +149,7 @@ export default function FoundersCTA() {
               (800) 555-1234
             </a>
 
+            {/* LinkedIn connection — removed for now, can re-add later
             <div
               className="h-[1px] w-full"
               style={{
@@ -179,6 +180,7 @@ export default function FoundersCTA() {
                 Connect with Adrian on LinkedIn
               </span>
             </Link>
+            */}
           </div>
         </div>
       </div>

@@ -56,7 +56,7 @@ export default function TestimonialsFeatured() {
                 marginTop: "6px",
               }}
             >
-              VP of Operations · Pacific Industrial Group
+              VP of Operations
             </p>
             <p
               className="font-display font-medium uppercase"
@@ -132,7 +132,7 @@ export default function TestimonialsFeatured() {
                 marginTop: "4px",
               }}
             >
-              VP of Operations · Pacific Industrial Group
+              VP of Operations
             </p>
           </div>
         </div>

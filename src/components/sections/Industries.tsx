@@ -7,11 +7,15 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const industrial = [
+  "Aerospace",
+  "Automotive",
+  "Food & Beverage",
+  "Pharmaceuticals",
+  "Light Industrial",
   "Manufacturing",
   "Logistics",
   "Skilled Trades",
   "Operations",
-  "Oil & Gas",
   "Construction",
 ];
 

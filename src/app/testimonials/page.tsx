@@ -5,7 +5,6 @@ import TestimonialsHero from "@/components/testimonials/TestimonialsHero";
 import TestimonialsFeatured from "@/components/testimonials/TestimonialsFeatured";
 import TestimonialsEmployers from "@/components/testimonials/TestimonialsEmployers";
 import TestimonialsCandidates from "@/components/testimonials/TestimonialsCandidates";
-import TestimonialsLogos from "@/components/testimonials/TestimonialsLogos";
 import TestimonialsClosing from "@/components/testimonials/TestimonialsClosing";
 
 export const metadata: Metadata = {
@@ -23,7 +22,6 @@ export default function TestimonialsPage() {
         <TestimonialsFeatured />
         <TestimonialsEmployers />
         <TestimonialsCandidates />
-        <TestimonialsLogos />
         <TestimonialsClosing />
       </main>
       <Footer />

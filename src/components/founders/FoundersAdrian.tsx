@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
 export default function FoundersAdrian() {
   return (
     <section
@@ -55,7 +53,7 @@ export default function FoundersAdrian() {
                 marginBottom: "12px",
               }}
             >
-              Co-Founder &amp; Partner
+              Founder
             </p>
 
             <h2
@@ -103,7 +101,7 @@ export default function FoundersAdrian() {
                   color: "#2A2A2A",
                 }}
               >
-                Adrian Ibarra is a co-founder and partner at Titan Ridge Talent,
+                Adrian Ibarra is the founder of Titan Ridge Talent,
                 bringing [X] years of recruiting experience across industrial
                 and corporate markets. His career has been built on one
                 principle: that the right placement starts with a real
@@ -139,7 +137,7 @@ export default function FoundersAdrian() {
               </p>
             </div>
 
-            {/* LinkedIn CTA */}
+            {/* LinkedIn CTA — removed for now, can re-add later
             <Link
               href="#"
               className="adrian-linkedin inline-flex items-center"
@@ -165,6 +163,7 @@ export default function FoundersAdrian() {
                 Connect on LinkedIn
               </span>
             </Link>
+            */}
           </div>
         </div>
       </div>

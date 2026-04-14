@@ -12,21 +12,21 @@ const employers = [
       "We'd worked with three other agencies before Titan Ridge. None of them took the time to actually understand our operation. Within two weeks they sent us one candidate — the right one. He's still with us eighteen months later.",
     initials: "MR",
     name: "Michael R.",
-    title: "Operations Director · Pacific Industrial Group",
+    title: "Operations Director",
   },
   {
     quote:
       "What separates Titan Ridge is accountability. They didn't disappear after the placement. They checked in, they followed up, and when we had a concern they addressed it directly. That's rare in this industry and it's why we keep coming back.",
     initials: "DK",
     name: "David K.",
-    title: "VP of Human Resources · Crestline Corp",
+    title: "VP of Human Resources",
   },
   {
     quote:
       "I've hired through staffing agencies my entire career. Most of them treat it like a transaction. Titan Ridge treated it like a partnership. The difference shows in the quality of every candidate they've sent our way.",
     initials: "RL",
     name: "Rachel L.",
-    title: "Plant Manager · Summit Manufacturing",
+    title: "Plant Manager",
   },
 ];
 

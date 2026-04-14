@@ -62,7 +62,7 @@ export default function JobsDualCTA() {
               away.
             </p>
             <a
-              href="mailto:hello@titanridgetalent.com"
+              href="mailto:support@titanridgetalent.com"
               className="jobs-dual-cta-button font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
               style={{
                 height: "52px",

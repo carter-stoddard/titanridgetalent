@@ -13,7 +13,7 @@ const testimonials = [
     quote:
       "We'd worked with three other agencies before Titan Ridge. None of them took the time to actually understand our operation. Within two weeks they sent us one candidate — the right one. He's still with us eighteen months later.",
     name: "Michael R.",
-    title: "Operations Director · Pacific Industrial Group",
+    title: "Operations Director",
   },
   {
     label: "Candidate",
@@ -21,7 +21,7 @@ const testimonials = [
     quote:
       "I wasn't even actively looking. Adrian reached out, we had a real conversation, and he actually listened. Two months later I was in a role that fit better than anything I'd found on my own in two years of searching.",
     name: "Jessica S.",
-    title: "Logistics Manager · Westfield Distribution",
+    title: "Logistics Manager",
   },
   {
     label: "Employer",
@@ -29,7 +29,7 @@ const testimonials = [
     quote:
       "What separates Titan Ridge is accountability. They didn't disappear after the placement. They checked in, they followed up, and when we had a concern they addressed it directly. That's rare in this industry.",
     name: "David K.",
-    title: "VP of Human Resources · Crestline Corp",
+    title: "VP of Human Resources",
   },
 ];
 

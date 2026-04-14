@@ -60,7 +60,7 @@ export default function Hero() {
       {/* Background — cinematic hero image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/titan-ridge-hero.webp"
+          src="/images/titan-ridge-hero.jpg"
           alt="Dramatic ridge landscape at golden hour"
           className="h-full w-full object-cover object-center"
         />

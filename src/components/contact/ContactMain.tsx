@@ -136,7 +136,7 @@ export default function ContactMain() {
                 descriptor="We respond within one business day."
               >
                 <a
-                  href="mailto:hello@titanridgetalent.com"
+                  href="mailto:support@titanridgetalent.com"
                   className="info-link font-display"
                   style={{
                     fontSize: "18px",
@@ -144,7 +144,7 @@ export default function ContactMain() {
                     fontWeight: 600,
                   }}
                 >
-                  hello@titanridgetalent.com
+                  support@titanridgetalent.com
                 </a>
               </InfoBlock>
 

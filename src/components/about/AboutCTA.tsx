@@ -32,7 +32,7 @@ export default function AboutCTA() {
             marginBottom: "16px",
           }}
         >
-          Meet the Founders.
+          Meet the Founder.
         </h2>
 
         <p

@@ -12,21 +12,21 @@ const candidates = [
       "I wasn't even actively looking. Adrian reached out, we had a real conversation, and he actually listened. Two months later I was in a role that fit better than anything I'd found on my own in two years of searching.",
     initials: "JS",
     name: "Jessica S.",
-    title: "Logistics Manager · Westfield Distribution",
+    title: "Logistics Manager",
   },
   {
     quote:
       "Every recruiter I'd dealt with before sent me roles that had nothing to do with what I was looking for. Titan Ridge actually read my resume, asked the right questions, and only reached out when they had something that made sense. That alone was a revelation.",
     initials: "TM",
     name: "Thomas M.",
-    title: "Operations Supervisor · Ironridge Industrial",
+    title: "Operations Supervisor",
   },
   {
     quote:
       "The process was straightforward and honest. They told me what to expect, kept me updated throughout, and when the offer came it was exactly what we'd talked about. No surprises. That's all anyone wants from a recruiter.",
     initials: "AP",
     name: "Amanda P.",
-    title: "HR Business Partner · Meridian Corporate Group",
+    title: "HR Business Partner",
   },
 ];
 

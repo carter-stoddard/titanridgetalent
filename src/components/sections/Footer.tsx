@@ -51,7 +51,8 @@ const socials = [
 
 const companyLinks = [
   { label: "About", href: "/about" },
-  { label: "Founders", href: "/founders" },
+  { label: "Mission", href: "/mission" },
+  { label: "Founder", href: "/founders" },
   { label: "Industries", href: "/industries" },
   { label: "Testimonials", href: "/testimonials" },
 ];
@@ -199,7 +200,7 @@ export default function Footer() {
               Get In Touch
             </p>
             <a
-              href="mailto:hello@titanridgetalent.com"
+              href="mailto:support@titanridgetalent.com"
               className="footer-email font-body"
               style={{
                 fontSize: "14px",
@@ -209,7 +210,7 @@ export default function Footer() {
                 transition: "color 0.2s ease",
               }}
             >
-              hello@titanridgetalent.com
+              support@titanridgetalent.com
             </a>
             <p
               className="font-body"
