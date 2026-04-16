@@ -105,7 +105,7 @@ export default function TestimonialsCandidates() {
             maxWidth: "720px",
           }}
         >
-          From skilled tradespeople to corporate professionals — these are
+          From skilled tradespeople to corporate professionals, these are
           the people who trusted us to find them the right role.
         </p>
 

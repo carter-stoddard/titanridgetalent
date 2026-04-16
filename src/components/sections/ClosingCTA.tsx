@@ -139,7 +139,7 @@ export default function ClosingCTA() {
               }}
             >
               Browse open positions and take the first step. Or if you&apos;re
-              looking to build a team — let&apos;s talk.
+              looking to build a team, let&apos;s talk.
             </p>
 
             <div

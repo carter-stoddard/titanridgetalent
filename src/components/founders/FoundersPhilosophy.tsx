@@ -1,7 +1,7 @@
 "use client";
 
 const proofPoints = [
-  { value: "[X]+", label: "Years Experience" },
+  { value: "6+", label: "Years Experience" },
   { value: "Both", label: "Industrial & Corporate" },
   { value: "100%", label: "Relationship-First" },
 ];
@@ -57,7 +57,7 @@ export default function FoundersPhilosophy() {
                 marginBottom: "32px",
               }}
             >
-              Every search starts the same way — with a conversation.
+              Every search starts the same way: with a conversation.
               Not a checklist, not a keyword scan. A real exchange about
               what the role actually demands, what the team actually needs,
               and what success actually looks like six months after the

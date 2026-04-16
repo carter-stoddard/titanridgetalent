@@ -121,7 +121,7 @@ export default function Positioning() {
               }}
             >
               We built Titan Ridge because we&apos;ve seen what this industry
-              looks like when it&apos;s done right — and we&apos;ve seen what
+              looks like when it&apos;s done right, and we&apos;ve seen what
               happens when it isn&apos;t. Years across industrial floors
               and corporate boardrooms taught us one thing: the right placement
               starts with the right relationship. Everything else follows.

@@ -11,7 +11,7 @@ const steps = [
     number: "01",
     title: "We Talk",
     description:
-      "A real conversation. Not a form, not an automated inbox. We learn what you actually need — the role, the culture, the non-negotiables.",
+      "A real conversation. Not a form, not an automated inbox. We learn what you actually need: the role, the culture, the non-negotiables.",
   },
   {
     number: "02",
@@ -23,7 +23,7 @@ const steps = [
     number: "03",
     title: "We Deliver",
     description:
-      "The right person in the right role. We stay accountable after the placement — because we measure success in retention, not volume.",
+      "The right person in the right role. We stay accountable after the placement, because we measure success in retention, not volume.",
   },
 ];
 

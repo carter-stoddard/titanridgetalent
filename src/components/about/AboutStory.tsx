@@ -51,7 +51,7 @@ export default function AboutStory() {
                 }}
               >
                 Titan Ridge Talent was built by recruiting professionals
-                who had seen the industry at its best — and watched it drift
+                who had seen the industry at its best, and watched it drift
                 far from it. Years of experience across industrial floors and
                 corporate boardrooms, placing thousands of people and building
                 relationships that lasted long after the placement. We also
@@ -69,8 +69,8 @@ export default function AboutStory() {
                 somewhere along the way, the industry decided relationships
                 were inefficient. Resumes in, bodies out, repeat. Candidates
                 became codes in a system. Clients became tickets in a queue.
-                The people on both sides of the equation — the ones whose
-                careers and companies were actually at stake — stopped being
+                The people on both sides of the equation, the ones whose
+                careers and companies were actually at stake, stopped being
                 treated like people.
               </p>
               <p
@@ -84,7 +84,7 @@ export default function AboutStory() {
                 We built Titan Ridge because we believe the right placement
                 starts with the right conversation. Not a form. Not an
                 automated inbox. A real conversation with someone who actually
-                listens, asks the right questions, and tells you the truth —
+                listens, asks the right questions, and tells you the truth,
                 even when the truth is that it&apos;s not the right fit.
               </p>
               <p

@@ -47,7 +47,7 @@ export default function JobsListings() {
           }}
         >
           We place candidates across industrial and corporate sectors. Browse
-          our current openings on our jobs board — every listing is a role
+          our current openings on our jobs board. Every listing is a role
           we&apos;re actively working with a real client to fill.
         </p>
 
@@ -94,7 +94,7 @@ export default function JobsListings() {
             }}
           >
             Our full job board is hosted externally. Click below to browse
-            current openings — new roles added regularly.
+            current openings. New roles added regularly.
           </p>
 
           <a
@@ -121,7 +121,7 @@ export default function JobsListings() {
               marginTop: "16px",
             }}
           >
-            Opens in a new tab — powered by our ATS platform
+            Opens in a new tab, powered by our ATS platform
           </p>
         </div>
       </div>

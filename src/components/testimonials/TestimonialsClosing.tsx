@@ -56,7 +56,7 @@ export default function TestimonialsClosing() {
             maxWidth: "640px",
           }}
         >
-          Whether you&apos;re hiring or looking — let&apos;s have a real
+          Whether you&apos;re hiring or looking, let&apos;s have a real
           conversation.
         </p>
 

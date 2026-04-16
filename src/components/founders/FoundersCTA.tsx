@@ -53,7 +53,7 @@ export default function FoundersCTA() {
               }}
             >
               Whether you&apos;re looking to build a team or find your next
-              role — the Titan Ridge team is ready to talk. No forms, no
+              role, the Titan Ridge team is ready to talk. No forms, no
               automated responses. Just a real conversation.
             </p>
 

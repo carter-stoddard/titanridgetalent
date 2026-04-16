@@ -15,12 +15,12 @@ const reasons = [
   {
     number: "02",
     title: "We Advocate For You",
-    body: "When we reach out about a role it's because we genuinely believe it's right for you. We represent you — not just the opening.",
+    body: "When we reach out about a role it's because we genuinely believe it's right for you. We represent you, not just the opening.",
   },
   {
     number: "03",
     title: "We Stay Accountable",
-    body: "Our relationship doesn't end at placement. We check in, follow up, and stay available because we measure success in retention — not volume.",
+    body: "Our relationship doesn't end at placement. We check in, follow up, and stay available because we measure success in retention, not volume.",
   },
 ];
 

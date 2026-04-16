@@ -11,7 +11,7 @@ const testimonials = [
     label: "Employer",
     initials: "MR",
     quote:
-      "We'd worked with three other agencies before Titan Ridge. None of them took the time to actually understand our operation. Within two weeks they sent us one candidate — the right one. He's still with us eighteen months later.",
+      "We'd worked with three other agencies before Titan Ridge. None of them took the time to actually understand our operation. Within two weeks they sent us one candidate, the right one. He's still with us eighteen months later.",
     name: "Michael R.",
     title: "Operations Director",
   },

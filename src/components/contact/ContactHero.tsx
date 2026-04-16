@@ -54,7 +54,7 @@ export default function ContactHero() {
               maxWidth: "560px",
             }}
           >
-            Whether you&apos;re looking to hire or ready for your next role —
+            Whether you&apos;re looking to hire or ready for your next role,
             the conversation starts here.
           </p>
         </div>

@@ -43,7 +43,7 @@ export default function IndustriesClosing() {
             maxWidth: "640px",
           }}
         >
-          Whether you&apos;re hiring or looking — the conversation starts here.
+          Whether you&apos;re hiring or looking, the conversation starts here.
         </p>
         <div className="closing-buttons flex" style={{ gap: "16px" }}>
           <Link

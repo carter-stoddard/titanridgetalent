@@ -111,7 +111,7 @@ export default function IndustriesIndustrial() {
               the job and one who can lead a team through a tough quarter,
               adapt when the operation changes, and stick around long enough
               to make a real impact. We&apos;ve worked this space long enough
-              to know the difference — and our clients know it too.
+              to know the difference, and our clients know it too.
             </p>
             <div
               className="h-[1px] w-full"

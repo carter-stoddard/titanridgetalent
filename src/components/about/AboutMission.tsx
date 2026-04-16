@@ -72,7 +72,7 @@ export default function AboutMission() {
                 color: "#141F31",
               }}
             >
-              To place the right people in the right roles — through
+              To place the right people in the right roles, through
               relationships, not transactions.
             </p>
           </div>
@@ -106,7 +106,7 @@ export default function AboutMission() {
               }}
             >
               To be the recruiting firm that industrial and corporate leaders
-              trust by name — not for volume, but for the quality of every
+              trust by name, not for volume, but for the quality of every
               relationship and the permanence of every placement.
             </p>
           </div>

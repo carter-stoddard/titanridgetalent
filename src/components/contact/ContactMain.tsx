@@ -239,7 +239,7 @@ export default function ContactMain() {
                 }}
               >
                 We update our job board regularly. If you don&apos;t see the
-                right fit today, check back — or send us your resume and
+                right fit today, check back. Or send us your resume and
                 we&apos;ll keep you in mind.
               </p>
               <Link

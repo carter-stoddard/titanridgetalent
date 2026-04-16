@@ -56,7 +56,7 @@ export default function JobsDualCTA() {
                 marginBottom: "32px",
               }}
             >
-              If you have a role to fill — industrial or corporate — we want
+              If you have a role to fill, industrial or corporate, we want
               to hear about it. Tell us what you need and we&apos;ll tell you
               honestly whether we can help.
             </p>

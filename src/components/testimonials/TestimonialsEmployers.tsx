@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 const employers = [
   {
     quote:
-      "We'd worked with three other agencies before Titan Ridge. None of them took the time to actually understand our operation. Within two weeks they sent us one candidate — the right one. He's still with us eighteen months later.",
+      "We'd worked with three other agencies before Titan Ridge. None of them took the time to actually understand our operation. Within two weeks they sent us one candidate, the right one. He's still with us eighteen months later.",
     initials: "MR",
     name: "Michael R.",
     title: "Operations Director",
@@ -104,7 +104,7 @@ export default function TestimonialsEmployers() {
             maxWidth: "640px",
           }}
         >
-          From plant managers to HR directors — these are the people who
+          From plant managers to HR directors, these are the people who
           trusted us to find the right fit.
         </p>
 

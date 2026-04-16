@@ -119,7 +119,7 @@ export default function DualSplit() {
                 We don&apos;t send you a stack of resumes and wish you luck.
                 We learn your operation, your culture, and what good actually
                 looks like in your environment. Then we find the person who
-                fits — and who stays.
+                fits, and who stays.
               </p>
               <p
                 ref={(el) => { empText.current[3] = el; }}
@@ -284,7 +284,7 @@ export default function DualSplit() {
                   opacity: 0,
                 }}
               >
-                We&apos;re not a job board. We work with you directly —
+                We&apos;re not a job board. We work with you directly,
                 understanding where you&apos;ve been and where you want to
                 go. When we reach out about a role, it&apos;s because we
                 genuinely think it&apos;s right for you.

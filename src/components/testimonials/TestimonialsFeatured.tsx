@@ -102,7 +102,7 @@ export default function TestimonialsFeatured() {
               took the time to understand what we actually needed. Adrian did.
               He asked questions nobody else had asked, told us when a
               candidate wasn&apos;t right, and when he finally put someone
-              forward — that person has been with us for two years.
+              forward, that person has been with us for two years.
               That&apos;s the standard we hold every partner to now.
             </p>
 

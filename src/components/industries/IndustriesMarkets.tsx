@@ -144,7 +144,7 @@ export default function IndustriesMarkets() {
           >
             We&apos;ve spent years working alongside plant managers, operations
             leads, and skilled tradespeople. We know what good looks like on a
-            job site — and we know the difference between a candidate who
+            job site, and we know the difference between a candidate who
             looks right on paper and one who&apos;ll actually last.
           </p>
           <div
@@ -215,7 +215,7 @@ export default function IndustriesMarkets() {
           >
             We&apos;ve placed executives, HR leaders, and corporate
             professionals across industries. We understand what organizations
-            need at every level — and we know how to find the candidates who
+            need at every level, and we know how to find the candidates who
             don&apos;t just fill the role but elevate the team around them.
           </p>
           <div

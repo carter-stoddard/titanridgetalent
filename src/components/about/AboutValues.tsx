@@ -23,7 +23,7 @@ const values = [
     number: "03",
     title: "Craftsmanship",
     description:
-      "We take pride in the work — the vetting, the matching, the follow-through. Details matter here.",
+      "We take pride in the work: the vetting, the matching, the follow-through. Details matter here.",
   },
   {
     number: "04",
@@ -35,7 +35,7 @@ const values = [
     number: "05",
     title: "Accountability",
     description:
-      "When something goes wrong, we own it. That's not a policy — that's how trust gets built.",
+      "When something goes wrong, we own it. That's not a policy. That's how trust gets built.",
   },
   {
     number: "06",

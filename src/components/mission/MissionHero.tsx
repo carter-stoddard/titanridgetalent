@@ -54,7 +54,7 @@ export default function MissionHero() {
               maxWidth: "560px",
             }}
           >
-            Why we built Titan Ridge — and what keeps us moving upward.
+            Why we built Titan Ridge, and what keeps us moving upward.
           </p>
         </div>
       </div>
