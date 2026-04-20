@@ -1,6 +1,11 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Link from "next/link";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const LinkedInIcon = () => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -21,12 +26,80 @@ const GlassdoorIcon = () => (
 );
 
 export default function ContactMain() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const formColRef = useRef<HTMLDivElement>(null);
+  const infoBlocksRef = useRef<(HTMLDivElement | null)[]>([]);
+  const darkCardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const trigger = {
+        trigger: sectionRef.current,
+        start: "top 75%",
+        once: true,
+      };
+
+      gsap.fromTo(
+        formColRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: trigger,
+        }
+      );
+
+      gsap.fromTo(
+        infoBlocksRef.current.filter(Boolean),
+        { opacity: 0, y: 24 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.65,
+          ease: "power2.out",
+          stagger: 0.1,
+          delay: 0.2,
+          scrollTrigger: trigger,
+        }
+      );
+
+      gsap.fromTo(
+        darkCardRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          delay: 0.55,
+          scrollTrigger: trigger,
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const setBlock = (i: number) => (el: HTMLDivElement | null) => {
+    infoBlocksRef.current[i] = el;
+  };
+
   return (
-    <section className="contact-main" style={{ backgroundColor: "#F5F4F0" }}>
+    <section
+      ref={sectionRef}
+      className="contact-main"
+      style={{ backgroundColor: "#F5F4F0" }}
+    >
       <div className="contact-main-inner">
         <div className="contact-grid">
           {/* LEFT — Form */}
-          <div className="contact-form-col">
+          <div
+            ref={formColRef}
+            className="contact-form-col"
+            style={{ opacity: 0 }}
+          >
             <p
               className="font-display font-bold uppercase"
               style={{
@@ -131,6 +204,7 @@ export default function ContactMain() {
           {/* RIGHT — Contact Info */}
           <div className="contact-info-col">
             <div className="flex flex-col" style={{ gap: "40px" }}>
+              <div ref={setBlock(0)} style={{ opacity: 0 }}>
               <InfoBlock
                 label="Email Us"
                 descriptor="We respond within one business day."
@@ -147,7 +221,9 @@ export default function ContactMain() {
                   support@titanridgetalent.com
                 </a>
               </InfoBlock>
+              </div>
 
+              <div ref={setBlock(1)} style={{ opacity: 0 }}>
               <InfoBlock
                 label="Call Us"
                 descriptor="Monday – Friday, 8am – 6pm"
@@ -164,7 +240,9 @@ export default function ContactMain() {
                   (800) 555-1234
                 </a>
               </InfoBlock>
+              </div>
 
+              <div ref={setBlock(2)} style={{ opacity: 0 }}>
               <InfoBlock label="Connect">
                 <div
                   className="flex items-center"
@@ -196,15 +274,18 @@ export default function ContactMain() {
                   </Link>
                 </div>
               </InfoBlock>
+              </div>
             </div>
 
             {/* Dark card */}
             <div
+              ref={darkCardRef}
               style={{
                 marginTop: "60px",
                 backgroundColor: "#141F31",
                 borderRadius: "8px",
                 padding: "32px",
+                opacity: 0,
               }}
             >
               <p

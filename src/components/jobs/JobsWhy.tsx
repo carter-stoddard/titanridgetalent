@@ -27,9 +27,11 @@ const reasons = [
 export default function JobsWhy() {
   const sectionRef = useRef<HTMLElement>(null);
   const colsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const numberRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Columns fade up
       gsap.fromTo(
         colsRef.current.filter(Boolean),
         { opacity: 0, y: 30 },
@@ -46,25 +48,79 @@ export default function JobsWhy() {
           },
         }
       );
+
+      // Atmospheric numbers count up 00 → 01/02/03
+      reasons.forEach((r, i) => {
+        const numEl = numberRefs.current[i];
+        if (!numEl) return;
+        const target = parseInt(r.number, 10);
+        const counter = { val: 0 };
+        gsap.to(counter, {
+          val: target,
+          duration: 1.1,
+          ease: "power2.out",
+          delay: 0.15 + i * 0.15,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+            once: true,
+          },
+          onUpdate: () => {
+            numEl.textContent = String(Math.round(counter.val)).padStart(2, "0");
+          },
+        });
+      });
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
+
+  // 3D tilt on hover (desktop only)
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>, i: number) => {
+    const card = colsRef.current[i];
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateY = ((x - centerX) / centerX) * 5;
+    const rotateX = ((centerY - y) / centerY) * 5;
+    gsap.to(card, {
+      rotateX,
+      rotateY,
+      duration: 0.4,
+      ease: "power2.out",
+      transformPerspective: 1000,
+    });
+  };
+
+  const handleMouseLeave = (i: number) => {
+    const card = colsRef.current[i];
+    if (!card) return;
+    gsap.to(card, {
+      rotateX: 0,
+      rotateY: 0,
+      duration: 0.6,
+      ease: "power3.out",
+    });
+  };
 
   return (
     <section
       ref={sectionRef}
       className="jobs-why relative w-full"
       style={{
-        backgroundColor: "#141F31",
+        backgroundColor: "#F5F4F0",
         paddingTop: "120px",
         paddingBottom: "120px",
       }}
     >
       <div
-        className="jobs-why-inner"
+        className="jobs-why-outer"
         style={{ paddingLeft: "80px", paddingRight: "80px" }}
       >
+        {/* Eyebrow — on light */}
         <p
           className="font-display font-medium uppercase"
           style={{
@@ -77,18 +133,31 @@ export default function JobsWhy() {
           The Difference
         </p>
 
+        {/* Headline — on light */}
         <h2
           className="font-display font-semibold uppercase"
           style={{
             fontSize: "clamp(36px, 4.5vw, 52px)",
             lineHeight: 0.95,
-            color: "#FFFFFF",
+            color: "#141F31",
             marginBottom: "60px",
           }}
         >
           Why Go Through Us.
         </h2>
 
+        {/* Navy inset card */}
+        <div
+          className="jobs-why-inner"
+          style={{
+            backgroundColor: "#141F31",
+            borderRadius: "12px",
+            paddingLeft: "60px",
+            paddingRight: "60px",
+            paddingTop: "80px",
+            paddingBottom: "60px",
+          }}
+        >
         <div className="jobs-why-grid">
           {reasons.map((r, i) => (
             <div
@@ -99,10 +168,15 @@ export default function JobsWhy() {
               className={`jobs-why-col relative flex flex-col items-center text-center ${
                 i > 0 ? "jobs-why-divider" : ""
               }`}
-              style={{ opacity: 0 }}
+              onMouseMove={(e) => handleMouseMove(e, i)}
+              onMouseLeave={() => handleMouseLeave(i)}
+              style={{ opacity: 0, transformStyle: "preserve-3d", willChange: "transform" }}
             >
               {/* Atmospheric number */}
               <span
+                ref={(el) => {
+                  numberRefs.current[i] = el;
+                }}
                 aria-hidden="true"
                 className="jobs-why-number font-display font-black select-none pointer-events-none"
                 style={{
@@ -116,7 +190,7 @@ export default function JobsWhy() {
                   zIndex: 0,
                 }}
               >
-                {r.number}
+                00
               </span>
 
               {/* Content */}
@@ -147,12 +221,14 @@ export default function JobsWhy() {
             </div>
           ))}
         </div>
+        </div>
       </div>
 
       <style jsx>{`
         .jobs-why-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
+          perspective: 1000px;
         }
         .jobs-why-col {
           padding-left: 48px;
@@ -167,9 +243,12 @@ export default function JobsWhy() {
             padding-top: 80px !important;
             padding-bottom: 80px !important;
           }
+          .jobs-why-outer {
+            padding-left: 16px !important;
+            padding-right: 16px !important;
+          }
           .jobs-why-inner {
-            padding-left: 24px !important;
-            padding-right: 24px !important;
+            padding: 60px 32px !important;
           }
           .jobs-why-grid {
             grid-template-columns: 1fr;

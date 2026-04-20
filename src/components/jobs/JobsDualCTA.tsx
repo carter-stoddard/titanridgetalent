@@ -1,10 +1,61 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Link from "next/link";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function JobsDualCTA() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const colsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const dividerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const trigger = {
+        trigger: sectionRef.current,
+        start: "top 75%",
+        once: true,
+      };
+
+      gsap.fromTo(
+        dividerRef.current,
+        { scaleY: 0, transformOrigin: "top center" },
+        {
+          scaleY: 1,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: trigger,
+        }
+      );
+
+      gsap.fromTo(
+        colsRef.current.filter(Boolean),
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          stagger: 0.15,
+          delay: 0.2,
+          scrollTrigger: trigger,
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const setCol = (i: number) => (el: HTMLDivElement | null) => {
+    colsRef.current[i] = el;
+  };
+
   return (
     <section
+      ref={sectionRef}
       className="jobs-dual-cta relative w-full"
       style={{
         backgroundColor: "#F5F4F0",
@@ -19,12 +70,13 @@ export default function JobsDualCTA() {
         <div className="jobs-dual-grid relative">
           {/* Center vertical divider */}
           <div
+            ref={dividerRef}
             className="jobs-dual-divider hidden md:block"
             aria-hidden="true"
           />
 
           {/* LEFT — Employers */}
-          <div className="jobs-dual-col">
+          <div ref={setCol(0)} className="jobs-dual-col" style={{ opacity: 0 }}>
             <p
               className="font-display font-medium uppercase"
               style={{
@@ -78,7 +130,7 @@ export default function JobsDualCTA() {
           </div>
 
           {/* RIGHT — Candidates */}
-          <div className="jobs-dual-col">
+          <div ref={setCol(1)} className="jobs-dual-col" style={{ opacity: 0 }}>
             <p
               className="font-display font-medium uppercase"
               style={{

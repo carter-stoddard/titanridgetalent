@@ -23,6 +23,7 @@ export default function IndustriesIndustrial() {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const sectorsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const goldBarsRef = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -51,6 +52,18 @@ export default function IndustriesIndustrial() {
           stagger: 0.08,
         },
         "-=0.4"
+      );
+
+      tl.fromTo(
+        goldBarsRef.current.filter(Boolean),
+        { scaleY: 0, transformOrigin: "top center" },
+        {
+          scaleY: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: 0.08,
+        },
+        "-=0.6"
       );
     }, sectionRef);
 
@@ -135,16 +148,32 @@ export default function IndustriesIndustrial() {
                   ref={(el) => {
                     sectorsRef.current[i] = el;
                   }}
-                  className="sector-card"
+                  className="sector-card relative overflow-hidden"
                   style={{
                     backgroundColor: "#FFFFFF",
-                    borderLeft: "4px solid #CCA662",
                     borderTopRightRadius: "4px",
                     borderBottomRightRadius: "4px",
-                    padding: "16px 16px 16px 16px",
+                    padding: "16px 16px 16px 20px",
                     opacity: 0,
                   }}
                 >
+                  <span
+                    ref={(el) => {
+                      goldBarsRef.current[i] = el;
+                    }}
+                    aria-hidden="true"
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      bottom: 0,
+                      left: 0,
+                      width: "4px",
+                      backgroundColor: "#CCA662",
+                      transform: "scaleY(0)",
+                      transformOrigin: "top center",
+                      zIndex: 2,
+                    }}
+                  />
                   <p
                     className="font-display font-bold uppercase"
                     style={{

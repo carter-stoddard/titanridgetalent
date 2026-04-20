@@ -133,13 +133,13 @@ export default function Testimonials() {
       ref={sectionRef}
       className="relative w-full"
       style={{
-        backgroundColor: "#141F31",
+        backgroundColor: "#F5F4F0",
         paddingTop: "120px",
         paddingBottom: "120px",
       }}
     >
-      <div className="testimonials-inner" style={{ paddingLeft: "80px", paddingRight: "80px", textAlign: "center" }}>
-        {/* Eyebrow */}
+      <div className="testimonials-outer" style={{ paddingLeft: "80px", paddingRight: "80px" }}>
+        {/* Eyebrow — on light, left-aligned */}
         <p
           ref={eyebrowRef}
           className="font-display font-medium uppercase"
@@ -154,21 +154,34 @@ export default function Testimonials() {
           What They Say
         </p>
 
-        {/* Headline */}
+        {/* Headline — on light, left-aligned */}
         <h2
           ref={headlineRef}
           className="font-display font-semibold uppercase"
           style={{
             fontSize: "clamp(36px, 4.5vw, 52px)",
             lineHeight: 0.95,
-            color: "#FFFFFF",
-            marginBottom: "80px",
+            color: "#141F31",
+            marginBottom: "60px",
             opacity: 0,
           }}
         >
           Don&apos;t Take Our Word For It.
         </h2>
 
+        {/* Navy card containing the rotating quote */}
+        <div
+          className="testimonials-inner"
+          style={{
+            backgroundColor: "#141F31",
+            borderRadius: "12px",
+            paddingLeft: "80px",
+            paddingRight: "80px",
+            paddingTop: "100px",
+            paddingBottom: "100px",
+            textAlign: "center",
+          }}
+        >
         {/* Quote area */}
         <div
           ref={quoteRef}
@@ -239,8 +252,7 @@ export default function Testimonials() {
                 width: "52px",
                 height: "52px",
                 borderRadius: "9999px",
-                border: "1px solid rgba(204, 166, 98, 0.4)",
-                backgroundColor: "rgba(204, 166, 98, 0.08)",
+                backgroundColor: "#141F31",
               }}
             >
               <svg
@@ -250,10 +262,10 @@ export default function Testimonials() {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <circle cx="12" cy="8" r="4" fill="rgba(204, 166, 98, 0.5)" />
+                <circle cx="12" cy="8" r="4" fill="rgba(245, 244, 240, 0.6)" />
                 <path
                   d="M4 20c0-4 3.6-7 8-7s8 3 8 7"
-                  fill="rgba(204, 166, 98, 0.5)"
+                  fill="rgba(245, 244, 240, 0.6)"
                 />
               </svg>
             </div>
@@ -272,7 +284,7 @@ export default function Testimonials() {
                 className="font-display"
                 style={{
                   fontSize: "13px",
-                  color: "rgba(204, 166, 98, 0.8)",
+                  color: "#CCA662",
                   letterSpacing: "1px",
                   marginTop: "4px",
                 }}
@@ -307,13 +319,20 @@ export default function Testimonials() {
             />
           ))}
         </div>
+        </div>
       </div>
 
       <style jsx>{`
         @media (max-width: 767px) {
+          .testimonials-outer {
+            padding-left: 16px !important;
+            padding-right: 16px !important;
+          }
           .testimonials-inner {
-            padding-left: 24px !important;
-            padding-right: 24px !important;
+            padding-left: 32px !important;
+            padding-right: 32px !important;
+            padding-top: 60px !important;
+            padding-bottom: 60px !important;
             text-align: left !important;
           }
           .testimonials-attribution {

@@ -1,8 +1,62 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default function FoundersAdrian() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const textItemsRef = useRef<(HTMLElement | null)[]>([]);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const trigger = {
+        trigger: sectionRef.current,
+        start: "top 75%",
+        once: true,
+      };
+
+      gsap.fromTo(
+        imageRef.current,
+        { opacity: 0, x: -30, scale: 0.98 },
+        {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: trigger,
+        }
+      );
+
+      gsap.fromTo(
+        textItemsRef.current.filter(Boolean),
+        { opacity: 0, y: 24 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: "power2.out",
+          stagger: 0.08,
+          delay: 0.2,
+          scrollTrigger: trigger,
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const setTextRef = (i: number) => (el: HTMLElement | null) => {
+    textItemsRef.current[i] = el;
+  };
+
   return (
     <section
+      ref={sectionRef}
       className="founders-adrian relative w-full"
       style={{
         backgroundColor: "#F5F4F0",
@@ -17,8 +71,9 @@ export default function FoundersAdrian() {
         <div className="adrian-grid">
           {/* LEFT — Contained headshot */}
           <div
+            ref={imageRef}
             className="flex items-center justify-center adrian-image-col"
-            style={{ padding: "24px" }}
+            style={{ padding: "24px", opacity: 0 }}
           >
             <div
               className="relative w-full overflow-hidden flex items-center justify-center"
@@ -45,30 +100,35 @@ export default function FoundersAdrian() {
           {/* RIGHT — Bio */}
           <div className="flex flex-col justify-center adrian-text-col">
             <p
+              ref={setTextRef(0)}
               className="font-display font-medium uppercase"
               style={{
                 fontSize: "11px",
                 letterSpacing: "4px",
                 color: "#CCA662",
                 marginBottom: "12px",
+                opacity: 0,
               }}
             >
               Founder
             </p>
 
             <h2
+              ref={setTextRef(1)}
               className="font-display font-semibold uppercase"
               style={{
                 fontSize: "clamp(36px, 4.5vw, 52px)",
                 lineHeight: 0.95,
                 color: "#141F31",
                 marginBottom: "8px",
+                opacity: 0,
               }}
             >
               Adrian Ibarra
             </h2>
 
             <p
+              ref={setTextRef(2)}
               className="font-display"
               style={{
                 fontSize: "18px",
@@ -76,22 +136,26 @@ export default function FoundersAdrian() {
                 letterSpacing: "1px",
                 color: "#CCA662",
                 marginBottom: "32px",
+                opacity: 0,
               }}
             >
               Aerospace, Food &amp; Beverage, Start Ups &amp; IT · 6 Years Experience
             </p>
 
             <div
+              ref={setTextRef(3)}
               className="h-[1px] w-full"
               style={{
                 backgroundColor: "#CCA662",
                 marginBottom: "32px",
+                opacity: 0,
               }}
             />
 
             <div
+              ref={setTextRef(4)}
               className="flex flex-col"
-              style={{ gap: "16px", marginBottom: "40px" }}
+              style={{ gap: "16px", marginBottom: "40px", opacity: 0 }}
             >
               <p
                 className="font-body"
@@ -137,33 +201,6 @@ export default function FoundersAdrian() {
               </p>
             </div>
 
-            {/* LinkedIn CTA — removed for now, can re-add later
-            <Link
-              href="#"
-              className="adrian-linkedin inline-flex items-center"
-              style={{ gap: "10px", color: "#CCA662" }}
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-              </svg>
-              <span
-                className="font-display"
-                style={{
-                  fontSize: "15px",
-                  fontWeight: 600,
-                  letterSpacing: "1px",
-                }}
-              >
-                Connect on LinkedIn
-              </span>
-            </Link>
-            */}
           </div>
         </div>
       </div>
@@ -175,13 +212,6 @@ export default function FoundersAdrian() {
           gap: 60px;
           align-items: center;
         }
-        .adrian-linkedin {
-          transition: color 0.2s ease;
-        }
-        .adrian-linkedin:hover {
-          color: #141f31 !important;
-        }
-
         @media (max-width: 767px) {
           .founders-adrian {
             padding-top: 80px !important;

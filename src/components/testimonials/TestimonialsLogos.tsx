@@ -1,5 +1,11 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 const logos = [
   { name: "Crestline Corp", letters: "CRESTLINE" },
   { name: "Pacific Industrial Group", letters: "PACIFIC" },
@@ -9,13 +15,22 @@ const logos = [
   { name: "Vantage Logistics", letters: "VANTAGE" },
 ];
 
-function FakeLogo({ name, letters }: { name: string; letters: string }) {
+function FakeLogo({
+  name,
+  letters,
+  innerRef,
+}: {
+  name: string;
+  letters: string;
+  innerRef: (el: HTMLDivElement | null) => void;
+}) {
   return (
     <div
+      ref={innerRef}
       className="flex items-center justify-center"
       style={{
         height: "56px",
-        opacity: 0.4,
+        opacity: 0,
       }}
       title={name}
     >
@@ -35,8 +50,69 @@ function FakeLogo({ name, letters }: { name: string; letters: string }) {
 }
 
 export default function TestimonialsLogos() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const textItemsRef = useRef<(HTMLElement | null)[]>([]);
+  const logosRef = useRef<(HTMLDivElement | null)[]>([]);
+  const dividerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const trigger = {
+        trigger: sectionRef.current,
+        start: "top 75%",
+        once: true,
+      };
+
+      gsap.fromTo(
+        textItemsRef.current.filter(Boolean),
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.65,
+          ease: "power2.out",
+          stagger: 0.08,
+          scrollTrigger: trigger,
+        }
+      );
+
+      gsap.fromTo(
+        logosRef.current.filter(Boolean),
+        { opacity: 0, y: 14 },
+        {
+          opacity: 0.4,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          stagger: 0.07,
+          delay: 0.25,
+          scrollTrigger: trigger,
+        }
+      );
+
+      gsap.fromTo(
+        dividerRef.current,
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          delay: 0.6,
+          scrollTrigger: trigger,
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const setText = (i: number) => (el: HTMLElement | null) => {
+    textItemsRef.current[i] = el;
+  };
+
   return (
     <section
+      ref={sectionRef}
       className="testimonials-logos relative w-full"
       style={{
         backgroundColor: "#141F31",
@@ -50,23 +126,27 @@ export default function TestimonialsLogos() {
       >
         <div className="text-center">
           <p
+            ref={setText(0)}
             className="font-display font-medium uppercase"
             style={{
               fontSize: "11px",
               letterSpacing: "4px",
               color: "#CCA662",
               marginBottom: "16px",
+              opacity: 0,
             }}
           >
             Trusted By
           </p>
           <h2
+            ref={setText(1)}
             className="font-display font-bold uppercase"
             style={{
               fontSize: "24px",
               letterSpacing: "2px",
               color: "#FFFFFF",
               marginBottom: "60px",
+              opacity: 0,
             }}
           >
             Companies That Trust Titan Ridge.
@@ -74,17 +154,28 @@ export default function TestimonialsLogos() {
         </div>
 
         <div className="logos-row">
-          {logos.map((logo) => (
-            <FakeLogo key={logo.name} name={logo.name} letters={logo.letters} />
+          {logos.map((logo, i) => (
+            <FakeLogo
+              key={logo.name}
+              name={logo.name}
+              letters={logo.letters}
+              innerRef={(el) => {
+                logosRef.current[i] = el;
+              }}
+            />
           ))}
         </div>
 
         <div
+          ref={dividerRef}
           className="h-[1px] mx-auto"
           style={{
             backgroundColor: "rgba(204, 166, 98, 0.2)",
             marginTop: "60px",
             maxWidth: "600px",
+            transform: "scaleX(0)",
+            transformOrigin: "center",
+            willChange: "transform",
           }}
         />
       </div>

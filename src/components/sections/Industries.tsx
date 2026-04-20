@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -274,9 +275,36 @@ export default function Industries() {
             >
               {corporate.map(renderName)}
             </ul>
+
+            {/* CTA */}
+            <div className="industries-home-cta-wrapper" style={{ marginTop: "48px" }}>
+              <Link
+                href="/industries"
+                className="industries-home-cta font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
+                style={{
+                  height: "52px",
+                  padding: "0 32px",
+                  borderRadius: "9999px",
+                  backgroundColor: "#CCA662",
+                  color: "#141F31",
+                  fontSize: "14px",
+                  letterSpacing: "3px",
+                }}
+              >
+                See Industries
+              </Link>
+            </div>
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @media (max-width: 767px) {
+          .industries-home-cta {
+            width: 100% !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

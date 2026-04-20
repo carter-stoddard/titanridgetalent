@@ -1,8 +1,58 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default function TestimonialsFeatured() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
+  const leftColRef = useRef<HTMLDivElement>(null);
+  const rightColRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const trigger = {
+        trigger: sectionRef.current,
+        start: "top 75%",
+        once: true,
+      };
+
+      gsap.fromTo(
+        frameRef.current,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: trigger,
+        }
+      );
+
+      gsap.fromTo(
+        [leftColRef.current, rightColRef.current],
+        { opacity: 0, y: 24 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: "power2.out",
+          stagger: 0.12,
+          delay: 0.3,
+          scrollTrigger: trigger,
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       className="testimonials-featured relative w-full"
       style={{
         backgroundColor: "#F5F4F0",
@@ -14,16 +64,31 @@ export default function TestimonialsFeatured() {
         className="featured-inner"
         style={{ paddingLeft: "80px", paddingRight: "80px" }}
       >
+        <div
+          ref={frameRef}
+          className="featured-frame"
+          style={{
+            backgroundColor: "#141F31",
+            borderRadius: "12px",
+            padding: "72px",
+            opacity: 0,
+          }}
+        >
         <div className="featured-grid">
           {/* LEFT — Headshot + attribution */}
-          <div className="flex flex-col items-center text-center">
+          <div
+            ref={leftColRef}
+            className="flex flex-col items-center text-center"
+            style={{ opacity: 0 }}
+          >
             <div
               className="flex items-center justify-center"
               style={{
                 width: "280px",
                 height: "280px",
                 borderRadius: "9999px",
-                backgroundColor: "#141F31",
+                backgroundColor: "#F5F4F0",
+                border: "1.5px solid rgba(204, 166, 98, 0.3)",
               }}
             >
               <p
@@ -41,7 +106,7 @@ export default function TestimonialsFeatured() {
               className="font-display font-bold"
               style={{
                 fontSize: "20px",
-                color: "#141F31",
+                color: "#F5F4F0",
                 marginTop: "20px",
               }}
             >
@@ -72,7 +137,7 @@ export default function TestimonialsFeatured() {
           </div>
 
           {/* RIGHT — Quote */}
-          <div className="relative">
+          <div ref={rightColRef} className="relative" style={{ opacity: 0 }}>
             <span
               aria-hidden="true"
               className="font-display font-black select-none pointer-events-none"
@@ -93,7 +158,7 @@ export default function TestimonialsFeatured() {
               style={{
                 fontSize: "clamp(20px, 2vw, 24px)",
                 lineHeight: 1.7,
-                color: "#141F31",
+                color: "#F5F4F0",
                 marginBottom: "32px",
                 zIndex: 1,
               }}
@@ -128,13 +193,14 @@ export default function TestimonialsFeatured() {
               style={{
                 fontSize: "13px",
                 letterSpacing: "1px",
-                color: "rgba(42, 42, 42, 0.6)",
+                color: "rgba(245, 244, 240, 0.6)",
                 marginTop: "4px",
               }}
             >
               VP of Operations
             </p>
           </div>
+        </div>
         </div>
       </div>
 
@@ -154,6 +220,9 @@ export default function TestimonialsFeatured() {
           .featured-inner {
             padding-left: 24px !important;
             padding-right: 24px !important;
+          }
+          .featured-frame {
+            padding: 40px 28px !important;
           }
           .featured-grid {
             grid-template-columns: 1fr;

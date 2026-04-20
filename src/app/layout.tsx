@@ -20,7 +20,7 @@ const lora = Lora({
 
 export const metadata: Metadata = {
   title: {
-    default: "Titan Ridge Talent | Built on Relationships. Driven by Results.",
+    default: "Titan Ridge Talent | Relationships First. Results Always.",
     template: "%s | Titan Ridge Talent",
   },
   icons: {

@@ -33,29 +33,88 @@ const employers = [
 export default function TestimonialsEmployers() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const barsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const marksRef = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        cardsRef.current.filter(Boolean),
-        { opacity: 0, y: 40 },
+      const cards = cardsRef.current.filter(Boolean);
+      const bars = barsRef.current.filter(Boolean);
+      const marks = marksRef.current.filter(Boolean);
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 75%",
+          once: true,
+        },
+      });
+
+      tl.fromTo(
+        cards,
+        { opacity: 0, y: 48, scale: 0.97 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          ease: "power2.out",
-          stagger: 0.15,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 75%",
-            once: true,
-          },
+          scale: 1,
+          duration: 0.85,
+          ease: "power3.out",
+          stagger: 0.18,
         }
-      );
+      )
+        .fromTo(
+          bars,
+          { scaleY: 0, transformOrigin: "top center" },
+          { scaleY: 1, duration: 0.7, ease: "power2.inOut", stagger: 0.18 },
+          0.1
+        )
+        .fromTo(
+          marks,
+          { opacity: 0, scale: 0.6, y: -10 },
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "back.out(1.6)",
+            stagger: 0.18,
+          },
+          0.3
+        );
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>, i: number) => {
+    const card = cardsRef.current[i];
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateY = ((x - centerX) / centerX) * 6;
+    const rotateX = ((centerY - y) / centerY) * 6;
+    gsap.to(card, {
+      rotateX,
+      rotateY,
+      duration: 0.4,
+      ease: "power2.out",
+      transformPerspective: 1000,
+    });
+  };
+
+  const handleMouseLeave = (i: number) => {
+    const card = cardsRef.current[i];
+    if (!card) return;
+    gsap.to(card, {
+      rotateX: 0,
+      rotateY: 0,
+      duration: 0.6,
+      ease: "power3.out",
+    });
+  };
 
   return (
     <section
@@ -115,20 +174,46 @@ export default function TestimonialsEmployers() {
               ref={(el) => {
                 cardsRef.current[i] = el;
               }}
-              className="relative overflow-hidden"
+              className="employer-card relative overflow-hidden"
+              onMouseMove={(e) => handleMouseMove(e, i)}
+              onMouseLeave={() => handleMouseLeave(i)}
               style={{
                 backgroundColor: "#FFFFFF",
-                borderLeft: "4px solid #CCA662",
                 borderTopRightRadius: "8px",
                 borderBottomRightRadius: "8px",
                 padding: "36px",
                 opacity: 0,
+                transformStyle: "preserve-3d",
+                willChange: "transform",
               }}
             >
+              {/* Animated gold left bar */}
+              <div
+                ref={(el) => {
+                  barsRef.current[i] = el;
+                }}
+                aria-hidden="true"
+                className="employer-bar"
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "4px",
+                  height: "100%",
+                  backgroundColor: "#CCA662",
+                  transform: "scaleY(0)",
+                  transformOrigin: "top center",
+                  zIndex: 2,
+                }}
+              />
+
               {/* Decorative quote mark */}
               <span
+                ref={(el) => {
+                  marksRef.current[i] = el;
+                }}
                 aria-hidden="true"
-                className="font-display font-black select-none pointer-events-none"
+                className="employer-mark font-display font-black select-none pointer-events-none"
                 style={{
                   position: "absolute",
                   top: "16px",
@@ -137,6 +222,7 @@ export default function TestimonialsEmployers() {
                   lineHeight: 1,
                   color: "rgba(204, 166, 98, 0.1)",
                   zIndex: 0,
+                  opacity: 0,
                 }}
               >
                 &ldquo;
@@ -234,6 +320,37 @@ export default function TestimonialsEmployers() {
       </div>
 
       <style jsx>{`
+        .employer-card {
+          transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+            box-shadow 0.4s ease;
+          box-shadow: 0 1px 2px rgba(20, 31, 49, 0.04);
+          will-change: transform;
+        }
+        .employer-bar {
+          transition: width 0.35s ease, box-shadow 0.35s ease;
+        }
+        .employer-mark {
+          transition: color 0.4s ease, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .employers-grid {
+          perspective: 1000px;
+        }
+
+        @media (hover: hover) and (min-width: 768px) {
+          .employer-card:hover {
+            box-shadow: 0 18px 40px rgba(20, 31, 49, 0.12);
+          }
+          .employer-card:hover .employer-bar {
+            width: 6px;
+            box-shadow: 0 0 18px rgba(204, 166, 98, 0.45);
+          }
+          .employer-card:hover .employer-mark {
+            color: rgba(204, 166, 98, 0.22);
+            transform: scale(1.08);
+          }
+        }
+
         .employers-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
