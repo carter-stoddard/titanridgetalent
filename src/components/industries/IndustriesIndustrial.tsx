@@ -17,6 +17,8 @@ const sectors = [
   { name: "Skilled Trades", descriptor: "Electricians, welders, machinists, HVAC technicians" },
   { name: "Operations", descriptor: "Operations managers, continuous improvement, safety leads" },
   { name: "Construction", descriptor: "Project managers, site superintendents, estimators" },
+  { name: "Warehouses", descriptor: "Warehouse managers, inventory leads, shipping & receiving supervisors" },
+  { name: "Energy", descriptor: "Plant managers, field operations, utility leads, HSE supervisors" },
 ];
 
 export default function IndustriesIndustrial() {
@@ -229,7 +231,7 @@ export default function IndustriesIndustrial() {
               }}
             >
               <img
-                src="/images/industrial-jobs.jpg"
+                src="/images/industrial-jobs.webp"
                 alt="Industrial job site — operations floor in cinematic warm light"
                 className="absolute inset-0 h-full w-full object-cover"
                 style={{ objectPosition: "center" }}

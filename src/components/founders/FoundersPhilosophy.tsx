@@ -7,12 +7,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const proofPoints = [
-  { value: "6+", label: "Years of recruiting experience" },
   { value: "100%", label: "Relationship-first placement" },
   { value: "Zero", label: "Bulk submissions, ever" },
   { value: "Both", label: "Industrial & corporate expertise" },
   { value: "Direct", label: "Client engagement, no portals" },
   { value: "Ongoing", label: "Accountability after the placement" },
+  { value: "Hands-on", label: "Founder-led, every search" },
 ];
 
 export default function FoundersPhilosophy() {

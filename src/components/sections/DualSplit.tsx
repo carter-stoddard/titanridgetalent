@@ -194,7 +194,7 @@ export default function DualSplit() {
                 }}
               >
                 <img
-                  src="/images/employer-industrial.jpg"
+                  src="/images/employer-industrial.webp"
                   alt="Industrial employer reviewing operations on the floor"
                   className="absolute inset-0 h-full w-full object-cover"
                   style={{ objectPosition: "center" }}
@@ -236,7 +236,7 @@ export default function DualSplit() {
                 }}
               >
                 <img
-                  src="/images/candidate-corporate.jpg"
+                  src="/images/candidate-corporate.webp"
                   alt="Professional candidate in a confident corporate setting"
                   className="absolute inset-0 h-full w-full object-cover"
                   style={{ objectPosition: "center" }}

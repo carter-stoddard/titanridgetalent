@@ -95,7 +95,7 @@ export default function IndustriesCorporate() {
               }}
             >
               <img
-                src="/images/corporate-jobs.jpg"
+                src="/images/corporate-jobs.webp"
                 alt="Corporate professional environment — modern office at golden hour"
                 className="absolute inset-0 h-full w-full object-cover"
                 style={{ objectPosition: "center" }}

@@ -18,6 +18,8 @@ const industrial = [
   "Skilled Trades",
   "Operations",
   "Construction",
+  "Warehouse",
+  "Energy",
 ];
 
 const corporate = [
@@ -177,7 +179,7 @@ export default function Industries() {
               }}
             >
               <img
-                src="/images/where-we-work.jpg"
+                src="/images/where-we-work.webp"
                 alt="Industrial and corporate landscape — where Titan Ridge works"
                 className="absolute inset-0 h-full w-full object-cover"
                 style={{ objectPosition: "center" }}

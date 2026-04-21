@@ -60,7 +60,7 @@ export default function Hero() {
       {/* Background — cinematic hero image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/titan-ridge-hero.jpg"
+          src="/images/titan-ridge-hero.webp"
           alt="Dramatic ridge landscape at golden hour"
           className="hero-image h-full w-full object-cover"
         />
@@ -99,7 +99,7 @@ export default function Hero() {
             className="font-body mt-8 max-w-xl text-base leading-relaxed sm:text-lg sm:leading-[1.7]"
             style={{ color: "#2A2A2A" }}
           >
-            Some climbs you don&apos;t take alone. We know the terrain.
+            Building strong teams for every ascent. TitanRidge Talent Solutions knows the way.
           </p>
 
           {/* Dual CTAs */}

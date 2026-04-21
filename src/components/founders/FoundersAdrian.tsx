@@ -139,7 +139,7 @@ export default function FoundersAdrian() {
                 opacity: 0,
               }}
             >
-              Aerospace, Food &amp; Beverage, Start Ups &amp; IT · 6 Years Experience
+              Aerospace, Food &amp; Beverage &amp; IT
             </p>
 
             <div
@@ -165,11 +165,10 @@ export default function FoundersAdrian() {
                   color: "#2A2A2A",
                 }}
               >
-                Adrian Ibarra is the founder of Titan Ridge Talent,
-                bringing 6 years of recruiting experience across industrial
-                and corporate markets. His career has been built on one
-                principle: that the right placement starts with a real
-                conversation. Not a resume submission.
+                Adrian Ibarra is the founder of Titan Ridge Talent, working
+                across industrial and corporate markets. His career has been
+                built on one principle: that the right placement starts with a
+                real conversation. Not a resume submission.
               </p>
               <p
                 className="font-body"
@@ -180,7 +179,7 @@ export default function FoundersAdrian() {
                 }}
               >
                 Throughout his career Adrian has developed deep expertise in
-                Aerospace, Food &amp; Beverage, Start Ups, and IT, working directly with hiring managers,
+                Aerospace, Food &amp; Beverage, and IT, working directly with hiring managers,
                 operations leaders, and executives to understand not just what a
                 role requires on paper, but what it demands in practice. That
                 ground-level understanding is what separates a good placement

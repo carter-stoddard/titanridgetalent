@@ -26,7 +26,7 @@ const stats: Stat[] = [
     type: "count",
     target: 15,
     suffix: "+",
-    label: "Years Combined Experience",
+    label: "Years of Combined Experience",
     descriptor: "Across industrial floors and corporate boardrooms.",
   },
   {
