@@ -32,41 +32,36 @@ export default function PageHero({
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const tl = gsap.timeline({ delay: 0.2 });
+        const tl = gsap.timeline({ delay: 0.25 });
 
         tl.from(eyebrowRef.current, {
           opacity: 0,
-          y: 16,
-          duration: 0.6,
+          y: 14,
+          duration: 0.7,
           ease: "power3.out",
         });
 
-        const words = headlineRef.current?.querySelectorAll(".hero-word");
-        if (words && words.length) {
-          tl.from(
-            words,
-            {
-              opacity: 0,
-              y: 40,
-              rotateX: 25,
-              duration: 0.9,
-              ease: "power4.out",
-              stagger: 0.12,
-            },
-            "-=0.3"
-          );
-        }
+        tl.from(
+          headlineRef.current,
+          {
+            opacity: 0,
+            y: 28,
+            duration: 1.1,
+            ease: "power3.out",
+          },
+          "-=0.45"
+        );
 
         if (subRef.current) {
           tl.from(
             subRef.current,
             {
               opacity: 0,
-              y: 20,
-              duration: 0.7,
+              y: 18,
+              duration: 0.8,
               ease: "power3.out",
             },
-            "-=0.4"
+            "-=0.6"
           );
         }
       });
@@ -74,8 +69,6 @@ export default function PageHero({
 
     return () => ctx.revert();
   }, []);
-
-  const words = headline.split(" ");
 
   return (
     <section
@@ -120,22 +113,9 @@ export default function PageHero({
               lineHeight: 0.95,
               color: "#FFFFFF",
               marginBottom: subtitle ? "16px" : 0,
-              perspective: "1000px",
             }}
           >
-            {words.map((w, i) => (
-              <span
-                key={i}
-                className="hero-word"
-                style={{
-                  display: "inline-block",
-                  marginRight: i < words.length - 1 ? "0.25em" : 0,
-                  willChange: "transform, opacity",
-                }}
-              >
-                {w}
-              </span>
-            ))}
+            {headline}
           </h1>
           {subtitle ? (
             <p

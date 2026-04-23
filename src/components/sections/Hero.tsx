@@ -11,42 +11,40 @@ export default function Hero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const lines = headlineRef.current?.querySelectorAll(".hero-word");
-      if (!lines) return;
+      const mm = gsap.matchMedia();
 
-      const tl = gsap.timeline({ delay: 0.2 });
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const tl = gsap.timeline({ delay: 0.25 });
 
-      tl.from(lines, {
-        opacity: 0,
-        y: 60,
-        rotateX: 30,
-        duration: 1,
-        ease: "power4.out",
-        stagger: 0.2,
+        tl.from(headlineRef.current, {
+          opacity: 0,
+          y: 32,
+          duration: 1.2,
+          ease: "power3.out",
+        });
+
+        tl.from(
+          subRef.current,
+          {
+            opacity: 0,
+            y: 20,
+            duration: 0.8,
+            ease: "power3.out",
+          },
+          "-=0.65"
+        );
+
+        tl.from(
+          ctaRef.current,
+          {
+            opacity: 0,
+            y: 18,
+            duration: 0.7,
+            ease: "power3.out",
+          },
+          "-=0.55"
+        );
       });
-
-      tl.from(
-        subRef.current,
-        {
-          opacity: 0,
-          y: 20,
-          duration: 0.7,
-          ease: "power3.out",
-        },
-        "-=0.4"
-      );
-
-      tl.from(
-        ctaRef.current,
-        {
-          opacity: 0,
-          y: 20,
-          duration: 0.7,
-          ease: "power3.out",
-        },
-        "-=0.4"
-      );
-
     }, sectionRef);
 
     return () => ctx.revert();
@@ -80,15 +78,12 @@ export default function Hero() {
           <h1
             ref={headlineRef}
             className="font-display font-bold uppercase leading-[0.95] tracking-[0.02em]"
-            style={{
-              fontSize: "clamp(56px, 8vw, 96px)",
-              perspective: "600px",
-            }}
+            style={{ fontSize: "clamp(56px, 8vw, 96px)" }}
           >
-            <span className="hero-word block text-titan-navy">
+            <span className="block text-titan-navy">
               THE RIGHT <span className="text-titan-gold">PEOPLE.</span>
             </span>
-            <span className="hero-word block text-titan-navy">
+            <span className="block text-titan-navy">
               THE RIGHT <span className="text-titan-gold">ROLES.</span>
             </span>
           </h1>
