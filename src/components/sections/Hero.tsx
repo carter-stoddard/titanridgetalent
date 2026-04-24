@@ -53,7 +53,7 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative flex min-h-dvh items-start justify-start overflow-hidden"
+      className="relative flex min-h-[80dvh] items-start justify-start overflow-hidden"
     >
       {/* Background — cinematic hero image */}
       <div className="absolute inset-0 z-0">
