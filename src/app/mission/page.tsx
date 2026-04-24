@@ -4,9 +4,10 @@ import Footer from "@/components/sections/Footer";
 import MissionHero from "@/components/mission/MissionHero";
 
 export const metadata: Metadata = {
-  title: "Mission | Titan Ridge Talent",
+  title: "Mission",
   description:
     "The mission behind Titan Ridge Talent — what drives us and why it matters.",
+  alternates: { canonical: "/mission" },
 };
 
 export default function MissionPage() {

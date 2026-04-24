@@ -7,9 +7,10 @@ import IndustriesIndustrial from "@/components/industries/IndustriesIndustrial";
 import IndustriesCorporate from "@/components/industries/IndustriesCorporate";
 
 export const metadata: Metadata = {
-  title: "Industries | Titan Ridge Talent",
+  title: "Industries",
   description:
     "From industrial operations to corporate boardrooms — the industries Titan Ridge Talent serves across both markets.",
+  alternates: { canonical: "/industries" },
 };
 
 export default function IndustriesPage() {

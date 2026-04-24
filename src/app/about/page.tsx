@@ -7,9 +7,10 @@ import AboutValues from "@/components/about/AboutValues";
 import AboutMission from "@/components/about/AboutMission";
 
 export const metadata: Metadata = {
-  title: "About | Titan Ridge Talent",
+  title: "About",
   description:
     "The story behind Titan Ridge Talent — three recruiting veterans, thirty years of combined experience, and one shared belief.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {

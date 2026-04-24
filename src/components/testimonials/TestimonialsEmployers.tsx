@@ -265,54 +265,41 @@ export default function TestimonialsEmployers() {
                 }}
               />
 
-              {/* Attribution row */}
-              <div className="flex items-center gap-4">
-                <div
-                  className="flex items-center justify-center flex-shrink-0"
+              {/* Attribution */}
+              <div className="flex items-baseline flex-wrap" style={{ gap: "10px" }}>
+                <p
+                  className="font-display font-bold"
                   style={{
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "9999px",
-                    backgroundColor: "#141F31",
+                    fontSize: "17px",
+                    color: "#141F31",
+                    lineHeight: 1.2,
+                    letterSpacing: "0.5px",
                   }}
                 >
-                  <svg
-                    width="22"
-                    height="22"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle cx="12" cy="8" r="4" fill="rgba(245, 244, 240, 0.6)" />
-                    <path
-                      d="M4 20c0-4 3.6-7 8-7s8 3 8 7"
-                      fill="rgba(245, 244, 240, 0.6)"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <p
-                    className="font-display font-bold"
-                    style={{
-                      fontSize: "15px",
-                      color: "#141F31",
-                      lineHeight: 1.2,
-                    }}
-                  >
-                    {t.name}
-                  </p>
-                  <p
-                    className="font-display"
-                    style={{
-                      fontSize: "12px",
-                      color: "#CCA662",
-                      letterSpacing: "1px",
-                      marginTop: "3px",
-                    }}
-                  >
-                    {t.title}
-                  </p>
-                </div>
+                  {t.name}
+                </p>
+                <span
+                  aria-hidden="true"
+                  style={{
+                    display: "inline-block",
+                    width: "4px",
+                    height: "4px",
+                    borderRadius: "9999px",
+                    backgroundColor: "#CCA662",
+                    transform: "translateY(-3px)",
+                  }}
+                />
+                <p
+                  className="font-display uppercase"
+                  style={{
+                    fontSize: "12px",
+                    color: "#CCA662",
+                    letterSpacing: "2px",
+                    fontWeight: 600,
+                  }}
+                >
+                  {t.title}
+                </p>
               </div>
             </div>
           ))}

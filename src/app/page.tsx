@@ -15,19 +15,22 @@ export const metadata: Metadata = {
   },
   description:
     "Industrial and corporate recruiting built on real conversations, not resume floods. Vetted candidates, direct engagement, placements that last.",
+  alternates: { canonical: "/" },
 };
 
 export default function Home() {
   return (
     <>
       <Navbar />
-      <Hero />
-      <Pillars />
-      <DualSplit />
-      <HowItWorks />
-      <Industries />
-      <Testimonials />
-      <ClosingCTA />
+      <main>
+        <Hero />
+        <Pillars />
+        <DualSplit />
+        <HowItWorks />
+        <Industries />
+        <Testimonials />
+        <ClosingCTA />
+      </main>
       <Footer />
     </>
   );

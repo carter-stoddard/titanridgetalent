@@ -7,9 +7,10 @@ import FoundersPhilosophy from "@/components/founders/FoundersPhilosophy";
 import FoundersCTA from "@/components/founders/FoundersCTA";
 
 export const metadata: Metadata = {
-  title: "Founders | Titan Ridge Talent",
+  title: "Founders",
   description:
     "Meet the people behind Titan Ridge Talent — thirty years of combined experience in industrial and corporate recruiting.",
+  alternates: { canonical: "/founders" },
 };
 
 export default function FoundersPage() {

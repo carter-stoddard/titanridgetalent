@@ -83,24 +83,21 @@ export default function TestimonialsFeatured() {
           >
             <div
               className="flex items-center justify-center"
-              style={{
-                width: "280px",
-                height: "280px",
-                borderRadius: "9999px",
-                backgroundColor: "#F5F4F0",
-                border: "1.5px solid rgba(204, 166, 98, 0.3)",
-              }}
+              style={{ width: "280px", height: "280px" }}
+              aria-hidden="true"
             >
-              <p
-                className="font-display uppercase"
+              <span
+                className="font-display font-black select-none pointer-events-none"
                 style={{
-                  fontSize: "12px",
-                  letterSpacing: "2px",
+                  fontSize: "360px",
+                  lineHeight: 0.8,
                   color: "#CCA662",
+                  transform: "translateY(0.12em)",
+                  display: "block",
                 }}
               >
-                Headshot
-              </p>
+                &ldquo;
+              </span>
             </div>
             <p
               className="font-display font-bold"

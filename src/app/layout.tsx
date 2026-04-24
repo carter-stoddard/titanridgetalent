@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     apple: "/favicon.svg",
   },
   description:
-    "Titan Ridge Talent connects industrial and corporate employers with people who actually fit the role. Relationship-first recruiting with 30+ years of combined experience.",
+    "Relationship-first recruiting for industrial and corporate teams. Real conversations, vetted candidates, placements that last.",
   metadataBase: new URL("https://titanridgetalent.com"),
   openGraph: {
     siteName: "Titan Ridge Talent",

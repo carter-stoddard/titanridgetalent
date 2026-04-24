@@ -76,24 +76,19 @@ export default function FoundersAdrian() {
             style={{ padding: "24px", opacity: 0 }}
           >
             <div
-              className="relative w-full overflow-hidden flex items-center justify-center"
+              className="relative w-full overflow-hidden"
               style={{
                 aspectRatio: "1 / 1",
                 borderRadius: "8px",
-                backgroundColor: "#C4B89A",
+                backgroundColor: "#141F31",
               }}
             >
-              <p
-                className="font-display uppercase text-center px-6"
-                style={{
-                  fontSize: "13px",
-                  letterSpacing: "2px",
-                  color: "#141F31",
-                }}
-              >
-                Adrian Ibarra — professional headshot, high contrast, neutral or
-                dark background
-              </p>
+              <img
+                src="/images/adrian-headshot.webp"
+                alt="Adrian Ibarra, founder of Titan Ridge Talent"
+                className="absolute inset-0 h-full w-full object-cover"
+                style={{ objectPosition: "center top" }}
+              />
             </div>
           </div>
 
@@ -139,7 +134,7 @@ export default function FoundersAdrian() {
                 opacity: 0,
               }}
             >
-              Aerospace, Food &amp; Beverage &amp; IT
+              Aerospace, Food &amp; Beverage, &amp; IT
             </p>
 
             <div
