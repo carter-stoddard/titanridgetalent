@@ -70,7 +70,7 @@ export default function Hero() {
       <div className="hero-content relative z-10 w-full pt-40 sm:pt-44 md:pt-48 pb-24" style={{ paddingLeft: "80px", paddingRight: "80px" }}>
         <div className="max-w-3xl">
           {/* Label */}
-          <p className="font-display mb-8 text-[11px] font-medium uppercase tracking-[0.35em] text-titan-gold">
+          <p className="font-display mb-8 text-[11px] font-medium uppercase tracking-[0.35em] text-titan-navy">
             Industrial &amp; Corporate Recruiting
           </p>
 
@@ -94,7 +94,7 @@ export default function Hero() {
             className="font-body mt-8 max-w-xl text-base leading-relaxed sm:text-lg sm:leading-[1.7]"
             style={{ color: "#2A2A2A" }}
           >
-            Building strong teams for every ascent. TitanRidge Talent Solutions knows the way.
+            Industrial and corporate recruiting built on real relationships, deep vetting, and placements that last.
           </p>
 
           {/* Dual CTAs */}
@@ -119,6 +119,7 @@ export default function Hero() {
       <style jsx>{`
         .hero-image {
           object-position: center;
+          filter: brightness(0.62) contrast(1.05) saturate(0.92);
         }
         .hero-overlay {
           background: linear-gradient(
