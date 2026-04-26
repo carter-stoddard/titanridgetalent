@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { JOBS_VISIBLE } from "@/lib/features";
 
 const socials = [
   {
@@ -59,8 +60,12 @@ const companyLinks = [
 
 const workLinks = [
   { label: "I'm Hiring", href: "/contact" },
-  { label: "I'm Looking for Work", href: "/jobs" },
-  { label: "Jobs Available", href: "/jobs" },
+  ...(JOBS_VISIBLE
+    ? [
+        { label: "I'm Looking for Work", href: "/jobs" },
+        { label: "Jobs Available", href: "/jobs" },
+      ]
+    : []),
   { label: "Contact Us", href: "/contact" },
 ];
 
@@ -206,22 +211,12 @@ export default function Footer() {
                 fontSize: "14px",
                 color: "rgba(255, 255, 255, 0.65)",
                 display: "block",
-                marginBottom: "8px",
+                marginBottom: "28px",
                 transition: "color 0.2s ease",
               }}
             >
               support@titanridgetalent.com
             </a>
-            <p
-              className="font-body"
-              style={{
-                fontSize: "14px",
-                color: "rgba(255, 255, 255, 0.65)",
-                marginBottom: "28px",
-              }}
-            >
-              (800) 555-1234
-            </p>
             <a
               href="/contact"
               className="font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
@@ -260,7 +255,7 @@ export default function Footer() {
           </p>
           <div className="footer-legal-row">
             <Link
-              href="#"
+              href="/privacy"
               className="footer-legal font-display"
               style={{
                 fontSize: "12px",
@@ -279,7 +274,7 @@ export default function Footer() {
               ·
             </span>
             <Link
-              href="#"
+              href="/terms"
               className="footer-legal font-display"
               style={{
                 fontSize: "12px",

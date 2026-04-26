@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { JOBS_VISIBLE } from "@/lib/features";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -197,7 +198,7 @@ export default function DualSplit() {
                   src="/images/employer-industrial.webp"
                   alt="Industrial employer reviewing operations on the floor"
                   className="absolute inset-0 h-full w-full object-cover"
-                  style={{ objectPosition: "center" }}
+                  style={{ objectPosition: "center", opacity: 0.85 }}
                 />
               </div>
             </div>
@@ -239,7 +240,7 @@ export default function DualSplit() {
                   src="/images/candidate-corporate.webp"
                   alt="Professional candidate in a confident corporate setting"
                   className="absolute inset-0 h-full w-full object-cover"
-                  style={{ objectPosition: "center" }}
+                  style={{ objectPosition: "center", opacity: 0.85 }}
                 />
               </div>
             </div>
@@ -307,7 +308,7 @@ export default function DualSplit() {
                 style={{ opacity: 0 }}
               >
                 <Link
-                  href="/jobs"
+                  href={JOBS_VISIBLE ? "/jobs" : "/contact"}
                   className="font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-navy/25 hover:-translate-y-0.5 active:translate-y-0 candidate-cta"
                   style={{
                     height: "56px",
@@ -319,7 +320,7 @@ export default function DualSplit() {
                     letterSpacing: "3px",
                   }}
                 >
-                  See Open Roles
+                  {JOBS_VISIBLE ? "See Open Roles" : "Get in Touch"}
                 </Link>
                 <div
                   className="flex items-center"

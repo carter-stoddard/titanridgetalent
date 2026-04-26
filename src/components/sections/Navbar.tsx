@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { JOBS_VISIBLE } from "@/lib/features";
 
 const navLinks = [
   { label: "About", href: "/about" },
   { label: "Mission", href: "/mission" },
   { label: "Founder", href: "/founders" },
-  { label: "Jobs", href: "/jobs" },
+  ...(JOBS_VISIBLE ? [{ label: "Jobs", href: "/jobs" }] : []),
   { label: "Industries", href: "/industries" },
   { label: "Testimonials", href: "/testimonials" },
 ];
@@ -246,20 +247,9 @@ export default function Navbar() {
               style={{
                 fontSize: "15px",
                 color: "rgba(245, 244, 240, 0.65)",
-                marginBottom: "6px",
               }}
             >
               support@titanridgetalent.com
-            </a>
-            <a
-              href="tel:+18005551234"
-              className="font-body italic block"
-              style={{
-                fontSize: "15px",
-                color: "rgba(245, 244, 240, 0.65)",
-              }}
-            >
-              (800) 555-1234
             </a>
 
             <div

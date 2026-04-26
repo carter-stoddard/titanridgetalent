@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { JOBS_VISIBLE } from "@/lib/features";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -152,22 +153,24 @@ export default function IndustriesMarkets() {
             style={{ backgroundColor: "#CCA662", marginBottom: "24px" }}
           />
           <StatRow stats={industrialStats} />
-          <a
-            href="/jobs"
-            className="font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
-            style={{
-              marginTop: "32px",
-              height: "48px",
-              padding: "0 28px",
-              borderRadius: "9999px",
-              backgroundColor: "#CCA662",
-              color: "#141F31",
-              fontSize: "13px",
-              letterSpacing: "3px",
-            }}
-          >
-            See Industrial Roles
-          </a>
+          {JOBS_VISIBLE && (
+            <a
+              href="/jobs"
+              className="font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
+              style={{
+                marginTop: "32px",
+                height: "48px",
+                padding: "0 28px",
+                borderRadius: "9999px",
+                backgroundColor: "#CCA662",
+                color: "#141F31",
+                fontSize: "13px",
+                letterSpacing: "3px",
+              }}
+            >
+              See Industrial Roles
+            </a>
+          )}
         </div>
 
         {/* RIGHT — Corporate */}
@@ -223,22 +226,24 @@ export default function IndustriesMarkets() {
             style={{ backgroundColor: "#CCA662", marginBottom: "24px" }}
           />
           <StatRow stats={corporateStats} />
-          <a
-            href="/jobs"
-            className="font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
-            style={{
-              marginTop: "32px",
-              height: "48px",
-              padding: "0 28px",
-              borderRadius: "9999px",
-              backgroundColor: "#CCA662",
-              color: "#141F31",
-              fontSize: "13px",
-              letterSpacing: "3px",
-            }}
-          >
-            See Corporate Roles
-          </a>
+          {JOBS_VISIBLE && (
+            <a
+              href="/jobs"
+              className="font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
+              style={{
+                marginTop: "32px",
+                height: "48px",
+                padding: "0 28px",
+                borderRadius: "9999px",
+                backgroundColor: "#CCA662",
+                color: "#141F31",
+                fontSize: "13px",
+                letterSpacing: "3px",
+              }}
+            >
+              See Corporate Roles
+            </a>
+          )}
         </div>
       </div>
 

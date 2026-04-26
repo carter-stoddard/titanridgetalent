@@ -192,24 +192,19 @@ export default function AboutStory() {
             style={{ padding: "24px", opacity: 0 }}
           >
             <div
-              className="relative w-full overflow-hidden flex items-center justify-center"
+              className="relative w-full overflow-hidden"
               style={{
                 aspectRatio: "1 / 1",
                 borderRadius: "8px",
-                backgroundColor: "#C4B89A",
+                backgroundColor: "#141F31",
               }}
             >
-              <p
-                className="font-display uppercase text-center px-6"
-                style={{
-                  fontSize: "13px",
-                  letterSpacing: "2px",
-                  color: "#141F31",
-                }}
-              >
-                Story Image — three founders in genuine conversation, candid,
-                warm light
-              </p>
+              <img
+                src="/images/about-story.webp"
+                alt="Cinematic ridge at golden hour — the Titan Ridge story"
+                className="absolute inset-0 h-full w-full object-cover"
+                style={{ objectPosition: "center" }}
+              />
             </div>
           </div>
         </div>

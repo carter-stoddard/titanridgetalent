@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { JOBS_VISIBLE } from "@/lib/features";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -165,22 +166,24 @@ export default function TestimonialsClosing() {
           >
             Let&apos;s Talk Hiring
           </Link>
-          <a
-            href="/jobs"
-            className="closing-cta closing-cta-ghost font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
-            style={{
-              height: "54px",
-              padding: "0 36px",
-              borderRadius: "9999px",
-              backgroundColor: "transparent",
-              border: "1.5px solid rgba(255, 255, 255, 0.7)",
-              color: "#FFFFFF",
-              fontSize: "14px",
-              letterSpacing: "3px",
-            }}
-          >
-            See Open Roles
-          </a>
+          {JOBS_VISIBLE && (
+            <a
+              href="/jobs"
+              className="closing-cta closing-cta-ghost font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
+              style={{
+                height: "54px",
+                padding: "0 36px",
+                borderRadius: "9999px",
+                backgroundColor: "transparent",
+                border: "1.5px solid rgba(255, 255, 255, 0.7)",
+                color: "#FFFFFF",
+                fontSize: "14px",
+                letterSpacing: "3px",
+              }}
+            >
+              See Open Roles
+            </a>
+          )}
         </div>
       </div>
 

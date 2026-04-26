@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { JOBS_VISIBLE } from "@/lib/features";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -147,21 +148,23 @@ export default function ClosingCTA() {
               className="flex flex-col sm:flex-row"
               style={{ gap: "16px", opacity: 0 }}
             >
-              <a
-                href="/jobs"
-                className="font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
-                style={{
-                  height: "52px",
-                  padding: "0 32px",
-                  borderRadius: "9999px",
-                  backgroundColor: "#CCA662",
-                  color: "#141F31",
-                  fontSize: "14px",
-                  letterSpacing: "3px",
-                }}
-              >
-                See Open Roles
-              </a>
+              {JOBS_VISIBLE && (
+                <a
+                  href="/jobs"
+                  className="font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
+                  style={{
+                    height: "52px",
+                    padding: "0 32px",
+                    borderRadius: "9999px",
+                    backgroundColor: "#CCA662",
+                    color: "#141F31",
+                    fontSize: "14px",
+                    letterSpacing: "3px",
+                  }}
+                >
+                  See Open Roles
+                </a>
+              )}
               <a
                 href="/contact"
                 className="font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:bg-titan-navy hover:text-titan-offwhite hover:-translate-y-0.5 active:translate-y-0"

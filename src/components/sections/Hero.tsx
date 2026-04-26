@@ -1,7 +1,24 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
+import { JOBS_VISIBLE } from "@/lib/features";
+
+// Replace placeholder slides with real WebPs (2400px-wide) when ready.
+// To "fill" a slide, set `src` to the path and clear `placeholder`.
+type HeroSlide =
+  | { src: string; alt: string; placeholder?: false }
+  | { placeholder: true; label: string };
+
+const heroImages: HeroSlide[] = [
+  { src: "/images/hero-1.webp", alt: "Titan Ridge Talent — slide 1" },
+  { src: "/images/hero-2.webp", alt: "Titan Ridge Talent — slide 2" },
+  { src: "/images/hero-3.webp", alt: "Titan Ridge Talent — slide 3" },
+  { src: "/images/hero-4.webp", alt: "Titan Ridge Talent — slide 4" },
+];
+
+const SLIDE_INTERVAL_MS = 4000;
+const CROSSFADE_MS = 600;
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -9,6 +26,15 @@ export default function Hero() {
   const subRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
 
+  const [activeIdx, setActiveIdx] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const reducedMotion = useMemo(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }, []);
+
+  // Text/CTA entrance animation
   useEffect(() => {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
@@ -25,23 +51,13 @@ export default function Hero() {
 
         tl.from(
           subRef.current,
-          {
-            opacity: 0,
-            y: 20,
-            duration: 0.8,
-            ease: "power3.out",
-          },
+          { opacity: 0, y: 20, duration: 0.8, ease: "power3.out" },
           "-=0.65"
         );
 
         tl.from(
           ctaRef.current,
-          {
-            opacity: 0,
-            y: 18,
-            duration: 0.7,
-            ease: "power3.out",
-          },
+          { opacity: 0, y: 18, duration: 0.7, ease: "power3.out" },
           "-=0.55"
         );
       });
@@ -50,31 +66,77 @@ export default function Hero() {
     return () => ctx.revert();
   }, []);
 
+  const goTo = (i: number) => setActiveIdx(i);
+  const handleAnimationEnd = () => {
+    setActiveIdx((i) => (i + 1) % heroImages.length);
+  };
+
+  const candidateHref = JOBS_VISIBLE ? "/jobs" : "/contact";
+
   return (
     <section
       ref={sectionRef}
       className="relative flex min-h-[80dvh] items-start justify-start overflow-hidden"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
     >
-      {/* Background — cinematic hero image */}
+      {/* Background — cinematic hero carousel */}
       <div className="absolute inset-0 z-0">
-        <img
-          src="/images/titan-ridge-hero.webp"
-          alt="Dramatic ridge landscape at golden hour"
-          className="hero-image h-full w-full object-cover"
-        />
+        {heroImages.map((slide, i) => {
+          const baseStyle: React.CSSProperties = {
+            opacity: i === activeIdx ? 1 : 0,
+            transition: `opacity ${CROSSFADE_MS}ms ease-in-out`,
+          };
+          if ("placeholder" in slide && slide.placeholder) {
+            return (
+              <div
+                key={i}
+                aria-hidden={i !== activeIdx}
+                className="absolute inset-0 h-full w-full flex items-center justify-center"
+                style={{
+                  ...baseStyle,
+                  background:
+                    "linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%)",
+                }}
+              >
+                <span
+                  className="font-display uppercase"
+                  style={{
+                    fontSize: "13px",
+                    letterSpacing: "4px",
+                    color: "rgba(255, 255, 255, 0.4)",
+                  }}
+                >
+                  {slide.label}
+                </span>
+              </div>
+            );
+          }
+          return (
+            <img
+              key={i}
+              src={slide.src}
+              alt={i === 0 ? slide.alt : ""}
+              aria-hidden={i !== activeIdx}
+              className="hero-image absolute inset-0 h-full w-full object-cover"
+              style={baseStyle}
+            />
+          );
+        })}
         {/* Directional gradient overlay — dark left, transparent right */}
         <div className="hero-overlay absolute inset-0" />
       </div>
 
       {/* Content */}
-      <div className="hero-content relative z-10 w-full pt-40 sm:pt-44 md:pt-48 pb-24" style={{ paddingLeft: "80px", paddingRight: "80px" }}>
+      <div
+        className="hero-content relative z-10 w-full pt-40 sm:pt-44 md:pt-48 pb-24"
+        style={{ paddingLeft: "80px", paddingRight: "80px" }}
+      >
         <div className="max-w-3xl">
-          {/* Label */}
           <p className="font-display mb-8 text-[11px] font-medium uppercase tracking-[0.35em] text-titan-navy">
             Industrial &amp; Corporate Recruiting
           </p>
 
-          {/* Headline — line by line reveal */}
           <h1
             ref={headlineRef}
             className="font-display font-bold uppercase leading-[0.95] tracking-[0.02em]"
@@ -88,17 +150,20 @@ export default function Hero() {
             </span>
           </h1>
 
-          {/* Subheadline */}
           <p
             ref={subRef}
             className="font-body mt-8 max-w-xl text-base leading-relaxed sm:text-lg sm:leading-[1.7]"
             style={{ color: "#2A2A2A" }}
           >
-            Industrial and corporate recruiting built on real relationships, deep vetting, and placements that last.
+            Industrial and corporate recruiting built on real relationships,
+            deep vetting, and placements that last.
           </p>
 
-          {/* Dual CTAs */}
-          <div ref={ctaRef} className="flex flex-col gap-4 sm:flex-row sm:gap-5" style={{ marginTop: "24px" }}>
+          <div
+            ref={ctaRef}
+            className="flex flex-col gap-4 sm:flex-row sm:gap-5"
+            style={{ marginTop: "24px" }}
+          >
             <a
               href="/contact"
               className="font-display inline-flex items-center justify-center rounded-full bg-gold-gradient px-8 py-3.5 text-sm font-bold uppercase tracking-[0.15em] text-titan-navy transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
@@ -106,7 +171,7 @@ export default function Hero() {
               I&apos;m Hiring
             </a>
             <a
-              href="/jobs"
+              href={candidateHref}
               className="font-display inline-flex items-center justify-center rounded-full px-8 py-3.5 text-sm font-bold uppercase tracking-[0.15em] text-titan-navy transition-all duration-300 hover:border-titan-gold hover:text-titan-gold hover:-translate-y-0.5 active:translate-y-0"
               style={{ border: "2px solid #141F31" }}
             >
@@ -116,10 +181,67 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* Carousel controls — bottom right */}
+      {heroImages.length > 1 && (
+        <div className="hero-controls absolute z-20 flex flex-col items-end">
+          {/* Dots */}
+          <div className="flex items-center" style={{ gap: "10px" }}>
+            {heroImages.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                aria-label={`Go to slide ${i + 1}`}
+                aria-current={i === activeIdx}
+                onClick={() => goTo(i)}
+                className="hero-dot"
+                style={{
+                  width: i === activeIdx ? "28px" : "10px",
+                  height: "2px",
+                  backgroundColor:
+                    i === activeIdx ? "#CCA662" : "rgba(20, 31, 49, 0.35)",
+                  border: "none",
+                  padding: 0,
+                  cursor: "pointer",
+                  transition:
+                    "width 0.35s ease, background-color 0.3s ease",
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Progress track */}
+          <div
+            aria-hidden="true"
+            style={{
+              marginTop: "12px",
+              width: "120px",
+              height: "1px",
+              backgroundColor: "rgba(20, 31, 49, 0.2)",
+              overflow: "hidden",
+            }}
+          >
+            <div
+              key={`${activeIdx}-${isPaused ? "p" : "r"}`}
+              className="hero-progress-fill"
+              onAnimationEnd={handleAnimationEnd}
+              style={{
+                width: "100%",
+                height: "100%",
+                backgroundColor: "#CCA662",
+                transformOrigin: "left center",
+                animation: reducedMotion
+                  ? "none"
+                  : `hero-progress ${SLIDE_INTERVAL_MS}ms linear forwards`,
+                animationPlayState: isPaused ? "paused" : "running",
+              }}
+            />
+          </div>
+        </div>
+      )}
+
       <style jsx>{`
         .hero-image {
           object-position: center;
-          filter: brightness(0.62) contrast(1.05) saturate(0.92);
         }
         .hero-overlay {
           background: linear-gradient(
@@ -129,6 +251,23 @@ export default function Hero() {
             rgba(245, 244, 240, 0.05) 100%
           );
         }
+        .hero-controls {
+          right: 80px;
+          bottom: 40px;
+        }
+        .hero-dot:hover {
+          background-color: #cca662 !important;
+        }
+
+        @keyframes hero-progress {
+          from {
+            transform: scaleX(0);
+          }
+          to {
+            transform: scaleX(1);
+          }
+        }
+
         @media (max-width: 767px) {
           .hero-image {
             object-position: 20% center;
@@ -147,6 +286,10 @@ export default function Hero() {
           }
           .hero-content :global(a) {
             width: 100% !important;
+          }
+          .hero-controls {
+            right: 24px !important;
+            bottom: 28px !important;
           }
         }
       `}</style>

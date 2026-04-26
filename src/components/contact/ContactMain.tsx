@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { JOBS_VISIBLE } from "@/lib/features";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -224,25 +225,6 @@ export default function ContactMain() {
               </div>
 
               <div ref={setBlock(1)} style={{ opacity: 0 }}>
-              <InfoBlock
-                label="Call Us"
-                descriptor="Monday – Friday, 8am – 6pm"
-              >
-                <a
-                  href="tel:+18005551234"
-                  className="info-link font-display"
-                  style={{
-                    fontSize: "18px",
-                    color: "#141F31",
-                    fontWeight: 600,
-                  }}
-                >
-                  (800) 555-1234
-                </a>
-              </InfoBlock>
-              </div>
-
-              <div ref={setBlock(2)} style={{ opacity: 0 }}>
               <InfoBlock label="Connect">
                 <div
                   className="flex items-center"
@@ -278,6 +260,7 @@ export default function ContactMain() {
             </div>
 
             {/* Dark card */}
+            {JOBS_VISIBLE && (
             <div
               ref={darkCardRef}
               style={{
@@ -339,6 +322,7 @@ export default function ContactMain() {
                 See Open Roles
               </Link>
             </div>
+            )}
           </div>
         </div>
       </div>

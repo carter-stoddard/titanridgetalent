@@ -76,11 +76,14 @@ export default function FoundersAdrian() {
             style={{ padding: "24px", opacity: 0 }}
           >
             <div
-              className="relative w-full overflow-hidden"
+              className="relative w-full overflow-hidden mx-auto"
               style={{
                 aspectRatio: "1 / 1",
-                borderRadius: "8px",
+                borderRadius: "9999px",
                 backgroundColor: "#141F31",
+                maxWidth: "440px",
+                border: "3px solid #CCA662",
+                boxShadow: "0 0 0 1px rgba(204, 166, 98, 0.25), 0 18px 40px rgba(20, 31, 49, 0.15)",
               }}
             >
               <img
