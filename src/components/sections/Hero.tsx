@@ -76,7 +76,7 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="hero-section relative flex flex-col md:min-h-[80dvh] md:items-start md:justify-start overflow-hidden"
+      className="hero-section relative flex min-h-[80dvh] items-start justify-start overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -269,42 +269,27 @@ export default function Hero() {
         }
 
         @media (max-width: 767px) {
-          .hero-section {
-            min-height: 0 !important;
-          }
-          .hero-bg {
-            position: relative !important;
-            inset: auto !important;
-            width: 100% !important;
-            height: auto !important;
-            aspect-ratio: 4 / 5;
-            background-color: #1e2d45;
-          }
           .hero-image {
             object-position: center center;
-            object-fit: cover;
           }
           .hero-overlay {
             background: linear-gradient(
               to bottom,
-              rgba(20, 31, 49, 0) 60%,
-              rgba(20, 31, 49, 0.35) 100%
+              rgba(245, 244, 240, 0.78) 0%,
+              rgba(245, 244, 240, 0.55) 70%,
+              rgba(245, 244, 240, 0.25) 100%
             );
           }
           .hero-content {
-            padding-top: 48px !important;
-            padding-bottom: 56px !important;
             padding-left: 24px !important;
             padding-right: 24px !important;
-            background-color: #f5f4f0;
           }
           .hero-content :global(a) {
             width: 100% !important;
           }
           .hero-controls {
             right: 24px !important;
-            bottom: auto !important;
-            top: calc((100vw * 5 / 4) - 56px) !important;
+            bottom: 28px !important;
           }
         }
       `}</style>
