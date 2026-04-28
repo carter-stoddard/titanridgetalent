@@ -11,10 +11,10 @@ type HeroSlide =
   | { placeholder: true; label: string };
 
 const heroImages: HeroSlide[] = [
-  { src: "/images/hero-1.webp", alt: "Titan Ridge Talent — slide 1" },
-  { src: "/images/hero-2.webp", alt: "Titan Ridge Talent — slide 2" },
-  { src: "/images/hero-3.webp", alt: "Titan Ridge Talent — slide 3" },
-  { src: "/images/hero-4.webp", alt: "Titan Ridge Talent — slide 4" },
+  { src: "/images/hero-mountain.webp", alt: "Mountain ridge at golden hour" },
+  { src: "/images/hero-1.webp", alt: "Operator at a CNC machine on the shop floor" },
+  { src: "/images/hero-2.webp", alt: "Professional working in a corporate office" },
+  { src: "/images/hero-3.webp", alt: "Forklift operator in a distribution warehouse" },
 ];
 
 const SLIDE_INTERVAL_MS = 4000;
@@ -76,9 +76,7 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="hero-section relative flex min-h-[80dvh] items-start justify-start overflow-hidden"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
+      className="hero-section relative flex min-h-[96dvh] items-start justify-start overflow-hidden"
     >
       {/* Background — cinematic hero carousel */}
       <div className="hero-bg absolute inset-0 z-0">
@@ -129,7 +127,7 @@ export default function Hero() {
 
       {/* Content */}
       <div
-        className="hero-content relative z-10 w-full pt-40 sm:pt-44 md:pt-48 pb-24"
+        className="hero-content relative z-10 w-full pt-52 sm:pt-56 md:pt-60 pb-24"
         style={{ paddingLeft: "80px", paddingRight: "80px" }}
       >
         <div className="max-w-3xl">

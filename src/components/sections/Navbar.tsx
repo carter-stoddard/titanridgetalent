@@ -42,10 +42,8 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
-          scrolled || menuOpen
-            ? "bg-titan-navy/95 backdrop-blur-md shadow-lg shadow-black/20"
-            : "bg-transparent"
+        className={`fixed top-0 left-0 right-0 z-50 transition-shadow duration-500 ease-out bg-titan-navy/95 backdrop-blur-md ${
+          scrolled || menuOpen ? "shadow-lg shadow-black/20" : ""
         }`}
       >
         <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-5 sm:px-10 lg:px-16">
@@ -69,13 +67,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     className={`relative font-display text-[13px] font-semibold uppercase tracking-[0.15em] transition-colors duration-300 hover:text-titan-gold ${
-                      isActive
-                        ? "text-titan-gold"
-                        : scrolled
-                        ? "text-titan-offwhite/70"
-                        : darkHero
-                        ? "text-titan-offwhite/70"
-                        : "text-titan-navy"
+                      isActive ? "text-titan-gold" : "text-titan-offwhite/70"
                     }`}
                     style={{
                       paddingBottom: "6px",
@@ -108,7 +100,7 @@ export default function Navbar() {
               style={{
                 width: "44px",
                 height: "44px",
-                color: scrolled || menuOpen || darkHero ? "#F5F4F0" : "#141F31",
+                color: "#F5F4F0",
               }}
             >
               <span
