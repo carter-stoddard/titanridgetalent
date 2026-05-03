@@ -11,15 +11,12 @@ const industrial = [
   "Aerospace",
   "Automotive",
   "Food & Beverage",
-  "Pharmaceuticals",
   "Light Industrial",
   "Manufacturing",
   "Logistics",
   "Skilled Trades",
   "Operations",
-  "Construction",
   "Warehouse",
-  "Energy",
 ];
 
 const corporate = [
