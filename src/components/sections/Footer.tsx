@@ -211,12 +211,25 @@ export default function Footer() {
                 fontSize: "14px",
                 color: "rgba(255, 255, 255, 0.65)",
                 display: "block",
-                marginBottom: "28px",
+                marginBottom: "16px",
                 transition: "color 0.2s ease",
               }}
             >
               support@titanridgetalent.com
             </a>
+            <address
+              className="font-body not-italic"
+              style={{
+                fontSize: "14px",
+                lineHeight: 1.6,
+                color: "rgba(255, 255, 255, 0.65)",
+                marginBottom: "28px",
+              }}
+            >
+              112 E. Amerige Ave #106
+              <br />
+              Fullerton, CA 92832
+            </address>
             <a
               href="/contact"
               className="font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"

@@ -46,7 +46,7 @@ export default function Navbar() {
           scrolled || menuOpen ? "shadow-lg shadow-black/20" : ""
         }`}
       >
-        <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-5 sm:px-10 lg:px-16">
+        <div className="flex w-full items-center justify-between px-6 py-5 sm:px-10 lg:px-20">
           <Link href="/" className="group flex items-center">
             <Image
               src="/images/titan-ridge-logo.svg"

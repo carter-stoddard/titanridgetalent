@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Barlow_Condensed, Lora } from "next/font/google";
 import "./globals.css";
 import LoaderGate from "@/components/animations/LoaderGate";
+import SmoothScroll from "@/components/animations/SmoothScroll";
 
 const barlowCondensed = Barlow_Condensed({
   variable: "--font-barlow-condensed",
@@ -60,7 +61,10 @@ const organizationJsonLd = {
   email: "support@titanridgetalent.com",
   address: {
     "@type": "PostalAddress",
+    streetAddress: "112 E. Amerige Ave #106",
+    addressLocality: "Fullerton",
     addressRegion: "CA",
+    postalCode: "92832",
     addressCountry: "US",
   },
 };
@@ -92,6 +96,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-titan-navy text-titan-offwhite">
+        <SmoothScroll />
         <LoaderGate>{children}</LoaderGate>
       </body>
     </html>
