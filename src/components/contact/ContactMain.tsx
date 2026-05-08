@@ -206,6 +206,59 @@ export default function ContactMain() {
           <div className="contact-info-col">
             <div className="flex flex-col" style={{ gap: "40px" }}>
               <div ref={setBlock(0)} style={{ opacity: 0 }}>
+                <div
+                  style={{
+                    backgroundColor: "#141F31",
+                    borderRadius: "8px",
+                    padding: "24px 28px",
+                    borderTop: "2px solid #CCA662",
+                  }}
+                >
+                  <p
+                    className="font-display font-bold uppercase"
+                    style={{
+                      fontSize: "11px",
+                      letterSpacing: "4px",
+                      color: "#CCA662",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    Please Note
+                  </p>
+                  <p
+                    className="font-display font-bold"
+                    style={{
+                      fontSize: "18px",
+                      color: "#FFFFFF",
+                      lineHeight: 1.25,
+                      marginBottom: "12px",
+                    }}
+                  >
+                    By appointment only.
+                  </p>
+                  <p
+                    className="font-body"
+                    style={{
+                      fontSize: "14px",
+                      lineHeight: 1.65,
+                      color: "rgba(255, 255, 255, 0.7)",
+                    }}
+                  >
+                    We&apos;re not accepting walk-ins at this time. All
+                    meetings are scheduled by appointment. Email{" "}
+                    <a
+                      href="mailto:support@titanridgetalent.com"
+                      style={{ color: "#CCA662", textDecoration: "underline", textUnderlineOffset: "3px" }}
+                    >
+                      support@titanridgetalent.com
+                    </a>{" "}
+                    and we&apos;ll get back to you. Looking forward to hearing
+                    from you.
+                  </p>
+                </div>
+              </div>
+
+              <div ref={setBlock(1)} style={{ opacity: 0 }}>
               <InfoBlock
                 label="Email Us"
                 descriptor="We respond within one business day."
@@ -224,7 +277,7 @@ export default function ContactMain() {
               </InfoBlock>
               </div>
 
-              <div ref={setBlock(1)} style={{ opacity: 0 }}>
+              <div ref={setBlock(2)} style={{ opacity: 0 }}>
               <InfoBlock label="Connect">
                 <div
                   className="flex items-center"
