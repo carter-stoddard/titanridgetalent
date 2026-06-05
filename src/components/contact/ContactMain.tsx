@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { FormEvent } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -87,6 +88,49 @@ export default function ContactMain() {
     infoBlocksRef.current[i] = el;
   };
 
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (status === "submitting") return;
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const payload = {
+      name: String(data.get("name") || ""),
+      company: String(data.get("company") || ""),
+      email: String(data.get("email") || ""),
+      phone: String(data.get("phone") || ""),
+      role: String(data.get("role") || ""),
+      message: String(data.get("message") || ""),
+      website: String(data.get("website") || ""), // honeypot
+    };
+
+    setStatus("submitting");
+    setErrorMessage("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const result = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        error?: string;
+      };
+      if (!res.ok || !result.ok) {
+        throw new Error(result.error || "Something went wrong. Please try again.");
+      }
+      setStatus("success");
+      form.reset();
+    } catch (err) {
+      setStatus("error");
+      setErrorMessage(err instanceof Error ? err.message : "Failed to send.");
+    }
+  };
+
   return (
     <section
       ref={sectionRef}
@@ -126,8 +170,31 @@ export default function ContactMain() {
             <form
               className="flex flex-col"
               style={{ gap: "20px" }}
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={handleSubmit}
+              noValidate
             >
+              {/* Honeypot — hidden from real users */}
+              <div
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  left: "-10000px",
+                  top: "auto",
+                  width: "1px",
+                  height: "1px",
+                  overflow: "hidden",
+                }}
+              >
+                <label htmlFor="website">Website</label>
+                <input
+                  type="text"
+                  id="website"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
               {/* Row 1 */}
               <div className="form-row">
                 <Field label="Full Name" id="name" type="text" required />
@@ -145,7 +212,7 @@ export default function ContactMain() {
                 <label htmlFor="role" className="form-label">
                   I am a...
                 </label>
-                <select id="role" className="form-input" defaultValue="">
+                <select id="role" name="role" className="form-input" defaultValue="">
                   <option value="" disabled>
                     — Select one —
                   </option>
@@ -163,6 +230,7 @@ export default function ContactMain() {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   className="form-input"
                   placeholder="Tell us what you're looking for..."
                   style={{ minHeight: "140px", resize: "vertical" }}
@@ -171,23 +239,58 @@ export default function ContactMain() {
 
               <button
                 type="submit"
+                disabled={status === "submitting"}
                 className="form-submit font-display font-bold uppercase"
                 style={{
                   marginTop: "12px",
                   height: "56px",
                   width: "100%",
-                  backgroundColor: "#CCA662",
+                  backgroundColor: status === "submitting" ? "#b89656" : "#CCA662",
                   color: "#141F31",
                   fontSize: "15px",
                   letterSpacing: "3px",
                   borderRadius: "4px",
                   border: "none",
-                  cursor: "pointer",
+                  cursor: status === "submitting" ? "wait" : "pointer",
                   transition: "all 0.3s ease",
                 }}
               >
-                Send Message
+                {status === "submitting" ? "Sending…" : "Send Message"}
               </button>
+
+              {status === "success" ? (
+                <p
+                  className="font-body text-center"
+                  role="status"
+                  style={{
+                    fontSize: "14px",
+                    color: "#1f7a4d",
+                    backgroundColor: "rgba(31, 122, 77, 0.08)",
+                    padding: "12px 16px",
+                    borderRadius: "4px",
+                    marginTop: "4px",
+                  }}
+                >
+                  Thanks — your message is on its way. We&apos;ll reply within one business day.
+                </p>
+              ) : null}
+
+              {status === "error" ? (
+                <p
+                  className="font-body text-center"
+                  role="alert"
+                  style={{
+                    fontSize: "14px",
+                    color: "#a8261a",
+                    backgroundColor: "rgba(168, 38, 26, 0.08)",
+                    padding: "12px 16px",
+                    borderRadius: "4px",
+                    marginTop: "4px",
+                  }}
+                >
+                  {errorMessage || "Something went wrong. Please try again."}
+                </p>
+              ) : null}
 
               <p
                 className="font-body italic text-center"
@@ -479,9 +582,21 @@ function Field({
       </label>
       <input
         id={id}
+        name={id}
         type={type}
         required={required}
         className="form-input"
+        autoComplete={
+          id === "name"
+            ? "name"
+            : id === "email"
+            ? "email"
+            : id === "phone"
+            ? "tel"
+            : id === "company"
+            ? "organization"
+            : "off"
+        }
       />
     </div>
   );
