@@ -282,7 +282,9 @@ export default function FoundersCTA() {
               style={{ gap: "12px", opacity: 0 }}
             >
               <a
-                href="#"
+                href="https://www.linkedin.com/company/titanridgetalent/"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="LinkedIn"
                 className="cta-social"
                 style={{

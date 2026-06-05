@@ -32,7 +32,6 @@ export const metadata: Metadata = {
   openGraph: {
     siteName: "Titan Ridge Talent",
     type: "website",
-    url: "https://titanridgetalent.com",
     images: [{ url: "/images/titan-ridge-hero.webp", width: 1200, height: 630 }],
   },
   twitter: {
@@ -67,6 +66,7 @@ const organizationJsonLd = {
     postalCode: "92832",
     addressCountry: "US",
   },
+  sameAs: ["https://www.linkedin.com/company/titanridgetalent/"],
 };
 
 export const viewport: Viewport = {

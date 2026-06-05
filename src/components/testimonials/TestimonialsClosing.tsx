@@ -57,35 +57,48 @@ export default function TestimonialsClosing() {
   return (
     <section
       ref={sectionRef}
-      className="testimonials-closing relative w-full overflow-hidden"
+      className="testimonials-closing relative w-full"
       style={{
-        paddingTop: "160px",
-        paddingBottom: "160px",
+        backgroundColor: "#F5F4F0",
+        paddingTop: "120px",
+        paddingBottom: "120px",
       }}
     >
-      {/* Background image */}
-      <img
-        src="/images/testimonials-closing-bg.webp"
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 h-full w-full object-cover"
-        style={{ objectPosition: "center", zIndex: 0 }}
-      />
-
-      {/* Cinematic gradient overlay — darker at edges, clearer through center */}
       <div
-        aria-hidden="true"
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse at center, rgba(20, 31, 49, 0.55) 0%, rgba(20, 31, 49, 0.82) 70%, rgba(20, 31, 49, 0.92) 100%)",
-          zIndex: 1,
-        }}
-      />
+        className="testimonials-closing-outer"
+        style={{ paddingLeft: "80px", paddingRight: "80px" }}
+      >
+        <div
+          className="testimonials-closing-card relative overflow-hidden"
+          style={{
+            borderRadius: "12px",
+            paddingTop: "120px",
+            paddingBottom: "120px",
+          }}
+        >
+          {/* Background image */}
+          <img
+            src="/images/testimonials-closing-bg.webp"
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover"
+            style={{ objectPosition: "center", zIndex: 0 }}
+          />
+
+          {/* Cinematic gradient overlay — darker at edges, clearer through center */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse at center, rgba(20, 31, 49, 0.55) 0%, rgba(20, 31, 49, 0.82) 70%, rgba(20, 31, 49, 0.92) 100%)",
+              zIndex: 1,
+            }}
+          />
 
       <div
         className="testimonials-closing-inner relative flex flex-col items-center text-center"
-        style={{ paddingLeft: "80px", paddingRight: "80px", zIndex: 2 }}
+        style={{ paddingLeft: "60px", paddingRight: "60px", zIndex: 2 }}
       >
         {/* Gold accent rule */}
         <div
@@ -186,6 +199,8 @@ export default function TestimonialsClosing() {
           )}
         </div>
       </div>
+        </div>
+      </div>
 
       <style>{`
         .closing-cta-ghost:hover {
@@ -194,8 +209,16 @@ export default function TestimonialsClosing() {
         }
         @media (max-width: 767px) {
           .testimonials-closing {
-            padding-top: 112px !important;
-            padding-bottom: 112px !important;
+            padding-top: 64px !important;
+            padding-bottom: 64px !important;
+          }
+          .testimonials-closing-outer {
+            padding-left: 24px !important;
+            padding-right: 24px !important;
+          }
+          .testimonials-closing-card {
+            padding-top: 80px !important;
+            padding-bottom: 80px !important;
           }
           .testimonials-closing-inner {
             padding-left: 24px !important;

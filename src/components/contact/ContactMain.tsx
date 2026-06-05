@@ -284,7 +284,9 @@ export default function ContactMain() {
                   style={{ gap: "16px", color: "#CCA662", marginTop: "4px" }}
                 >
                   <Link
-                    href="#"
+                    href="https://www.linkedin.com/company/titanridgetalent/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     aria-label="LinkedIn"
                     className="contact-social"
                     style={{ color: "#CCA662", transition: "color 0.2s ease" }}

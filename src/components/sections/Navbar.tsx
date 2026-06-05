@@ -250,7 +250,9 @@ export default function Navbar() {
             >
               {/* LinkedIn */}
               <a
-                href="#"
+                href="https://www.linkedin.com/company/titanridgetalent/"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="LinkedIn"
                 style={{ color: "#CCA662", transition: "color 0.2s ease" }}
               >

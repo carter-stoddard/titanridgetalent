@@ -56,35 +56,48 @@ export default function MissionCTA() {
   return (
     <section
       ref={sectionRef}
-      className="mission-cta relative w-full overflow-hidden"
+      className="mission-cta relative w-full"
       style={{
-        paddingTop: "160px",
-        paddingBottom: "160px",
+        backgroundColor: "#F5F4F0",
+        paddingTop: "0",
+        paddingBottom: "120px",
       }}
     >
-      {/* Background image */}
-      <img
-        src="/images/cta-section.webp"
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 h-full w-full object-cover"
-        style={{ objectPosition: "center", zIndex: 0 }}
-      />
-
-      {/* Cinematic gradient overlay */}
       <div
-        aria-hidden="true"
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse at center, rgba(20, 31, 49, 0.6) 0%, rgba(20, 31, 49, 0.85) 70%, rgba(20, 31, 49, 0.93) 100%)",
-          zIndex: 1,
-        }}
-      />
+        className="mission-cta-outer"
+        style={{ paddingLeft: "80px", paddingRight: "80px" }}
+      >
+        <div
+          className="mission-cta-card relative overflow-hidden"
+          style={{
+            borderRadius: "12px",
+            paddingTop: "120px",
+            paddingBottom: "120px",
+          }}
+        >
+          {/* Background image */}
+          <img
+            src="/images/cta-section.webp"
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover"
+            style={{ objectPosition: "center", zIndex: 0 }}
+          />
+
+          {/* Cinematic gradient overlay */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse at center, rgba(20, 31, 49, 0.6) 0%, rgba(20, 31, 49, 0.85) 70%, rgba(20, 31, 49, 0.93) 100%)",
+              zIndex: 1,
+            }}
+          />
 
       <div
         className="mission-cta-inner relative flex flex-col items-center text-center"
-        style={{ paddingLeft: "80px", paddingRight: "80px", zIndex: 2 }}
+        style={{ paddingLeft: "60px", paddingRight: "60px", zIndex: 2 }}
       >
         {/* Gold accent rule */}
         <div
@@ -183,6 +196,8 @@ export default function MissionCTA() {
           </Link>
         </div>
       </div>
+        </div>
+      </div>
 
       <style>{`
         .mission-cta-ghost:hover {
@@ -191,8 +206,15 @@ export default function MissionCTA() {
         }
         @media (max-width: 767px) {
           .mission-cta {
-            padding-top: 112px !important;
-            padding-bottom: 112px !important;
+            padding-bottom: 80px !important;
+          }
+          .mission-cta-outer {
+            padding-left: 24px !important;
+            padding-right: 24px !important;
+          }
+          .mission-cta-card {
+            padding-top: 80px !important;
+            padding-bottom: 80px !important;
           }
           .mission-cta-inner {
             padding-left: 24px !important;
