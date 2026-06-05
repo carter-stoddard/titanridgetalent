@@ -3,6 +3,7 @@ import { Barlow_Condensed, Lora } from "next/font/google";
 import "./globals.css";
 import LoaderGate from "@/components/animations/LoaderGate";
 import SmoothScroll from "@/components/animations/SmoothScroll";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const barlowCondensed = Barlow_Condensed({
   variable: "--font-barlow-condensed",
@@ -99,6 +100,7 @@ export default function RootLayout({
         <SmoothScroll />
         <LoaderGate>{children}</LoaderGate>
       </body>
+      <GoogleAnalytics gaId="G-1SPN3NHNV7" />
     </html>
   );
 }
