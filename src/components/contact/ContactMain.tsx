@@ -91,6 +91,26 @@ export default function ContactMain() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
+  const modalOpen = status === "success" || status === "error";
+  const closeModal = () => {
+    setStatus("idle");
+    setErrorMessage("");
+  };
+
+  useEffect(() => {
+    if (!modalOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeModal();
+    };
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [modalOpen]);
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (status === "submitting") return;
@@ -257,40 +277,6 @@ export default function ContactMain() {
               >
                 {status === "submitting" ? "Sending…" : "Send Message"}
               </button>
-
-              {status === "success" ? (
-                <p
-                  className="font-body text-center"
-                  role="status"
-                  style={{
-                    fontSize: "14px",
-                    color: "#1f7a4d",
-                    backgroundColor: "rgba(31, 122, 77, 0.08)",
-                    padding: "12px 16px",
-                    borderRadius: "4px",
-                    marginTop: "4px",
-                  }}
-                >
-                  Thanks — your message is on its way. We&apos;ll reply within one business day.
-                </p>
-              ) : null}
-
-              {status === "error" ? (
-                <p
-                  className="font-body text-center"
-                  role="alert"
-                  style={{
-                    fontSize: "14px",
-                    color: "#a8261a",
-                    backgroundColor: "rgba(168, 38, 26, 0.08)",
-                    padding: "12px 16px",
-                    borderRadius: "4px",
-                    marginTop: "4px",
-                  }}
-                >
-                  {errorMessage || "Something went wrong. Please try again."}
-                </p>
-              ) : null}
 
               <p
                 className="font-body italic text-center"
@@ -560,6 +546,176 @@ export default function ContactMain() {
           }
         }
       `}</style>
+
+      {/* Result modal */}
+      {modalOpen ? (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="contact-modal-title"
+          className="contact-modal-backdrop"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) closeModal();
+          }}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 100,
+            background: "rgba(20, 31, 49, 0.7)",
+            backdropFilter: "blur(8px)",
+            WebkitBackdropFilter: "blur(8px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "24px",
+            animation: "contact-modal-fade 220ms ease-out",
+          }}
+        >
+          <div
+            className="contact-modal-card"
+            style={{
+              position: "relative",
+              backgroundColor: "#FFFFFF",
+              borderRadius: "12px",
+              maxWidth: "480px",
+              width: "100%",
+              padding: "56px 48px 48px",
+              textAlign: "center",
+              boxShadow: "0 24px 80px rgba(20, 31, 49, 0.35)",
+              borderTop: "3px solid #CCA662",
+              animation: "contact-modal-lift 320ms cubic-bezier(0.2, 0.8, 0.2, 1)",
+            }}
+          >
+            {/* Close button */}
+            <button
+              type="button"
+              aria-label="Close"
+              onClick={closeModal}
+              style={{
+                position: "absolute",
+                top: "16px",
+                right: "16px",
+                width: "36px",
+                height: "36px",
+                borderRadius: "9999px",
+                border: "none",
+                background: "transparent",
+                cursor: "pointer",
+                color: "#141F31",
+                fontSize: "20px",
+                lineHeight: 1,
+                transition: "background 0.2s ease",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(20, 31, 49, 0.06)")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+            >
+              ×
+            </button>
+
+            {/* Icon */}
+            <div
+              aria-hidden="true"
+              style={{
+                width: "64px",
+                height: "64px",
+                borderRadius: "9999px",
+                backgroundColor: status === "success" ? "#CCA662" : "#a8261a",
+                color: status === "success" ? "#141F31" : "#FFFFFF",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "0 auto 24px",
+              }}
+            >
+              {status === "success" ? (
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              ) : (
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              )}
+            </div>
+
+            <p
+              className="font-display font-medium uppercase"
+              style={{
+                fontSize: "11px",
+                letterSpacing: "4px",
+                color: "#CCA662",
+                marginBottom: "12px",
+              }}
+            >
+              {status === "success" ? "Message Sent" : "Couldn’t Send"}
+            </p>
+
+            <h3
+              id="contact-modal-title"
+              className="font-display font-semibold uppercase"
+              style={{
+                fontSize: "clamp(24px, 3vw, 30px)",
+                lineHeight: 1.1,
+                color: "#141F31",
+                marginBottom: "16px",
+              }}
+            >
+              {status === "success" ? "Thanks for reaching out." : "Something went wrong."}
+            </h3>
+
+            <p
+              className="font-body"
+              style={{
+                fontSize: "15px",
+                lineHeight: 1.65,
+                color: "#2A2A2A",
+                marginBottom: "32px",
+              }}
+            >
+              {status === "success"
+                ? "We received your message and will reply within one business day."
+                : errorMessage || "Please try again, or email support@titanridgetalent.com directly."}
+            </p>
+
+            <button
+              type="button"
+              onClick={closeModal}
+              className="font-display font-bold uppercase"
+              style={{
+                height: "48px",
+                padding: "0 32px",
+                borderRadius: "9999px",
+                backgroundColor: "#141F31",
+                color: "#F5F4F0",
+                fontSize: "13px",
+                letterSpacing: "3px",
+                border: "none",
+                cursor: "pointer",
+                transition: "all 0.2s ease",
+              }}
+            >
+              {status === "success" ? "Got It" : "Try Again"}
+            </button>
+          </div>
+
+          <style>{`
+            @keyframes contact-modal-fade {
+              from { opacity: 0; }
+              to { opacity: 1; }
+            }
+            @keyframes contact-modal-lift {
+              from { opacity: 0; transform: translateY(20px) scale(0.98); }
+              to { opacity: 1; transform: translateY(0) scale(1); }
+            }
+            @media (max-width: 480px) {
+              .contact-modal-card {
+                padding: 48px 32px 36px !important;
+              }
+            }
+          `}</style>
+        </div>
+      ) : null}
     </section>
   );
 }
