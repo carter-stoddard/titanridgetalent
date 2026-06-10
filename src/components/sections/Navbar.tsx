@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { JOBS_VISIBLE } from "@/lib/features";
+import { JOBS_VISIBLE, CAREERS_VISIBLE } from "@/lib/features";
 
 const navLinks = [
   { label: "About", href: "/about" },
@@ -12,7 +12,7 @@ const navLinks = [
   { label: "Founder", href: "/founders" },
   ...(JOBS_VISIBLE ? [{ label: "Jobs", href: "/jobs" }] : []),
   { label: "Industries", href: "/industries" },
-  { label: "Careers", href: "/careers" },
+  ...(CAREERS_VISIBLE ? [{ label: "Careers", href: "/careers" }] : []),
   { label: "Testimonials", href: "/testimonials" },
 ];
 

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { JOBS_VISIBLE } from "@/lib/features";
+import { JOBS_VISIBLE, CAREERS_VISIBLE } from "@/lib/features";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://titanridgetalent.com";
@@ -13,7 +13,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       ? [{ url: `${baseUrl}/jobs`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.9 }]
       : []),
     { url: `${baseUrl}/industries`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${baseUrl}/careers`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
+    ...(CAREERS_VISIBLE
+      ? [{ url: `${baseUrl}/careers`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.9 }]
+      : []),
     { url: `${baseUrl}/testimonials`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
     { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/privacy`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
