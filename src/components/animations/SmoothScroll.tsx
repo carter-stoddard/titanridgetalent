@@ -28,7 +28,23 @@ export default function SmoothScroll() {
 
     ScrollTrigger.refresh();
 
+    // Keep Lenis + ScrollTrigger in sync when page height changes mid-flight
+    // (third-party widgets like Avionté inject DOM after Lenis initialized).
+    let refreshTimer: number | null = null;
+    const refreshScroll = () => {
+      if (refreshTimer) window.clearTimeout(refreshTimer);
+      refreshTimer = window.setTimeout(() => {
+        lenis.resize();
+        ScrollTrigger.refresh();
+      }, 120);
+    };
+
+    const resizeObserver = new ResizeObserver(refreshScroll);
+    resizeObserver.observe(document.body);
+
     return () => {
+      if (refreshTimer) window.clearTimeout(refreshTimer);
+      resizeObserver.disconnect();
       gsap.ticker.remove(raf);
       lenis.destroy();
     };
