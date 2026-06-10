@@ -205,7 +205,7 @@ export default function JobsListings() {
             ref={setCardItem(4)}
             className="font-body italic"
             style={{
-              fontSize: "13px",
+              fontSize: "14px",
               color: "rgba(0, 0, 0, 0.35)",
               marginTop: "16px",
               opacity: 0,

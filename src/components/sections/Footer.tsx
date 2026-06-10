@@ -243,7 +243,7 @@ export default function Footer() {
                 borderRadius: "9999px",
                 backgroundColor: "#CCA662",
                 color: "#141F31",
-                fontSize: "13px",
+                fontSize: "14px",
                 letterSpacing: "3px",
               }}
             >

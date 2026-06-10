@@ -188,7 +188,7 @@ export default function IndustriesIndustrial() {
                   <p
                     className="font-body italic"
                     style={{
-                      fontSize: "13px",
+                      fontSize: "14px",
                       color: "rgba(42, 42, 42, 0.6)",
                       lineHeight: 1.5,
                     }}
@@ -209,7 +209,7 @@ export default function IndustriesIndustrial() {
                   borderRadius: "9999px",
                   backgroundColor: "#CCA662",
                   color: "#141F31",
-                  fontSize: "13px",
+                  fontSize: "14px",
                   letterSpacing: "3px",
                 }}
               >

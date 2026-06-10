@@ -40,7 +40,7 @@ function StatRow({ stats }: { stats: Stat[] }) {
           <p
             className="font-display uppercase"
             style={{
-              fontSize: "10px",
+              fontSize: "12px",
               letterSpacing: "2px",
               color: "rgba(42, 42, 42, 0.6)",
               lineHeight: 1.3,
@@ -164,7 +164,7 @@ export default function IndustriesMarkets() {
                 borderRadius: "9999px",
                 backgroundColor: "#CCA662",
                 color: "#141F31",
-                fontSize: "13px",
+                fontSize: "14px",
                 letterSpacing: "3px",
               }}
             >
@@ -237,7 +237,7 @@ export default function IndustriesMarkets() {
                 borderRadius: "9999px",
                 backgroundColor: "#CCA662",
                 color: "#141F31",
-                fontSize: "13px",
+                fontSize: "14px",
                 letterSpacing: "3px",
               }}
             >

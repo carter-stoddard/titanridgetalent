@@ -281,7 +281,7 @@ export default function ContactMain() {
               <p
                 className="font-body italic text-center"
                 style={{
-                  fontSize: "13px",
+                  fontSize: "14px",
                   color: "rgba(0, 0, 0, 0.35)",
                   marginTop: "4px",
                 }}
@@ -459,7 +459,7 @@ export default function ContactMain() {
                   borderRadius: "9999px",
                   backgroundColor: "#CCA662",
                   color: "#141F31",
-                  fontSize: "13px",
+                  fontSize: "14px",
                   letterSpacing: "3px",
                 }}
               >
@@ -688,7 +688,7 @@ export default function ContactMain() {
                 borderRadius: "9999px",
                 backgroundColor: "#141F31",
                 color: "#F5F4F0",
-                fontSize: "13px",
+                fontSize: "14px",
                 letterSpacing: "3px",
                 border: "none",
                 cursor: "pointer",
@@ -790,7 +790,7 @@ function InfoBlock({
         <p
           className="font-body italic"
           style={{
-            fontSize: "13px",
+            fontSize: "14px",
             color: "rgba(0, 0, 0, 0.45)",
             marginTop: "6px",
           }}

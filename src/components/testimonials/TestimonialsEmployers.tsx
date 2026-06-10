@@ -232,7 +232,7 @@ export default function TestimonialsEmployers() {
               <p
                 className="font-display font-medium uppercase relative"
                 style={{
-                  fontSize: "10px",
+                  fontSize: "12px",
                   letterSpacing: "3px",
                   color: "#CCA662",
                   marginBottom: "16px",

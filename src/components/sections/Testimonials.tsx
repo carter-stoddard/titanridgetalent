@@ -235,7 +235,7 @@ export default function Testimonials() {
           <p
             className="font-display font-medium uppercase"
             style={{
-              fontSize: "10px",
+              fontSize: "12px",
               letterSpacing: "3px",
               color: "#CCA662",
               marginBottom: "16px",

@@ -123,7 +123,7 @@ export default function TestimonialsFeatured() {
             <p
               className="font-display font-medium uppercase"
               style={{
-                fontSize: "10px",
+                fontSize: "12px",
                 letterSpacing: "3px",
                 color: "#CCA662",
                 marginTop: "8px",

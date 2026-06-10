@@ -67,7 +67,7 @@ export default function Navbar() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className={`relative font-display text-[13px] font-semibold uppercase tracking-[0.15em] transition-colors duration-300 hover:text-titan-gold ${
+                    className={`relative font-display text-[14px] font-semibold uppercase tracking-[0.15em] transition-colors duration-300 hover:text-titan-gold ${
                       isActive ? "text-titan-gold" : "text-titan-offwhite/70"
                     }`}
                     style={{
