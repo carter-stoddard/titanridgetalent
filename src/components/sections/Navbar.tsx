@@ -240,9 +240,20 @@ export default function Navbar() {
               style={{
                 fontSize: "15px",
                 color: "rgba(245, 244, 240, 0.65)",
+                marginBottom: "6px",
               }}
             >
               support@titanridgetalent.com
+            </a>
+            <a
+              href="tel:+17145524334"
+              className="font-body italic block"
+              style={{
+                fontSize: "15px",
+                color: "rgba(245, 244, 240, 0.65)",
+              }}
+            >
+              (714) 552-4334
             </a>
 
             <div

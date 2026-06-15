@@ -59,6 +59,7 @@ const organizationJsonLd = {
   description:
     "Relationship-first recruiting for industrial and corporate teams.",
   email: "support@titanridgetalent.com",
+  telephone: "+1-714-552-4334",
   address: {
     "@type": "PostalAddress",
     streetAddress: "112 E. Amerige Ave #106",

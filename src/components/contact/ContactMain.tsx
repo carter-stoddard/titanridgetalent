@@ -341,6 +341,13 @@ export default function ContactMain() {
                     >
                       support@titanridgetalent.com
                     </a>{" "}
+                    or call{" "}
+                    <a
+                      href="tel:+17145524334"
+                      style={{ color: "#CCA662", textDecoration: "underline", textUnderlineOffset: "3px" }}
+                    >
+                      (714) 552-4334
+                    </a>{" "}
                     and we&apos;ll get back to you. Looking forward to hearing
                     from you.
                   </p>
@@ -367,6 +374,22 @@ export default function ContactMain() {
               </div>
 
               <div ref={setBlock(2)} style={{ opacity: 0 }}>
+              <InfoBlock label="Call Us">
+                <a
+                  href="tel:+17145524334"
+                  className="info-link font-display"
+                  style={{
+                    fontSize: "18px",
+                    color: "#141F31",
+                    fontWeight: 600,
+                  }}
+                >
+                  (714) 552-4334
+                </a>
+              </InfoBlock>
+              </div>
+
+              <div ref={setBlock(3)} style={{ opacity: 0 }}>
               <InfoBlock label="Connect">
                 <div
                   className="flex items-center"

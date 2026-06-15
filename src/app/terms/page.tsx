@@ -128,8 +128,9 @@ export default function TermsPage() {
             Questions about these Terms? Email{" "}
             <a href="mailto:support@titanridgetalent.com">
               support@titanridgetalent.com
-            </a>
-            .
+            </a>{" "}
+            or call{" "}
+            <a href="tel:+17145524334">(714) 552-4334</a>.
           </p>
         </LegalLayout>
       </main>

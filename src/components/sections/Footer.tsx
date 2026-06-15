@@ -208,31 +208,102 @@ export default function Footer() {
             >
               Get In Touch
             </p>
+            {/* Email */}
             <a
               href="mailto:support@titanridgetalent.com"
-              className="footer-email font-body"
+              className="footer-contact-row font-body"
               style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "12px",
                 fontSize: "14px",
                 color: "rgba(255, 255, 255, 0.65)",
-                display: "block",
-                marginBottom: "16px",
+                marginBottom: "12px",
                 transition: "color 0.2s ease",
               }}
             >
-              support@titanridgetalent.com
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#CCA662"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                style={{ flexShrink: 0 }}
+              >
+                <rect x="3" y="5" width="18" height="14" rx="2" />
+                <path d="m3 7 9 6 9-6" />
+              </svg>
+              <span>support@titanridgetalent.com</span>
             </a>
-            <address
-              className="font-body not-italic"
+
+            {/* Phone */}
+            <a
+              href="tel:+17145524334"
+              className="footer-contact-row font-body"
               style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "12px",
+                fontSize: "14px",
+                color: "rgba(255, 255, 255, 0.65)",
+                marginBottom: "12px",
+                transition: "color 0.2s ease",
+              }}
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#CCA662"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                style={{ flexShrink: 0 }}
+              >
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+              <span>(714) 552-4334</span>
+            </a>
+
+            {/* Address */}
+            <address
+              className="footer-contact-row font-body not-italic"
+              style={{
+                display: "flex",
+                alignItems: "flex-start",
+                gap: "12px",
                 fontSize: "14px",
                 lineHeight: 1.6,
                 color: "rgba(255, 255, 255, 0.65)",
                 marginBottom: "28px",
               }}
             >
-              112 E. Amerige Ave #106
-              <br />
-              Fullerton, CA 92832
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#CCA662"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                style={{ flexShrink: 0, marginTop: "4px" }}
+              >
+                <path d="M20 10c0 7-8 12-8 12s-8-5-8-12a8 8 0 0 1 16 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <span>
+                112 E. Amerige Ave #106
+                <br />
+                Fullerton, CA 92832
+              </span>
             </address>
             <a
               href="/contact"
@@ -348,7 +419,7 @@ export default function Footer() {
         .footer-legal:hover {
           color: rgba(255, 255, 255, 0.7) !important;
         }
-        .footer-email:hover {
+        .footer-contact-row:hover {
           color: #cca662 !important;
         }
         .footer-social-icon:hover {
