@@ -58,6 +58,31 @@ html {
   background: linear-gradient(135deg, var(--gold-start), var(--gold-mid), var(--gold-end));
 }
 
+/* Gold gradient horizontal rule — fades in/out at the edges, peaks in the middle. */
+.gold-rule {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(204, 166, 98, 0) 0%,
+    rgba(204, 166, 98, 0.85) 50%,
+    rgba(204, 166, 98, 0) 100%
+  );
+  border: 0;
+}
+
+.gold-rule-thick {
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(204, 166, 98, 0) 0%,
+    rgba(204, 166, 98, 0.9) 50%,
+    rgba(204, 166, 98, 0) 100%
+  );
+  border: 0;
+}
+
 /* Loader styles */
 .loader-wrapper {
   position: fixed;

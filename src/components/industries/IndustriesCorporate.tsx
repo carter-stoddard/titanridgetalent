@@ -146,8 +146,8 @@ export default function IndustriesCorporate() {
               search.
             </p>
             <div
-              className="h-[1px] w-full"
-              style={{ backgroundColor: "#CCA662", marginBottom: "40px" }}
+              className="gold-rule"
+              style={{ marginBottom: "40px" }}
             />
             <p
               className="font-display font-bold uppercase"

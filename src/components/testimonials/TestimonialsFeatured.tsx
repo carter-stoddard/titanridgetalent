@@ -169,10 +169,9 @@ export default function TestimonialsFeatured() {
             </p>
 
             <div
-              className="h-[1px] w-full"
-              style={{
-                backgroundColor: "#CCA662",
-                marginBottom: "24px",
+              className="gold-rule"
+                style={{
+                                marginBottom: "24px",
               }}
             />
 

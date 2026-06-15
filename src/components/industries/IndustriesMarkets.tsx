@@ -149,8 +149,8 @@ export default function IndustriesMarkets() {
             looks right on paper and one who&apos;ll actually last.
           </p>
           <div
-            className="h-[1px] w-full"
-            style={{ backgroundColor: "#CCA662", marginBottom: "24px" }}
+            className="gold-rule"
+            style={{ marginBottom: "24px" }}
           />
           <StatRow stats={industrialStats} />
           {JOBS_VISIBLE && (
@@ -222,8 +222,8 @@ export default function IndustriesMarkets() {
             don&apos;t just fill the role but elevate the team around them.
           </p>
           <div
-            className="h-[1px] w-full"
-            style={{ backgroundColor: "#CCA662", marginBottom: "24px" }}
+            className="gold-rule"
+            style={{ marginBottom: "24px" }}
           />
           <StatRow stats={corporateStats} />
           {JOBS_VISIBLE && (

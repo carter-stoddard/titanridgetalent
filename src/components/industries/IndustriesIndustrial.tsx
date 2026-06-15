@@ -127,8 +127,8 @@ export default function IndustriesIndustrial() {
               to know the difference, and our clients know it too.
             </p>
             <div
-              className="h-[1px] w-full"
-              style={{ backgroundColor: "#CCA662", marginBottom: "40px" }}
+              className="gold-rule"
+              style={{ marginBottom: "40px" }}
             />
             <p
               className="font-display font-bold uppercase"

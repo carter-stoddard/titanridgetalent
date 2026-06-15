@@ -254,10 +254,9 @@ export default function TestimonialsCandidates() {
               </p>
 
               <div
-                className="h-[1px] w-full"
+                className="gold-rule"
                 style={{
-                  backgroundColor: "#CCA662",
-                  marginBottom: "20px",
+                                  marginBottom: "20px",
                 }}
               />
 

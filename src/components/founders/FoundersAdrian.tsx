@@ -142,9 +142,8 @@ export default function FoundersAdrian() {
 
             <div
               ref={setTextRef(3)}
-              className="h-[1px] w-full"
+              className="gold-rule"
               style={{
-                backgroundColor: "#CCA662",
                 marginBottom: "32px",
                 opacity: 0,
               }}

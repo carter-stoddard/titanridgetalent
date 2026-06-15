@@ -255,10 +255,7 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="footer-bottom-wrap">
-        <div
-          className="w-full"
-          style={{ height: "1px", backgroundColor: "#CCA662" }}
-        />
+        <div className="gold-rule" />
         <div className="footer-bottom">
           <p
             className="font-display"
