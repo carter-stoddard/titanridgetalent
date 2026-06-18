@@ -47,7 +47,7 @@ export default function FoundersPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
       />
       <Navbar />
-      <main>
+      <main id="main">
         <FoundersHero />
         <FoundersAdrian />
         <FoundersPhilosophy />

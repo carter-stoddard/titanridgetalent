@@ -119,3 +119,52 @@ html {
   stroke-dasharray: 3000;
   stroke-dashoffset: 3000;
 }
+
+/* ──────────────────────────────────────────────────────────
+   ACCESSIBILITY — keyboard focus indicators (WCAG 2.4.7 AA)
+   :focus-visible only paints on keyboard navigation, not mouse
+   ────────────────────────────────────────────────────────── */
+*:focus {
+  outline: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--titan-gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+  box-shadow: 0 0 0 4px rgba(204, 166, 98, 0.25);
+}
+
+/* ──────────────────────────────────────────────────────────
+   ACCESSIBILITY — skip-to-main-content link (WCAG 2.4.1 A)
+   Hidden until keyboard-focused; lets users bypass nav.
+   ────────────────────────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -100px;
+  z-index: 10000;
+  background-color: var(--titan-gold);
+  color: var(--titan-navy);
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 16px;
+  outline: 2px solid var(--titan-navy);
+  outline-offset: 2px;
+}

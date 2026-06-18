@@ -17,7 +17,7 @@ export default function CareersPage() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main">
         <CareersHero />
         <CareersIntro />
         <CareersListings />

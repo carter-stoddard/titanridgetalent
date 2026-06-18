@@ -55,6 +55,7 @@ const companyLinks = [
   { label: "Mission", href: "/mission" },
   { label: "Founder", href: "/founders" },
   { label: "Industries", href: "/industries" },
+  { label: "Services", href: "/services" },
   { label: "Testimonials", href: "/testimonials" },
 ];
 
@@ -368,6 +369,25 @@ export default function Footer() {
               }}
             >
               Terms of Use
+            </Link>
+            <span
+              style={{
+                fontSize: "12px",
+                color: "rgba(255, 255, 255, 0.35)",
+              }}
+            >
+              ·
+            </span>
+            <Link
+              href="/accessibility"
+              className="footer-legal font-display"
+              style={{
+                fontSize: "12px",
+                color: "rgba(255, 255, 255, 0.35)",
+                transition: "color 0.2s ease",
+              }}
+            >
+              Accessibility
             </Link>
           </div>
         </div>

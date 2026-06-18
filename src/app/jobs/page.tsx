@@ -17,7 +17,7 @@ export default function JobsPage() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main">
         <JobsHero />
         <JobsListings />
         <JobsWhy />

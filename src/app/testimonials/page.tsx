@@ -18,7 +18,7 @@ export default function TestimonialsPage() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main">
         <TestimonialsHero />
         <TestimonialsFeatured />
         <TestimonialsEmployers />

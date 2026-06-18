@@ -17,7 +17,7 @@ export default function MissionPage() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main">
         <MissionHero />
         <MissionStatement />
         <MissionPillars />

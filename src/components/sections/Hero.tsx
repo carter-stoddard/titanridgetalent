@@ -100,7 +100,7 @@ export default function Hero() {
                 <span
                   className="font-display uppercase"
                   style={{
-                    fontSize: "13px",
+                    fontSize: "14px",
                     letterSpacing: "4px",
                     color: "rgba(255, 255, 255, 0.4)",
                   }}

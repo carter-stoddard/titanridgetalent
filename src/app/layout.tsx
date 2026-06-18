@@ -98,6 +98,9 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-titan-navy text-titan-offwhite">
+        <a href="#main" className="skip-link">
+          Skip to main content
+        </a>
         <SmoothScroll />
         <LoaderGate>{children}</LoaderGate>
       </body>

@@ -86,7 +86,7 @@ export default function IndustriesPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(corporateServiceJsonLd) }}
       />
       <Navbar />
-      <main>
+      <main id="main">
         <IndustriesHero />
         <IndustriesMarkets />
         <IndustriesIndustrial />

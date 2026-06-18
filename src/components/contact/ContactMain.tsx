@@ -535,7 +535,8 @@ export default function ContactMain() {
         }
         :global(.form-input:focus) {
           border-color: #cca662;
-          box-shadow: 0 0 0 3px rgba(204, 166, 98, 0.12);
+          box-shadow: 0 0 0 3px rgba(204, 166, 98, 0.28);
+          outline: 2px solid transparent;
         }
         :global(.form-input::placeholder) {
           color: rgba(42, 42, 42, 0.45);

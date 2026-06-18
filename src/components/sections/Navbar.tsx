@@ -12,6 +12,7 @@ const navLinks = [
   { label: "Founder", href: "/founders" },
   ...(JOBS_VISIBLE ? [{ label: "Jobs", href: "/jobs" }] : []),
   { label: "Industries", href: "/industries" },
+  { label: "Services", href: "/services" },
   ...(CAREERS_VISIBLE ? [{ label: "Careers", href: "/careers" }] : []),
   { label: "Testimonials", href: "/testimonials" },
 ];
