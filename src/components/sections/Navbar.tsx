@@ -9,7 +9,7 @@ import { JOBS_VISIBLE, CAREERS_VISIBLE } from "@/lib/features";
 const navLinks = [
   { label: "About", href: "/about" },
   { label: "Mission", href: "/mission" },
-  { label: "Founder", href: "/founders" },
+  { label: "Leadership", href: "/leadership" },
   ...(JOBS_VISIBLE ? [{ label: "Jobs", href: "/jobs" }] : []),
   { label: "Industries", href: "/industries" },
   { label: "Services", href: "/services" },

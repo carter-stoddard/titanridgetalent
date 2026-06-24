@@ -53,7 +53,7 @@ const socials = [
 const companyLinks = [
   { label: "About", href: "/about" },
   { label: "Mission", href: "/mission" },
-  { label: "Founder", href: "/founders" },
+  { label: "Leadership", href: "/leadership" },
   { label: "Industries", href: "/industries" },
   { label: "Services", href: "/services" },
   { label: "Testimonials", href: "/testimonials" },

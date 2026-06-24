@@ -167,7 +167,7 @@ export default function AboutStory() {
 
             <Link
               ref={setText(3) as (el: HTMLAnchorElement | null) => void}
-              href="/founders"
+              href="/leadership"
               className="font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
               style={{
                 height: "52px",
@@ -181,7 +181,7 @@ export default function AboutStory() {
                 opacity: 0,
               }}
             >
-              Meet the Founder
+              Meet the Team
             </Link>
           </div>
 

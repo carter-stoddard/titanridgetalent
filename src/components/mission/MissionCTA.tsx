@@ -179,7 +179,7 @@ export default function MissionCTA() {
             Start the Conversation
           </Link>
           <Link
-            href="/founders"
+            href="/leadership"
             className="mission-cta-btn mission-cta-ghost font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
             style={{
               height: "54px",
@@ -192,7 +192,7 @@ export default function MissionCTA() {
               letterSpacing: "3px",
             }}
           >
-            Meet the Founder
+            Meet the Team
           </Link>
         </div>
       </div>
