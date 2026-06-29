@@ -5,4 +5,4 @@ export const JOBS_VISIBLE = false;
 
 // CAREERS_VISIBLE controls the /careers page (Avionté job board embed).
 // The route stays mounted; only its navbar link + sitemap entry are gated.
-export const CAREERS_VISIBLE = false;
+export const CAREERS_VISIBLE = true;
