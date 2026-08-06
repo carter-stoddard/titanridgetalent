@@ -251,6 +251,7 @@ export default function FeaturedListings() {
           <div
             onClick={(e) => e.stopPropagation()}
             style={{
+              margin: "auto",
               width: "min(860px, 100%)",
               cursor: "default",
               borderRadius: "8px",
