@@ -4,6 +4,7 @@ import Footer from "@/components/sections/Footer";
 import CareersHero from "@/components/careers/CareersHero";
 import CareersIntro from "@/components/careers/CareersIntro";
 import CareersListings from "@/components/careers/CareersListings";
+import FeaturedListings from "@/components/careers/FeaturedListings";
 import CareersCTA from "@/components/careers/CareersCTA";
 
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ export default function CareersPage() {
       <main id="main">
         <CareersHero />
         <CareersIntro />
+        <FeaturedListings />
         <CareersListings />
         <CareersCTA />
       </main>
