@@ -26,247 +26,163 @@ const reasons = [
 
 export default function JobsWhy() {
   const sectionRef = useRef<HTMLElement>(null);
-  const colsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const headRef = useRef<HTMLDivElement>(null);
+  const rowRefs = useRef<(HTMLLIElement | null)[]>([]);
   const numberRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Columns fade up
       gsap.fromTo(
-        colsRef.current.filter(Boolean),
-        { opacity: 0, y: 30 },
+        headRef.current,
+        { opacity: 0, y: 24 },
         {
           opacity: 1,
           y: 0,
           duration: 0.7,
           ease: "power2.out",
-          stagger: 0.15,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 75%",
-            once: true,
-          },
+          scrollTrigger: { trigger: sectionRef.current, start: "top 75%", once: true },
         }
       );
 
-      // Atmospheric numbers count up 00 → 01/02/03
-      reasons.forEach((r, i) => {
-        const numEl = numberRefs.current[i];
-        if (!numEl) return;
-        const target = parseInt(r.number, 10);
-        const counter = { val: 0 };
-        gsap.to(counter, {
-          val: target,
-          duration: 1.1,
-          ease: "power2.out",
-          delay: 0.15 + i * 0.15,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 75%",
-            once: true,
-          },
-          onUpdate: () => {
-            numEl.textContent = String(Math.round(counter.val)).padStart(2, "0");
-          },
+      rowRefs.current.forEach((row, i) => {
+        if (!row) return;
+        const content = row.querySelectorAll<HTMLElement>("[data-reveal]");
+        const tl = gsap.timeline({
+          scrollTrigger: { trigger: row, start: "top 78%", once: true },
         });
+        tl.fromTo(content, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.65, ease: "power2.out", stagger: 0.08 }, 0.1);
+
+        // Numbers count up 00 → 01/02/03
+        const numEl = numberRefs.current[i];
+        if (numEl) {
+          const target = parseInt(reasons[i].number, 10);
+          const counter = { val: 0 };
+          tl.to(
+            counter,
+            {
+              val: target,
+              duration: 1.1,
+              ease: "power2.out",
+              onUpdate: () => {
+                numEl.textContent = String(Math.round(counter.val)).padStart(2, "0");
+              },
+            },
+            0.1
+          );
+        }
       });
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
-  // 3D tilt on hover (desktop only)
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>, i: number) => {
-    const card = colsRef.current[i];
-    if (!card) return;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateY = ((x - centerX) / centerX) * 5;
-    const rotateX = ((centerY - y) / centerY) * 5;
-    gsap.to(card, {
-      rotateX,
-      rotateY,
-      duration: 0.4,
-      ease: "power2.out",
-      transformPerspective: 1000,
-    });
-  };
-
-  const handleMouseLeave = (i: number) => {
-    const card = colsRef.current[i];
-    if (!card) return;
-    gsap.to(card, {
-      rotateX: 0,
-      rotateY: 0,
-      duration: 0.6,
-      ease: "power3.out",
-    });
-  };
-
   return (
     <section
       ref={sectionRef}
-      className="jobs-why relative w-full"
-      style={{
-        backgroundColor: "#F5F4F0",
-        paddingTop: "120px",
-        paddingBottom: "120px",
-      }}
+      className="jobs-why tr-section relative w-full"
+      aria-labelledby="jobs-why-heading"
+      style={{ backgroundColor: "var(--tr-cream)", color: "var(--tr-navy)" }}
     >
-      <div
-        className="jobs-why-outer"
-        style={{ paddingLeft: "80px", paddingRight: "80px" }}
-      >
-        {/* Eyebrow — on light */}
-        <p
-          className="font-display font-medium uppercase"
-          style={{
-            fontSize: "11px",
-            letterSpacing: "4px",
-            color: "#CCA662",
-            marginBottom: "16px",
-          }}
-        >
-          The Difference
-        </p>
-
-        {/* Headline — on light */}
-        <h2
-          className="font-display font-semibold uppercase"
-          style={{
-            fontSize: "clamp(36px, 4.5vw, 52px)",
-            lineHeight: 0.95,
-            color: "#141F31",
-            marginBottom: "60px",
-          }}
-        >
-          Why Go Through Us.
-        </h2>
-
-        {/* Navy inset card */}
-        <div
-          className="jobs-why-inner"
-          style={{
-            backgroundColor: "#141F31",
-            borderRadius: "12px",
-            paddingLeft: "60px",
-            paddingRight: "60px",
-            paddingTop: "80px",
-            paddingBottom: "60px",
-          }}
-        >
+      <div className="tr-container">
         <div className="jobs-why-grid">
-          {reasons.map((r, i) => (
-            <div
-              key={r.number}
-              ref={(el) => {
-                colsRef.current[i] = el;
-              }}
-              className={`jobs-why-col relative flex flex-col items-center text-center ${
-                i > 0 ? "jobs-why-divider" : ""
-              }`}
-              onMouseMove={(e) => handleMouseMove(e, i)}
-              onMouseLeave={() => handleMouseLeave(i)}
-              style={{ opacity: 0, transformStyle: "preserve-3d", willChange: "transform" }}
-            >
-              {/* Atmospheric number */}
-              <span
-                ref={(el) => {
-                  numberRefs.current[i] = el;
-                }}
-                aria-hidden="true"
-                className="jobs-why-number font-display font-black select-none pointer-events-none"
-                style={{
-                  position: "absolute",
-                  top: "-20px",
-                  left: "50%",
-                  transform: "translateX(-50%)",
-                  fontSize: "96px",
-                  lineHeight: 1,
-                  color: "rgba(204, 166, 98, 0.12)",
-                  zIndex: 0,
-                }}
-              >
-                00
-              </span>
+          <div ref={headRef} className="jobs-why-head" style={{ opacity: 0 }}>
+            <p className="tr-eyebrow">The Difference</p>
+            <h2 id="jobs-why-heading" className="tr-h2" style={{ marginTop: "20px", color: "var(--tr-navy)" }}>
+              Why Go Through Us
+            </h2>
+          </div>
 
-              {/* Content */}
-              <div className="relative" style={{ zIndex: 1, paddingTop: "48px" }}>
-                <h3
-                  className="font-display font-bold uppercase"
-                  style={{
-                    fontSize: "20px",
-                    letterSpacing: "2px",
-                    color: "#CCA662",
-                    marginBottom: "16px",
-                    lineHeight: 1.1,
+          <ol className="jobs-why-list">
+            {reasons.map((r, i) => (
+              <li
+                key={r.number}
+                ref={(el) => {
+                  rowRefs.current[i] = el;
+                }}
+                className="jobs-why-row"
+              >
+                <span
+                  ref={(el) => {
+                    numberRefs.current[i] = el;
                   }}
+                  aria-hidden="true"
+                  className="jobs-why-num font-display"
+                  data-reveal
                 >
-                  {r.title}
-                </h3>
-                <p
-                  className="font-body italic"
-                  style={{
-                    fontSize: "15px",
-                    lineHeight: 1.7,
-                    color: "rgba(255, 255, 255, 0.6)",
-                  }}
-                >
-                  {r.body}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+                  00
+                </span>
+                <div className="jobs-why-text">
+                  <h3 className="jobs-why-title font-display" data-reveal>
+                    {r.title}
+                  </h3>
+                  <p className="jobs-why-body font-body" data-reveal>
+                    {r.body}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
 
       <style jsx>{`
         .jobs-why-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          perspective: 1000px;
+          grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+          gap: clamp(40px, 6vw, 96px);
+          align-items: start;
         }
-        .jobs-why-col {
-          padding-left: 48px;
-          padding-right: 48px;
+        .jobs-why-list {
+          list-style: none;
+          margin: 0;
+          padding: 0;
         }
-        .jobs-why-divider {
-          border-left: 1px solid rgba(204, 166, 98, 0.4);
+        .jobs-why-row {
+          position: relative;
+          display: grid;
+          grid-template-columns: 96px 1fr;
+          gap: clamp(16px, 3vw, 40px);
+          padding: clamp(28px, 3vw, 44px) 0;
+          border-top: 1px solid rgba(20, 31, 49, 0.14);
         }
-
-        @media (max-width: 767px) {
-          .jobs-why {
-            padding-top: 80px !important;
-            padding-bottom: 80px !important;
-          }
-          .jobs-why-outer {
-            padding-left: 16px !important;
-            padding-right: 16px !important;
-          }
-          .jobs-why-inner {
-            padding: 60px 32px !important;
-          }
+        .jobs-why-row:last-child {
+          border-bottom: 1px solid rgba(20, 31, 49, 0.14);
+        }
+        .jobs-why-num {
+          font-weight: 700;
+          font-size: clamp(44px, 5vw, 72px);
+          line-height: 0.9;
+          letter-spacing: -0.02em;
+          color: var(--tr-gold-text);
+          font-variant-numeric: tabular-nums;
+        }
+        .jobs-why-title {
+          font-weight: 600;
+          text-transform: uppercase;
+          font-size: clamp(26px, 2.4vw, 34px);
+          line-height: 1;
+          letter-spacing: 0.01em;
+          color: var(--tr-navy);
+        }
+        .jobs-why-body {
+          margin-top: 14px;
+          font-size: 18px;
+          line-height: 1.75;
+          color: var(--tr-ink);
+          max-width: 46ch;
+        }
+        [data-reveal] {
+          opacity: 0;
+        }
+        @media (max-width: 1023px) {
           .jobs-why-grid {
             grid-template-columns: 1fr;
-            gap: 48px;
           }
-          .jobs-why-col {
-            padding-left: 0;
-            padding-right: 0;
-            text-align: left;
-            align-items: flex-start;
-          }
-          .jobs-why-number {
-            display: none !important;
-          }
-          .jobs-why-divider {
-            border-left: none;
-            border-top: 1px solid rgba(204, 166, 98, 0.4);
-            padding-top: 48px;
+        }
+        @media (max-width: 639px) {
+          .jobs-why-row {
+            grid-template-columns: 1fr;
+            gap: 10px;
           }
         }
       `}</style>

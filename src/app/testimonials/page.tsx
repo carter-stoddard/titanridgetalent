@@ -8,7 +8,7 @@ import TestimonialsCandidates from "@/components/testimonials/TestimonialsCandid
 import TestimonialsClosing from "@/components/testimonials/TestimonialsClosing";
 
 export const metadata: Metadata = {
-  title: "Testimonials",
+  title: "Testimonials | What Employers and Candidates Say",
   description:
     "Real results from the companies we've helped build — and the people we've helped place.",
   alternates: { canonical: "/testimonials" },

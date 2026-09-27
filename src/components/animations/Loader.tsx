@@ -45,7 +45,7 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
       <div className="w-[280px] sm:w-[360px] md:w-[420px]">
         <img
           ref={logoRef}
-          src="/images/titan-ridge-logo.svg"
+          src="/images/titan-ridge-talent-logo.svg"
           alt=""
           aria-hidden="true"
           className="w-full h-auto"

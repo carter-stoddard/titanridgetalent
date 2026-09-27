@@ -9,22 +9,9 @@ gsap.registerPlugin(ScrollTrigger);
 export default function CareersIntro() {
   const sectionRef = useRef<HTMLElement>(null);
   const itemsRef = useRef<(HTMLElement | null)[]>([]);
-  const ruleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const trigger = {
-        trigger: sectionRef.current,
-        start: "top 75%",
-        once: true,
-      };
-
-      gsap.fromTo(
-        ruleRef.current,
-        { scaleX: 0 },
-        { scaleX: 1, duration: 0.9, ease: "power3.out", scrollTrigger: trigger }
-      );
-
       gsap.fromTo(
         itemsRef.current.filter(Boolean),
         { opacity: 0, y: 24 },
@@ -34,8 +21,11 @@ export default function CareersIntro() {
           duration: 0.7,
           ease: "power2.out",
           stagger: 0.1,
-          delay: 0.15,
-          scrollTrigger: trigger,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+            once: true,
+          },
         }
       );
     }, sectionRef);
@@ -50,86 +40,73 @@ export default function CareersIntro() {
   return (
     <section
       ref={sectionRef}
-      className="careers-intro relative w-full"
-      style={{
-        backgroundColor: "#F5F4F0",
-        paddingTop: "120px",
-        paddingBottom: "60px",
-      }}
+      className="careers-intro tr-section relative w-full"
+      aria-labelledby="careers-intro-heading"
+      style={{ backgroundColor: "var(--tr-cream)", color: "var(--tr-navy)" }}
     >
-      <div
-        className="careers-intro-inner"
-        style={{ paddingLeft: "80px", paddingRight: "80px" }}
-      >
+      <div className="tr-container">
         <div className="careers-intro-grid">
           <div className="careers-intro-headline">
-            <p
-              ref={setItem(0)}
-              className="font-display font-medium uppercase"
-              style={{
-                fontSize: "11px",
-                letterSpacing: "4px",
-                color: "#CCA662",
-                marginBottom: "16px",
-                opacity: 0,
-              }}
-            >
-              Open Positions
+            <p ref={setItem(0)} className="tr-eyebrow" style={{ opacity: 0 }}>
+              Join Our Network
             </p>
             <h2
+              id="careers-intro-heading"
               ref={setItem(1)}
-              className="font-display font-semibold uppercase"
-              style={{
-                fontSize: "clamp(36px, 4.5vw, 52px)",
-                lineHeight: 0.95,
-                color: "#141F31",
-                opacity: 0,
-              }}
+              className="tr-h2"
+              style={{ marginTop: "20px", color: "var(--tr-navy)", opacity: 0 }}
             >
-              Roles we&apos;re actively filling.
+              Get paid weekly. Get placed right
             </h2>
           </div>
 
           <div className="careers-intro-body">
+            <p ref={setItem(2)} className="tr-body" style={{ color: "var(--tr-ink)", opacity: 0 }}>
+              We place people in industrial and administrative roles across the
+              LA/OC market, and every search we run is for a real client. No
+              ghost postings, no resume traps.
+            </p>
+            <p ref={setItem(3)} className="tr-body" style={{ color: "var(--tr-ink)", marginTop: "20px", opacity: 0 }}>
+              Tell us who you are and what you do, and share your resume if you
+              have one handy. We&apos;ll reach out when the right role comes up.
+            </p>
             <div
-              ref={ruleRef}
-              aria-hidden="true"
+              ref={setItem(4)}
+              className="careers-perk inline-flex items-center"
               style={{
-                width: "60px",
-                height: "2px",
-                backgroundColor: "#CCA662",
-                marginBottom: "32px",
-                transformOrigin: "left center",
-              }}
-            />
-            <p
-              ref={setItem(2)}
-              className="font-body"
-              style={{
-                fontSize: "17px",
-                lineHeight: 1.7,
-                color: "#2A2A2A",
-                marginBottom: "20px",
+                marginTop: "36px",
+                gap: "14px",
+                backgroundColor: "var(--tr-navy)",
+                borderRadius: "9999px",
+                padding: "12px 22px 12px 14px",
                 opacity: 0,
               }}
             >
-              Every role below is a real search we&apos;re running with a real
-              client. No ghost postings, no resume traps. Browse what&apos;s
-              open, and if something fits, apply directly.
-            </p>
-            <p
-              ref={setItem(3)}
-              className="font-body"
-              style={{
-                fontSize: "17px",
-                lineHeight: 1.7,
-                color: "#2A2A2A",
-                opacity: 0,
-              }}
-            >
-              Don&apos;t see the right fit today? Send us your resume anyway.
-              We&apos;ll keep you in mind as new searches come in.
-            </p>
+              <span
+                aria-hidden="true"
+                className="font-display"
+                style={{
+                  width: "30px",
+                  height: "30px",
+                  borderRadius: "50%",
+                  backgroundColor: "var(--tr-gold)",
+                  color: "var(--tr-navy)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontWeight: 700,
+                  fontSize: "16px",
+                }}
+              >
+                $
+              </span>
+              <span
+                className="font-display font-bold uppercase"
+                style={{ fontSize: "14px", letterSpacing: "0.2em", color: "var(--tr-cream)" }}
+              >
+                Weekly Pay
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -137,25 +114,14 @@ export default function CareersIntro() {
       <style jsx>{`
         .careers-intro-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 80px;
+          grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+          gap: clamp(32px, 6vw, 96px);
           align-items: start;
         }
-
         @media (max-width: 1023px) {
           .careers-intro-grid {
             grid-template-columns: 1fr;
-            gap: 40px;
-          }
-        }
-
-        @media (max-width: 767px) {
-          .careers-intro {
-            padding-top: 80px !important;
-          }
-          .careers-intro-inner {
-            padding-left: 24px !important;
-            padding-right: 24px !important;
+            gap: 32px;
           }
         }
       `}</style>

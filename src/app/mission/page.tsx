@@ -9,7 +9,7 @@ import MissionCTA from "@/components/mission/MissionCTA";
 export const metadata: Metadata = {
   title: "Mission",
   description:
-    "The mission behind Titan Ridge Talent — what drives us and why it matters.",
+    "Where Talent Meets Its Peaks. Titan Ridge Talent builds lasting partnerships by connecting great people with the right opportunities through relationship-first recruiting.",
   alternates: { canonical: "/mission" },
 };
 

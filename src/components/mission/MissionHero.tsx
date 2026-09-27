@@ -4,9 +4,9 @@ export default function MissionHero() {
   return (
     <PageHero
       eyebrow="Our Mission"
-      headline="Where top-tier talent meets peak-level service."
-      image="/images/mission-hero.webp"
-      imageAlt="Cinematic ridge at golden hour — what drives Titan Ridge"
+      headline="Where Talent Meets Its Peaks"
+      image="/images/mountain-sunrise-mission-titan-ridge-talent.webp"
+      imageAlt="Sunrise over a fog-covered mountain ridge — what drives Titan Ridge"
     />
   );
 }

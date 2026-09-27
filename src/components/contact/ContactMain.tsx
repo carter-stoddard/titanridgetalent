@@ -88,9 +88,17 @@ export default function ContactMain() {
     infoBlocksRef.current[i] = el;
   };
 
+  const [role, setRole] = useState<"" | "company" | "professional">("");
+  useEffect(() => {
+    const r = new URLSearchParams(window.location.search).get("role");
+    if (r === "company" || r === "professional") setRole(r);
+  }, []);
+
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const lastFocusRef = useRef<HTMLElement | null>(null);
   const modalOpen = status === "success" || status === "error";
   const closeModal = () => {
     setStatus("idle");
@@ -99,8 +107,33 @@ export default function ContactMain() {
 
   useEffect(() => {
     if (!modalOpen) return;
+    lastFocusRef.current = document.activeElement as HTMLElement | null;
+    const dialog = dialogRef.current;
+    const focusables = () =>
+      Array.from(
+        dialog?.querySelectorAll<HTMLElement>('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])') ?? []
+      );
+    // Move focus into the dialog (WCAG 2.4.3), on the primary action button.
+    const initial = focusables();
+    (initial[initial.length - 1] ?? initial[0])?.focus();
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeModal();
+      if (e.key === "Escape") {
+        closeModal();
+        return;
+      }
+      if (e.key === "Tab") {
+        const els = focusables();
+        if (!els.length) return;
+        const first = els[0];
+        const last = els[els.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     };
     document.addEventListener("keydown", onKey);
     const prev = document.body.style.overflow;
@@ -108,6 +141,8 @@ export default function ContactMain() {
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
+      // Return focus to where the user was (the submit button) when the dialog closes.
+      lastFocusRef.current?.focus();
     };
   }, [modalOpen]);
 
@@ -145,6 +180,7 @@ export default function ContactMain() {
       }
       setStatus("success");
       form.reset();
+      setRole("");
     } catch (err) {
       setStatus("error");
       setErrorMessage(err instanceof Error ? err.message : "Failed to send.");
@@ -154,10 +190,10 @@ export default function ContactMain() {
   return (
     <section
       ref={sectionRef}
-      className="contact-main"
-      style={{ backgroundColor: "#F5F4F0" }}
+      className="contact-main tr-section relative"
+      style={{ backgroundColor: "var(--tr-cream)", color: "var(--tr-navy)" }}
     >
-      <div className="contact-main-inner">
+      <div className="tr-container">
         <div className="contact-grid">
           {/* LEFT — Form */}
           <div
@@ -165,30 +201,20 @@ export default function ContactMain() {
             className="contact-form-col"
             style={{ opacity: 0 }}
           >
+            <p className="tr-eyebrow">Send Us a Message</p>
             <p
-              className="font-display font-bold uppercase"
-              style={{
-                fontSize: "11px",
-                letterSpacing: "4px",
-                color: "#CCA662",
-                marginBottom: "8px",
-              }}
+              className="tr-body"
+              style={{ color: "var(--tr-ink)", marginTop: "20px", marginBottom: "36px" }}
             >
-              Send Us a Message
-            </p>
-            <p
-              className="font-body italic"
-              style={{
-                fontSize: "14px",
-                color: "#2A2A2A",
-                marginBottom: "32px",
-              }}
-            >
-              We typically respond within one business day.
+              {role === "company"
+                ? "Tell us about the role you need to fill. We typically respond within one business day."
+                : role === "professional"
+                ? "Tell us what you're looking for. We typically respond within one business day."
+                : "We typically respond within one business day."}
             </p>
 
             <form
-              className="flex flex-col"
+              className="flex flex-col relative"
               style={{ gap: "20px" }}
               onSubmit={handleSubmit}
               noValidate
@@ -232,7 +258,7 @@ export default function ContactMain() {
                 <label htmlFor="role" className="form-label">
                   I am a...
                 </label>
-                <select id="role" name="role" className="form-input" defaultValue="">
+                <select id="role" name="role" className="form-input" value={role} onChange={(e) => setRole(e.target.value as "" | "company" | "professional")}>
                   <option value="" disabled>
                     — Select one —
                   </option>
@@ -260,29 +286,23 @@ export default function ContactMain() {
               <button
                 type="submit"
                 disabled={status === "submitting"}
-                className="form-submit font-display font-bold uppercase"
+                className="form-submit tr-btn tr-btn-gold"
                 style={{
                   marginTop: "12px",
-                  height: "56px",
-                  width: "100%",
-                  backgroundColor: status === "submitting" ? "#b89656" : "#CCA662",
-                  color: "#141F31",
-                  fontSize: "15px",
-                  letterSpacing: "3px",
-                  borderRadius: "4px",
                   border: "none",
                   cursor: status === "submitting" ? "wait" : "pointer",
-                  transition: "all 0.3s ease",
+                  opacity: status === "submitting" ? 0.75 : 1,
                 }}
               >
                 {status === "submitting" ? "Sending…" : "Send Message"}
               </button>
 
               <p
-                className="font-body italic text-center"
+                className="font-body"
                 style={{
-                  fontSize: "14px",
-                  color: "rgba(0, 0, 0, 0.35)",
+                  fontSize: "17px",
+                  lineHeight: 1.6,
+                  color: "var(--tr-ink)",
                   marginTop: "4px",
                 }}
               >
@@ -295,21 +315,16 @@ export default function ContactMain() {
           <div className="contact-info-col">
             <div className="flex flex-col" style={{ gap: "40px" }}>
               <div ref={setBlock(0)} style={{ opacity: 0 }}>
-                <div
-                  style={{
-                    backgroundColor: "#141F31",
-                    borderRadius: "8px",
-                    padding: "24px 28px",
-                    borderTop: "2px solid #CCA662",
-                  }}
-                >
+                <div className="contact-note">
                   <p
-                    className="font-display font-bold uppercase"
+                    className="font-display"
                     style={{
-                      fontSize: "11px",
-                      letterSpacing: "4px",
-                      color: "#CCA662",
-                      marginBottom: "10px",
+                      fontSize: "13px",
+                      fontWeight: 600,
+                      letterSpacing: "0.12em",
+                      textTransform: "uppercase",
+                      color: "var(--tr-gold-text)",
+                      marginBottom: "12px",
                     }}
                   >
                     Please Note
@@ -317,9 +332,9 @@ export default function ContactMain() {
                   <p
                     className="font-display font-bold"
                     style={{
-                      fontSize: "18px",
-                      color: "#FFFFFF",
-                      lineHeight: 1.25,
+                      fontSize: "24px",
+                      color: "var(--tr-navy)",
+                      lineHeight: 1.15,
                       marginBottom: "12px",
                     }}
                   >
@@ -328,23 +343,25 @@ export default function ContactMain() {
                   <p
                     className="font-body"
                     style={{
-                      fontSize: "14px",
-                      lineHeight: 1.65,
-                      color: "rgba(255, 255, 255, 0.7)",
+                      fontSize: "17px",
+                      lineHeight: 1.7,
+                      color: "var(--tr-ink)",
                     }}
                   >
                     We&apos;re not accepting walk-ins at this time. All
                     meetings are scheduled by appointment. Email{" "}
                     <a
                       href="mailto:support@titanridgetalent.com"
-                      style={{ color: "#CCA662", textDecoration: "underline", textUnderlineOffset: "3px" }}
+                      className="contact-inline-link"
+                      style={{ color: "var(--tr-navy)", textDecoration: "underline", textUnderlineOffset: "3px", textDecorationColor: "var(--tr-gold)" }}
                     >
                       support@titanridgetalent.com
                     </a>{" "}
                     or call{" "}
                     <a
                       href="tel:+17145524334"
-                      style={{ color: "#CCA662", textDecoration: "underline", textUnderlineOffset: "3px" }}
+                      className="contact-inline-link"
+                      style={{ color: "var(--tr-navy)", textDecoration: "underline", textUnderlineOffset: "3px", textDecorationColor: "var(--tr-gold)" }}
                     >
                       (714) 552-4334
                     </a>{" "}
@@ -364,7 +381,7 @@ export default function ContactMain() {
                   className="info-link font-display"
                   style={{
                     fontSize: "18px",
-                    color: "#141F31",
+                    color: "var(--tr-navy)",
                     fontWeight: 600,
                   }}
                 >
@@ -380,7 +397,7 @@ export default function ContactMain() {
                   className="info-link font-display"
                   style={{
                     fontSize: "18px",
-                    color: "#141F31",
+                    color: "var(--tr-navy)",
                     fontWeight: 600,
                   }}
                 >
@@ -393,7 +410,7 @@ export default function ContactMain() {
               <InfoBlock label="Connect">
                 <div
                   className="flex items-center"
-                  style={{ gap: "16px", color: "#CCA662", marginTop: "4px" }}
+                  style={{ gap: "16px", color: "var(--tr-gold-text)", marginTop: "4px" }}
                 >
                   <Link
                     href="https://www.linkedin.com/company/titanridgetalent/"
@@ -401,7 +418,7 @@ export default function ContactMain() {
                     rel="noopener noreferrer"
                     aria-label="LinkedIn"
                     className="contact-social"
-                    style={{ color: "#CCA662", transition: "color 0.2s ease" }}
+                    style={{ color: "var(--tr-gold-text)", transition: "color 0.2s ease" }}
                   >
                     <LinkedInIcon />
                   </Link>
@@ -409,7 +426,7 @@ export default function ContactMain() {
                     href="#"
                     aria-label="Indeed"
                     className="contact-social"
-                    style={{ color: "#CCA662", transition: "color 0.2s ease" }}
+                    style={{ color: "var(--tr-gold-text)", transition: "color 0.2s ease" }}
                   >
                     <IndeedIcon />
                   </Link>
@@ -417,7 +434,7 @@ export default function ContactMain() {
                     href="#"
                     aria-label="Glassdoor"
                     className="contact-social"
-                    style={{ color: "#CCA662", transition: "color 0.2s ease" }}
+                    style={{ color: "var(--tr-gold-text)", transition: "color 0.2s ease" }}
                   >
                     <GlassdoorIcon />
                   </Link>
@@ -426,24 +443,21 @@ export default function ContactMain() {
               </div>
             </div>
 
-            {/* Dark card */}
+            {/* Open roles block */}
             {JOBS_VISIBLE && (
             <div
               ref={darkCardRef}
-              style={{
-                marginTop: "60px",
-                backgroundColor: "#141F31",
-                borderRadius: "8px",
-                padding: "32px",
-                opacity: 0,
-              }}
+              className="contact-jobs"
+              style={{ marginTop: "60px", opacity: 0 }}
             >
               <p
-                className="font-display font-bold uppercase"
+                className="font-display"
                 style={{
-                  fontSize: "11px",
-                  letterSpacing: "4px",
-                  color: "#CCA662",
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: "var(--tr-gold-text)",
                   marginBottom: "12px",
                 }}
               >
@@ -452,41 +466,29 @@ export default function ContactMain() {
               <h3
                 className="font-display font-bold"
                 style={{
-                  fontSize: "22px",
-                  color: "#FFFFFF",
-                  lineHeight: 1.2,
+                  fontSize: "24px",
+                  color: "var(--tr-navy)",
+                  lineHeight: 1.15,
                   marginBottom: "12px",
                 }}
               >
-                Browse our current job listings.
+                Browse our current job listings
               </h3>
               <p
-                className="font-body italic"
+                className="font-body"
                 style={{
-                  fontSize: "14px",
-                  lineHeight: 1.6,
-                  color: "rgba(255, 255, 255, 0.55)",
-                  marginBottom: "24px",
+                  fontSize: "17px",
+                  lineHeight: 1.7,
+                  color: "var(--tr-ink)",
+                  marginBottom: "28px",
                 }}
               >
                 We update our job board regularly. If you don&apos;t see the
                 right fit today, check back. Or send us your resume and
                 we&apos;ll keep you in mind.
               </p>
-              <Link
-                href="/jobs"
-                className="font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
-                style={{
-                  height: "44px",
-                  padding: "0 28px",
-                  borderRadius: "9999px",
-                  backgroundColor: "#CCA662",
-                  color: "#141F31",
-                  fontSize: "14px",
-                  letterSpacing: "3px",
-                }}
-              >
-                See Open Roles
+              <Link href="/jobs" className="tr-btn tr-btn-gold">
+                Find a Job
               </Link>
             </div>
             )}
@@ -495,13 +497,18 @@ export default function ContactMain() {
       </div>
 
       <style jsx>{`
-        .contact-main {
-          padding: 120px 80px;
-        }
         .contact-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 80px;
+          grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+          gap: clamp(32px, 6vw, 96px);
+          align-items: start;
+        }
+        .contact-note {
+          padding-bottom: 40px;
+          border-bottom: 1px solid rgba(20, 31, 49, 0.14);
+        }
+        .contact-inline-link:hover {
+          color: var(--tr-gold-text);
         }
         .form-row {
           display: grid;
@@ -523,7 +530,7 @@ export default function ContactMain() {
         }
         :global(.form-input) {
           background-color: #ffffff;
-          border: 1px solid #d4d0c8;
+          border: 1px solid rgba(20, 31, 49, 0.55);
           border-radius: 4px;
           padding: 14px 16px;
           font-family: var(--font-lora);
@@ -541,32 +548,32 @@ export default function ContactMain() {
         :global(.form-input::placeholder) {
           color: rgba(42, 42, 42, 0.45);
         }
-        .form-submit:hover {
-          transform: translateY(-1px);
-          box-shadow: 0 8px 24px rgba(204, 166, 98, 0.25);
+        .form-submit {
+          align-self: flex-start;
+        }
+        .form-submit:disabled {
+          transform: none;
+          box-shadow: none;
         }
         .info-link:hover {
-          color: #cca662 !important;
+          color: var(--tr-gold-text) !important;
         }
         .contact-social:hover {
-          color: #ffffff !important;
+          color: #141f31 !important;
         }
 
-        @media (max-width: 767px) {
-          .contact-main {
-            padding: 80px 24px;
-          }
+        @media (max-width: 1023px) {
           .contact-grid {
             grid-template-columns: 1fr;
-            gap: 60px;
+            gap: 64px;
           }
+        }
+        @media (max-width: 767px) {
           .form-row {
             grid-template-columns: 1fr;
           }
-          .contact-main :global(a[style*="borderRadius"]) {
-            width: 100% !important;
-            display: flex !important;
-            justify-content: center !important;
+          .form-submit {
+            align-self: stretch;
           }
         }
       `}</style>
@@ -574,6 +581,7 @@ export default function ContactMain() {
       {/* Result modal */}
       {modalOpen ? (
         <div
+          ref={dialogRef}
           role="dialog"
           aria-modal="true"
           aria-labelledby="contact-modal-title"
@@ -668,7 +676,7 @@ export default function ContactMain() {
               style={{
                 fontSize: "11px",
                 letterSpacing: "4px",
-                color: "#CCA662",
+                color: "var(--tr-gold-text)",
                 marginBottom: "12px",
               }}
             >
@@ -759,6 +767,7 @@ function Field({
     <div className="form-field">
       <label htmlFor={id} className="form-label">
         {label}
+        {required ? <span className="sr-only"> (required)</span> : null}
       </label>
       <input
         id={id}
@@ -792,19 +801,16 @@ function InfoBlock({
   children: React.ReactNode;
 }) {
   return (
-    <div
-      style={{
-        borderLeft: "4px solid #CCA662",
-        paddingLeft: "20px",
-      }}
-    >
+    <div>
       <p
-        className="font-display font-bold uppercase"
+        className="font-display"
         style={{
-          fontSize: "11px",
-          letterSpacing: "4px",
-          color: "#CCA662",
-          marginBottom: "8px",
+          fontSize: "13px",
+          fontWeight: 600,
+          letterSpacing: "0.12em",
+          textTransform: "uppercase",
+          color: "var(--tr-gold-text)",
+          marginBottom: "10px",
         }}
       >
         {label}
@@ -812,11 +818,12 @@ function InfoBlock({
       {children}
       {descriptor ? (
         <p
-          className="font-body italic"
+          className="font-body"
           style={{
-            fontSize: "14px",
-            color: "rgba(0, 0, 0, 0.45)",
-            marginTop: "6px",
+            fontSize: "17px",
+            lineHeight: 1.6,
+            color: "var(--tr-ink)",
+            marginTop: "8px",
           }}
         >
           {descriptor}

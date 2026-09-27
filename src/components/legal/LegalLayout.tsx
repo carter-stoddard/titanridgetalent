@@ -12,181 +12,137 @@ export default function LegalLayout({
   children,
 }: LegalLayoutProps) {
   return (
-    <>
-      {/* Header */}
-      <section
-        className="legal-header relative w-full overflow-hidden"
-        style={{
-          backgroundColor: "#1E2D45",
-          paddingTop: "180px",
-          paddingBottom: "80px",
-        }}
-      >
-        <div
-          className="legal-header-inner relative w-full"
-          style={{ paddingLeft: "80px", paddingRight: "80px" }}
-        >
-          <div style={{ maxWidth: "780px" }}>
-            <p
-              className="font-display font-medium uppercase"
-              style={{
-                fontSize: "11px",
-                letterSpacing: "4px",
-                color: "#CCA662",
-                marginBottom: "16px",
-              }}
-            >
-              Legal
-            </p>
-            <h1
-              className="font-display font-bold uppercase"
-              style={{
-                fontSize: "clamp(36px, 5vw, 56px)",
-                lineHeight: 0.95,
-                color: "#FFFFFF",
-                marginBottom: "16px",
-              }}
-            >
+    <section
+      className="legal tr-section relative w-full"
+      style={{
+        backgroundColor: "var(--tr-cream)",
+        color: "var(--tr-navy)",
+        paddingTop: "clamp(150px, 16vw, 210px)",
+      }}
+    >
+      <style>{`
+        .legal-grid {
+          display: grid;
+          grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+          gap: clamp(40px, 6vw, 96px);
+          align-items: start;
+        }
+        .legal-prose {
+          max-width: 68ch;
+        }
+        .legal-prose h2 {
+          font-family: var(--font-display);
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.01em;
+          font-size: 26px;
+          line-height: 1.05;
+          color: var(--tr-navy);
+          margin-top: 56px;
+          margin-bottom: 18px;
+        }
+        .legal-prose h2:first-child,
+        .legal-prose .legal-divider + h2 {
+          margin-top: 0;
+        }
+        .legal-prose h3 {
+          font-family: var(--font-display);
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+          font-size: 14px;
+          color: var(--tr-gold-text);
+          margin-top: 32px;
+          margin-bottom: 10px;
+        }
+        .legal-prose p {
+          font-family: var(--font-body);
+          font-size: 17px;
+          line-height: 1.75;
+          color: var(--tr-ink);
+          margin-bottom: 18px;
+          text-wrap: pretty;
+        }
+        .legal-prose ul {
+          list-style: none;
+          padding: 0;
+          margin: 18px 0;
+        }
+        .legal-prose ul li {
+          position: relative;
+          padding-left: 24px;
+          font-family: var(--font-body);
+          font-size: 17px;
+          line-height: 1.7;
+          color: var(--tr-ink);
+          margin-bottom: 10px;
+        }
+        .legal-prose ul li::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 0.7em;
+          width: 12px;
+          height: 1px;
+          background-color: var(--tr-gold-text);
+        }
+        .legal-prose strong {
+          font-weight: 600;
+          color: var(--tr-navy);
+        }
+        .legal-prose a {
+          color: var(--tr-gold-text);
+          text-decoration: underline;
+          text-underline-offset: 3px;
+          text-decoration-thickness: 1px;
+          transition: color 0.2s ease;
+        }
+        .legal-prose a:hover {
+          color: var(--tr-navy);
+        }
+        .legal-prose .legal-divider {
+          display: none;
+        }
+        @media (max-width: 1023px) {
+          .legal-grid {
+            grid-template-columns: 1fr;
+            gap: 40px;
+          }
+        }
+        @media (max-width: 767px) {
+          .legal-prose h2 {
+            font-size: 23px;
+            margin-top: 44px;
+          }
+        }
+      `}</style>
+
+      <div className="tr-container">
+        <div className="legal-grid">
+          <div className="legal-head">
+            <p className="tr-eyebrow">Legal</p>
+            <h1 className="tr-h2" style={{ marginTop: "20px", color: "var(--tr-navy)" }}>
               {title}
             </h1>
             <p
-              className="font-body italic"
+              className="legal-updated"
               style={{
-                fontSize: "15px",
-                color: "rgba(255, 255, 255, 0.55)",
+                fontFamily: "var(--font-display)",
+                fontWeight: 600,
+                fontSize: "13px",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "var(--tr-gold-text)",
+                marginTop: "24px",
               }}
             >
               Last updated: {lastUpdated}
             </p>
           </div>
-        </div>
-      </section>
 
-      {/* Body */}
-      <section
-        className="legal-body relative w-full"
-        style={{
-          backgroundColor: "#F5F4F0",
-          paddingTop: "96px",
-          paddingBottom: "120px",
-        }}
-      >
-        <div
-          className="legal-body-inner"
-          style={{
-            maxWidth: "780px",
-            marginLeft: "auto",
-            marginRight: "auto",
-            paddingLeft: "80px",
-            paddingRight: "80px",
-          }}
-        >
           <div className="legal-prose">{children}</div>
         </div>
-
-        <style>{`
-          .legal-prose h2 {
-            font-family: var(--font-barlow-condensed);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 22px;
-            color: #141f31;
-            margin-top: 48px;
-            margin-bottom: 16px;
-          }
-          .legal-prose h2:first-child {
-            margin-top: 0;
-          }
-          .legal-prose h3 {
-            font-family: var(--font-barlow-condensed);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 14px;
-            color: #cca662;
-            margin-top: 28px;
-            margin-bottom: 8px;
-          }
-          .legal-prose p {
-            font-family: var(--font-lora);
-            font-size: 16px;
-            line-height: 1.75;
-            color: #2a2a2a;
-            margin-bottom: 16px;
-          }
-          .legal-prose ul {
-            list-style: none;
-            padding: 0;
-            margin: 16px 0;
-          }
-          .legal-prose ul li {
-            position: relative;
-            padding-left: 24px;
-            font-family: var(--font-lora);
-            font-size: 16px;
-            line-height: 1.7;
-            color: #2a2a2a;
-            margin-bottom: 10px;
-          }
-          .legal-prose ul li::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 0.7em;
-            width: 12px;
-            height: 1px;
-            background-color: #cca662;
-          }
-          .legal-prose strong {
-            font-weight: 600;
-            color: #141f31;
-          }
-          .legal-prose a {
-            color: #cca662;
-            text-decoration: underline;
-            text-underline-offset: 3px;
-            text-decoration-thickness: 1px;
-            transition: color 0.2s ease;
-          }
-          .legal-prose a:hover {
-            color: #141f31;
-          }
-          .legal-prose .legal-divider {
-            width: 48px;
-            height: 2px;
-            background-color: #cca662;
-            margin: 0 0 32px 0;
-          }
-
-          @media (max-width: 767px) {
-            .legal-header {
-              padding-top: 140px !important;
-              padding-bottom: 64px !important;
-            }
-            .legal-header-inner {
-              padding-left: 24px !important;
-              padding-right: 24px !important;
-            }
-            .legal-body {
-              padding-top: 64px !important;
-              padding-bottom: 80px !important;
-            }
-            .legal-body-inner {
-              padding-left: 24px !important;
-              padding-right: 24px !important;
-            }
-            .legal-prose h2 {
-              font-size: 19px;
-              margin-top: 40px;
-            }
-            .legal-prose p,
-            .legal-prose ul li {
-              font-size: 15px;
-            }
-          }
-        `}</style>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }

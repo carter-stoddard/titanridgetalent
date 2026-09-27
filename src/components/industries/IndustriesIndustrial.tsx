@@ -22,8 +22,8 @@ const sectors = [
 export default function IndustriesIndustrial() {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const sectorsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const goldBarsRef = useRef<(HTMLSpanElement | null)[]>([]);
+  const mediaRef = useRef<HTMLDivElement>(null);
+  const sectorsRef = useRef<(HTMLLIElement | null)[]>([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -36,34 +36,30 @@ export default function IndustriesIndustrial() {
       });
 
       tl.fromTo(
+        mediaRef.current,
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 0.9, ease: "power2.out" },
+        0
+      );
+
+      tl.fromTo(
         contentRef.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+        0.1
       );
 
       tl.fromTo(
         sectorsRef.current.filter(Boolean),
-        { opacity: 0, y: 30 },
+        { opacity: 0, y: 18 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.6,
+          duration: 0.55,
           ease: "power2.out",
-          stagger: 0.08,
+          stagger: 0.05,
         },
-        "-=0.4"
-      );
-
-      tl.fromTo(
-        goldBarsRef.current.filter(Boolean),
-        { scaleY: 0, transformOrigin: "top center" },
-        {
-          scaleY: 1,
-          duration: 0.8,
-          ease: "power3.out",
-          stagger: 0.08,
-        },
-        "-=0.6"
+        0.3
       );
     }, sectionRef);
 
@@ -74,51 +70,18 @@ export default function IndustriesIndustrial() {
     <section
       id="industrial"
       ref={sectionRef}
-      className="industries-industrial relative w-full"
-      style={{
-        backgroundColor: "#F5F4F0",
-        paddingTop: "120px",
-        paddingBottom: "120px",
-      }}
+      className="industries-industrial tr-section relative"
+      style={{ backgroundColor: "var(--tr-cream)", color: "var(--tr-navy)", paddingTop: 0 }}
     >
-      <div
-        className="industrial-inner"
-        style={{ paddingLeft: "80px", paddingRight: "80px" }}
-      >
+      <div className="tr-container">
         <div className="industrial-grid">
           {/* LEFT — Content */}
-          <div ref={contentRef} style={{ opacity: 0 }}>
-            <p
-              className="font-display font-medium uppercase"
-              style={{
-                fontSize: "11px",
-                letterSpacing: "4px",
-                color: "#CCA662",
-                marginBottom: "16px",
-              }}
-            >
-              Industrial Recruiting
-            </p>
-            <h2
-              className="font-display font-semibold uppercase"
-              style={{
-                fontSize: "clamp(36px, 4.5vw, 52px)",
-                lineHeight: 0.95,
-                color: "#141F31",
-                marginBottom: "24px",
-              }}
-            >
-              We Know What Good Looks Like On a Job Site.
+          <div ref={contentRef} className="industrial-content" style={{ opacity: 0 }}>
+            <p className="tr-eyebrow">Industrial Recruiting</p>
+            <h2 className="tr-h2" style={{ marginTop: "20px", color: "var(--tr-navy)" }}>
+              We Know What Good Looks Like On a Job Site
             </h2>
-            <p
-              className="font-body"
-              style={{
-                fontSize: "16px",
-                lineHeight: 1.7,
-                color: "rgba(42, 42, 42, 0.7)",
-                marginBottom: "40px",
-              }}
-            >
+            <p className="tr-body industrial-body" style={{ color: "var(--tr-ink)" }}>
               Industrial recruiting requires more than keyword matching. It
               requires knowing the difference between a candidate who can do
               the job and one who can lead a team through a tough quarter,
@@ -126,117 +89,38 @@ export default function IndustriesIndustrial() {
               to make a real impact. We&apos;ve worked this space long enough
               to know the difference, and our clients know it too.
             </p>
-            <div
-              className="gold-rule"
-              style={{ marginBottom: "40px" }}
-            />
-            <p
-              className="font-display font-bold uppercase"
-              style={{
-                fontSize: "12px",
-                letterSpacing: "3px",
-                color: "#CCA662",
-                marginBottom: "24px",
-              }}
-            >
-              Sectors We Cover
-            </p>
-            <div className="sectors-grid">
+            <p className="industrial-sublabel font-display">Sectors We Cover</p>
+            <ul className="sectors-list">
               {sectors.map((s, i) => (
-                <div
+                <li
                   key={s.name}
                   ref={(el) => {
                     sectorsRef.current[i] = el;
                   }}
-                  className="sector-card relative overflow-hidden"
-                  style={{
-                    backgroundColor: "#FFFFFF",
-                    borderTopRightRadius: "4px",
-                    borderBottomRightRadius: "4px",
-                    padding: "16px 16px 16px 20px",
-                    opacity: 0,
-                  }}
+                  className="sector-row"
+                  style={{ opacity: 0 }}
                 >
-                  <span
-                    ref={(el) => {
-                      goldBarsRef.current[i] = el;
-                    }}
-                    aria-hidden="true"
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      bottom: 0,
-                      left: 0,
-                      width: "4px",
-                      backgroundColor: "#CCA662",
-                      transform: "scaleY(0)",
-                      transformOrigin: "top center",
-                      zIndex: 2,
-                    }}
-                  />
-                  <p
-                    className="font-display font-bold uppercase"
-                    style={{
-                      fontSize: "16px",
-                      letterSpacing: "1px",
-                      color: "#141F31",
-                      marginBottom: "4px",
-                    }}
-                  >
-                    {s.name}
-                  </p>
-                  <p
-                    className="font-body italic"
-                    style={{
-                      fontSize: "14px",
-                      color: "rgba(42, 42, 42, 0.6)",
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    {s.descriptor}
-                  </p>
-                </div>
+                  <p className="sector-name font-display">{s.name}</p>
+                  <p className="sector-desc font-body">{s.descriptor}</p>
+                </li>
               ))}
-            </div>
+            </ul>
             {JOBS_VISIBLE && (
-              <a
-                href="/jobs"
-                className="font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
-                style={{
-                  marginTop: "40px",
-                  height: "48px",
-                  padding: "0 28px",
-                  borderRadius: "9999px",
-                  backgroundColor: "#CCA662",
-                  color: "#141F31",
-                  fontSize: "14px",
-                  letterSpacing: "3px",
-                }}
-              >
-                Browse Industrial Roles
-              </a>
+              <div className="industrial-cta">
+                <a href="/jobs" className="tr-btn tr-btn-gold">
+                  Browse Industrial Roles
+                </a>
+              </div>
             )}
           </div>
 
           {/* RIGHT — Image */}
-          <div
-            className="industrial-image flex items-center justify-center"
-            style={{ padding: "24px" }}
-          >
-            <div
-              className="relative w-full overflow-hidden"
-              style={{
-                aspectRatio: "1 / 1",
-                borderRadius: "8px",
-              }}
-            >
-              <img
-                src="/images/industrial-jobs.webp"
-                alt="Industrial job site — operations floor in cinematic warm light"
-                className="absolute inset-0 h-full w-full object-cover"
-                style={{ objectPosition: "center" }}
-              />
-            </div>
+          <div ref={mediaRef} className="industrial-media" style={{ opacity: 0 }}>
+            <img
+              src="/images/forklift-operator-industrial-staffing-manufacturing-facility.webp"
+              alt="Forklift operator moving materials inside a manufacturing facility"
+              className="industrial-img"
+            />
           </div>
         </div>
       </div>
@@ -244,38 +128,82 @@ export default function IndustriesIndustrial() {
       <style jsx>{`
         .industrial-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 60px;
+          grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+          gap: clamp(32px, 6vw, 96px);
           align-items: center;
         }
-        .sectors-grid {
+        .industrial-body {
+          margin-top: 24px;
+        }
+        .industrial-sublabel {
+          margin-top: clamp(32px, 4vw, 48px);
+          font-size: 13px;
+          font-weight: 600;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--tr-gold-text);
+        }
+        .sectors-list {
+          list-style: none;
+          margin: 12px 0 0;
+          padding: 0;
+        }
+        .sector-row {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 16px;
+          grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+          gap: 16px 24px;
+          align-items: baseline;
+          padding: 12px 0;
+          border-bottom: 1px solid rgba(20, 31, 49, 0.14);
+          transition: padding-left 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .sector-row:hover {
+          padding-left: 6px;
+        }
+        .sector-row:hover .sector-name {
+          color: var(--tr-gold-text);
+        }
+        .sector-name {
+          font-weight: 600;
+          font-size: clamp(19px, 1.6vw, 22px);
+          line-height: 1.15;
+          color: var(--tr-navy);
+          transition: color 0.25s ease;
+        }
+        .sector-desc {
+          font-size: 17px;
+          line-height: 1.55;
+          color: var(--tr-ink);
+        }
+        .industrial-cta {
+          margin-top: clamp(32px, 4vw, 48px);
+        }
+        .industrial-media {
+          aspect-ratio: 4 / 5;
+          overflow: hidden;
+          background: var(--tr-cream-deep);
+        }
+        .industrial-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          filter: saturate(0.9);
         }
 
-        @media (max-width: 767px) {
-          .industries-industrial {
-            padding-top: 80px !important;
-            padding-bottom: 80px !important;
-          }
-          .industrial-inner {
-            padding-left: 24px !important;
-            padding-right: 24px !important;
-          }
+        @media (max-width: 1023px) {
           .industrial-grid {
             grid-template-columns: 1fr;
-            gap: 40px;
+            gap: 32px;
           }
-          .industrial-image {
-            order: 2;
-            min-height: 400px !important;
+          .industrial-media {
+            aspect-ratio: 16 / 11;
           }
-          .sectors-grid {
+        }
+        @media (max-width: 639px) {
+          .sector-row {
             grid-template-columns: 1fr;
-          }
-          .industrial-inner :global(a) {
-            width: 100% !important;
+            gap: 4px;
           }
         }
       `}</style>

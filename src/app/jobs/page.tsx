@@ -9,7 +9,7 @@ import JobsDualCTA from "@/components/jobs/JobsDualCTA";
 export const metadata: Metadata = {
   title: "Jobs Available",
   description:
-    "Browse open positions with Titan Ridge Talent. Personally vetted roles across industrial and corporate sectors.",
+    "Browse open positions with Titan Ridge Talent. Personally vetted roles across industrial and administrative sectors.",
   alternates: { canonical: "/jobs" },
 };
 

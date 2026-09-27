@@ -4,9 +4,9 @@ export default function ContactHero() {
   return (
     <PageHero
       eyebrow="Get in Touch"
-      headline="Let’s Find the Right Fit."
-      image="/images/contact-hero.webp"
-      imageAlt="Two professionals in genuine conversation — contact Titan Ridge"
+      headline="Let’s Find the Right Fit"
+      image="/images/warehouse-supervisor-team-staffing-agency-fullerton-ca.webp"
+      imageAlt="Warehouse supervisor reviewing work with two team members"
       overlayAlpha={0.82}
     />
   );

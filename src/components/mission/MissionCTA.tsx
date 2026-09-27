@@ -9,224 +9,98 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function MissionCTA() {
   const sectionRef = useRef<HTMLElement>(null);
-  const itemsRef = useRef<(HTMLElement | null)[]>([]);
-  const ruleRef = useRef<HTMLDivElement>(null);
+  const mediaRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const trigger = {
-        trigger: sectionRef.current,
-        start: "top 75%",
-        once: true,
-      };
-
-      gsap.fromTo(
-        ruleRef.current,
-        { scaleX: 0 },
-        {
-          scaleX: 1,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: trigger,
-        }
-      );
-
-      gsap.fromTo(
-        itemsRef.current.filter(Boolean),
-        { opacity: 0, y: 24 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          ease: "power2.out",
-          stagger: 0.08,
-          delay: 0.15,
-          scrollTrigger: trigger,
-        }
-      );
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: sectionRef.current, start: "top 72%", once: true },
+      });
+      tl.fromTo(mediaRef.current, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.9, ease: "power2.out" }, 0);
+      const items = contentRef.current?.querySelectorAll<HTMLElement>("[data-reveal]") ?? [];
+      tl.fromTo(items, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.75, ease: "power2.out", stagger: 0.09 }, 0.1);
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
-  const setItem = (i: number) => (el: HTMLElement | null) => {
-    itemsRef.current[i] = el;
-  };
-
   return (
     <section
       ref={sectionRef}
-      className="mission-cta relative w-full"
-      style={{
-        backgroundColor: "#F5F4F0",
-        paddingTop: "0",
-        paddingBottom: "120px",
-      }}
+      className="mission-cta tr-section relative"
+      aria-labelledby="mission-cta-heading"
+      style={{ backgroundColor: "var(--tr-cream)", color: "var(--tr-navy)" }}
     >
-      <div
-        className="mission-cta-outer"
-        style={{ paddingLeft: "80px", paddingRight: "80px" }}
-      >
-        <div
-          className="mission-cta-card relative overflow-hidden"
-          style={{
-            borderRadius: "12px",
-            paddingTop: "120px",
-            paddingBottom: "120px",
-          }}
-        >
-          {/* Background image */}
-          <img
-            src="/images/cta-section.webp"
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 h-full w-full object-cover"
-            style={{ objectPosition: "center", zIndex: 0 }}
-          />
+      <div className="tr-container">
+        <div className="mission-cta-grid">
+          <div ref={contentRef} className="mission-cta-content">
+            <p className="tr-eyebrow" data-reveal>
+              The Standard in Practice
+            </p>
 
-          {/* Cinematic gradient overlay */}
-          <div
-            aria-hidden="true"
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(ellipse at center, rgba(20, 31, 49, 0.6) 0%, rgba(20, 31, 49, 0.85) 70%, rgba(20, 31, 49, 0.93) 100%)",
-              zIndex: 1,
-            }}
-          />
+            <h2 id="mission-cta-heading" className="tr-h2" data-reveal style={{ marginTop: "20px", color: "var(--tr-navy)" }}>
+              Hold us to it
+            </h2>
 
-      <div
-        className="mission-cta-inner relative flex flex-col items-center text-center"
-        style={{ paddingLeft: "60px", paddingRight: "60px", zIndex: 2 }}
-      >
-        {/* Gold accent rule */}
-        <div
-          ref={ruleRef}
-          aria-hidden="true"
-          style={{
-            width: "48px",
-            height: "2px",
-            backgroundColor: "#CCA662",
-            marginBottom: "32px",
-            transformOrigin: "center",
-          }}
-        />
+            <p className="tr-body" data-reveal style={{ color: "var(--tr-ink)", marginTop: "24px", maxWidth: "44ch" }}>
+              A mission only matters if it shows up in the work. Start a
+              conversation and find out.
+            </p>
 
-        <p
-          ref={setItem(0)}
-          className="font-display font-medium uppercase"
-          style={{
-            fontSize: "11px",
-            letterSpacing: "4px",
-            color: "#CCA662",
-            marginBottom: "16px",
-            opacity: 0,
-          }}
-        >
-          The Standard in Practice
-        </p>
+            <div className="mission-cta-actions" data-reveal>
+              <Link href="/contact" className="tr-btn tr-btn-gold">
+                Start the Conversation
+              </Link>
+            </div>
+          </div>
 
-        <h2
-          ref={setItem(1)}
-          className="font-display font-semibold uppercase"
-          style={{
-            fontSize: "clamp(40px, 5vw, 56px)",
-            lineHeight: 0.95,
-            color: "#FFFFFF",
-            marginBottom: "20px",
-            maxWidth: "900px",
-            textShadow: "0 2px 24px rgba(0, 0, 0, 0.35)",
-            opacity: 0,
-          }}
-        >
-          Hold us to it.
-        </h2>
-
-        <p
-          ref={setItem(2)}
-          className="font-body italic"
-          style={{
-            fontSize: "17px",
-            lineHeight: 1.6,
-            color: "rgba(255, 255, 255, 0.75)",
-            marginBottom: "40px",
-            maxWidth: "640px",
-            opacity: 0,
-          }}
-        >
-          A mission only matters if it shows up in the work. Start a
-          conversation and find out.
-        </p>
-
-        <div
-          ref={setItem(3) as (el: HTMLDivElement | null) => void}
-          className="mission-cta-buttons flex"
-          style={{ gap: "16px", opacity: 0 }}
-        >
-          <Link
-            href="/contact"
-            className="mission-cta-btn font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/30 hover:-translate-y-0.5 active:translate-y-0"
-            style={{
-              height: "54px",
-              padding: "0 36px",
-              borderRadius: "9999px",
-              backgroundColor: "#CCA662",
-              color: "#141F31",
-              fontSize: "14px",
-              letterSpacing: "3px",
-            }}
-          >
-            Start the Conversation
-          </Link>
-          <Link
-            href="/leadership"
-            className="mission-cta-btn mission-cta-ghost font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
-            style={{
-              height: "54px",
-              padding: "0 36px",
-              borderRadius: "9999px",
-              backgroundColor: "transparent",
-              border: "1.5px solid rgba(255, 255, 255, 0.7)",
-              color: "#FFFFFF",
-              fontSize: "14px",
-              letterSpacing: "3px",
-            }}
-          >
-            Meet the Team
-          </Link>
-        </div>
-      </div>
+          <div ref={mediaRef} className="mission-cta-media" style={{ opacity: 0 }}>
+            <img src="/images/mountain-summit-sunrise-start-the-conversation-recruiting.webp" alt="" aria-hidden="true" className="mission-cta-img" />
+          </div>
         </div>
       </div>
 
-      <style>{`
-        .mission-cta-ghost:hover {
-          border-color: #CCA662 !important;
-          color: #CCA662 !important;
+      <style jsx>{`
+        .mission-cta-grid {
+          display: grid;
+          grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+          gap: clamp(32px, 6vw, 96px);
+          align-items: center;
+        }
+        .mission-cta-actions {
+          margin-top: 36px;
+          display: flex;
+          gap: 16px;
+          flex-wrap: wrap;
+        }
+        .mission-cta-media {
+          aspect-ratio: 4 / 5;
+          overflow: hidden;
+          background: var(--tr-cream-deep);
+        }
+        .mission-cta-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          filter: saturate(0.9);
+        }
+        [data-reveal] {
+          opacity: 0;
+        }
+        @media (max-width: 1023px) {
+          .mission-cta-grid {
+            grid-template-columns: 1fr;
+            gap: 32px;
+          }
+          .mission-cta-media {
+            aspect-ratio: 16 / 11;
+          }
         }
         @media (max-width: 767px) {
-          .mission-cta {
-            padding-bottom: 80px !important;
-          }
-          .mission-cta-outer {
-            padding-left: 24px !important;
-            padding-right: 24px !important;
-          }
-          .mission-cta-card {
-            padding-top: 80px !important;
-            padding-bottom: 80px !important;
-          }
-          .mission-cta-inner {
-            padding-left: 24px !important;
-            padding-right: 24px !important;
-          }
-          .mission-cta-buttons {
+          .mission-cta-actions {
             flex-direction: column;
-            width: 100%;
-            max-width: 360px;
-          }
-          .mission-cta-btn {
-            width: 100%;
           }
         }
       `}</style>

@@ -7,9 +7,9 @@ import IndustriesIndustrial from "@/components/industries/IndustriesIndustrial";
 import IndustriesCorporate from "@/components/industries/IndustriesCorporate";
 
 export const metadata: Metadata = {
-  title: "Industries",
+  title: "Industries | Industrial & Administrative Staffing in Southern California",
   description:
-    "From industrial operations to corporate boardrooms — the industries Titan Ridge Talent serves across both markets.",
+    "Warehouse, manufacturing, logistics, aerospace, and skilled trades staffing, plus HR, finance, administrative, technology, and sales recruiting across Southern California.",
   alternates: { canonical: "/industries" },
 };
 
@@ -51,15 +51,15 @@ const industrialServiceJsonLd = {
 const corporateServiceJsonLd = {
   "@context": "https://schema.org",
   "@type": "Service",
-  serviceType: "Corporate Recruiting",
-  name: "Corporate Recruiting",
+  serviceType: "Administrative Recruiting",
+  name: "Administrative Recruiting",
   description:
-    "Corporate recruiting for Human Resources, Executive Search, Finance, Administration, Technology, and Sales roles. Precision placement at every level, from individual contributors to C-suite leadership.",
+    "Administrative recruiting for Human Resources, Executive Search, Finance, Administration, Technology, and Sales roles. Precision placement at every level, from individual contributors to C-suite leadership.",
   provider,
   areaServed: { "@type": "Country", name: "United States" },
   hasOfferCatalog: {
     "@type": "OfferCatalog",
-    name: "Corporate Sectors",
+    name: "Administrative Sectors",
     itemListElement: [
       "Human Resources",
       "Executive Search",

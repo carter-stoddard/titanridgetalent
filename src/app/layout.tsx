@@ -22,22 +22,23 @@ const lora = Lora({
 
 export const metadata: Metadata = {
   title: {
-    default: "Titan Ridge Talent | Relationships First. Results Always.",
+    default: "Titan Ridge Talent | Staffing & Recruiting Agency in Orange County, CA",
     template: "%s | Titan Ridge Talent",
   },
   applicationName: "Titan Ridge Talent",
   description:
-    "Relationship-first recruiting for industrial and corporate teams. Real conversations, vetted candidates, placements that last.",
+    "Relationship-first industrial and administrative staffing headquartered in Fullerton, CA. Serving Orange County, Los Angeles, the Inland Empire, and San Diego, with nationwide searches available.",
   metadataBase: new URL("https://titanridgetalent.com"),
   alternates: { canonical: "/" },
   openGraph: {
     siteName: "Titan Ridge Talent",
     type: "website",
-    images: [{ url: "/images/titan-ridge-hero.webp", width: 1200, height: 630 }],
+    locale: "en_US",
+    images: [{ url: "/images/titan-ridge-talent-staffing-agency-social-share.png", width: 1200, height: 630, alt: "Titan Ridge Talent — The right people. The right roles." }],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/images/titan-ridge-hero.webp"],
+    images: ["/images/titan-ridge-talent-staffing-agency-social-share.png"],
   },
 };
 
@@ -51,13 +52,14 @@ const websiteJsonLd = {
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": ["Organization", "EmploymentAgency"],
+  "@id": "https://titanridgetalent.com/#organization",
   name: "Titan Ridge Talent",
   legalName: "Titan Ridge Talent LLC",
   url: "https://titanridgetalent.com",
-  logo: "https://titanridgetalent.com/images/titan-ridge-logo.svg",
+  logo: "https://titanridgetalent.com/images/titan-ridge-talent-logo.svg",
   description:
-    "Relationship-first recruiting for industrial and corporate teams.",
+    "Relationship-first recruiting for industrial and administrative teams.",
   email: "support@titanridgetalent.com",
   telephone: "+1-714-552-4334",
   address: {
@@ -68,6 +70,15 @@ const organizationJsonLd = {
     postalCode: "92832",
     addressCountry: "US",
   },
+  areaServed: [
+    { "@type": "AdministrativeArea", name: "Orange County, California" },
+    { "@type": "AdministrativeArea", name: "Los Angeles County, California" },
+    { "@type": "AdministrativeArea", name: "Riverside County, California" },
+    { "@type": "AdministrativeArea", name: "San Bernardino County, California" },
+    { "@type": "AdministrativeArea", name: "San Diego County, California" },
+    { "@type": "Country", name: "United States" },
+  ],
+  knowsAbout: ["Industrial staffing", "Administrative staffing", "Temporary staffing", "Temp-to-hire", "Direct hire recruiting"],
   sameAs: ["https://www.linkedin.com/company/titanridgetalent/"],
 };
 
@@ -88,6 +99,9 @@ export default function RootLayout({
       className={`${barlowCondensed.variable} ${lora.variable} antialiased`}
     >
       <head>
+        <noscript>
+          <style>{`[data-reveal],[style*="opacity: 0"]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
@@ -103,8 +117,8 @@ export default function RootLayout({
         </a>
         <SmoothScroll />
         <LoaderGate>{children}</LoaderGate>
+        <ConsentGate />
       </body>
-      <ConsentGate />
     </html>
   );
 }

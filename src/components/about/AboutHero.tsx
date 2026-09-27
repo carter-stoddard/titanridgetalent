@@ -4,8 +4,8 @@ export default function AboutHero() {
   return (
     <PageHero
       eyebrow="Our Story"
-      headline="Built Different. On Purpose."
-      image="/images/about-hero.webp"
+      headline="Built Different. On Purpose"
+      image="/images/about-titan-ridge-talent-recruiting-firm-fullerton-ca.webp"
       imageAlt="Cinematic industrial workplace at golden hour"
     />
   );

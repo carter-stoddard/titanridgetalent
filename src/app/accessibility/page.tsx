@@ -17,7 +17,7 @@ export default function AccessibilityPage() {
       <main id="main">
         <LegalLayout
           title="Accessibility Statement"
-          lastUpdated="April 26, 2026"
+          lastUpdated="September 27, 2026"
         >
           <div className="legal-divider" aria-hidden="true" />
 
@@ -26,7 +26,7 @@ export default function AccessibilityPage() {
             Titan Ridge Talent Solutions LLC is committed to providing a
             website that is accessible to the widest possible audience,
             regardless of ability. We strive to align with the Web Content
-            Accessibility Guidelines (WCAG) 2.1, Level AA, and we continue
+            Accessibility Guidelines (WCAG) 2.2, Level AA, and we continue
             to make improvements as part of our ongoing work on the Site.
           </p>
 
@@ -36,7 +36,7 @@ export default function AccessibilityPage() {
           </p>
           <ul>
             <li>
-              <strong>WCAG 2.1, Level AA</strong> — the international
+              <strong>WCAG 2.2, Level AA</strong> — the international
               standard for web accessibility, published by the World Wide Web
               Consortium (W3C)
             </li>
@@ -132,7 +132,7 @@ export default function AccessibilityPage() {
             <li>Review accessibility considerations during design and build</li>
             <li>
               Test new functionality with assistive technologies and against
-              WCAG 2.1 AA criteria
+              WCAG 2.2 AA criteria
             </li>
             <li>Provide accessibility training to team members</li>
             <li>
@@ -144,11 +144,36 @@ export default function AccessibilityPage() {
             </li>
           </ul>
 
+          <h2>How We Test</h2>
+          <p>
+            The most recent review of this Site was completed on September 27,
+            2026. It included an automated scan of every page template with
+            axe-core against WCAG 2.2 Level A and AA rules, a color-contrast
+            audit of the full palette, a keyboard-only pass of navigation,
+            forms, dialogs, and the slideshow, and a check that every page
+            reflows without horizontal scrolling at 320 pixels wide.
+          </p>
+
+          <h2>Known Limitations</h2>
+          <ul>
+            <li>
+              Job listings are provided through a third-party job board
+              (Avionté). We test its accessibility but do not control its
+              code. If you have difficulty using it, contact us and we will
+              share open roles directly.
+            </li>
+            <li>
+              Promotional job-listing graphics may contain text. Where they
+              appear, the full text is provided in the image&apos;s
+              alternative text.
+            </li>
+          </ul>
+
           <h2>How to Report an Accessibility Issue</h2>
           <p>
             If you encounter an accessibility barrier on the Site, please let
-            us know. We welcome feedback and will work to resolve issues
-            promptly. When contacting us, please include:
+            us know. We welcome feedback and aim to respond within two
+            business days. When contacting us, please include:
           </p>
           <ul>
             <li>The URL of the page where the issue occurred</li>

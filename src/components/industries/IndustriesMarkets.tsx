@@ -21,39 +21,6 @@ const corporateStats: Stat[] = [
   { value: "Retained", label: "Client Relationships" },
 ];
 
-function StatRow({ stats }: { stats: Stat[] }) {
-  return (
-    <div className="industries-stat-row">
-      {stats.map((s) => (
-        <div key={s.label}>
-          <p
-            className="font-display font-bold"
-            style={{
-              fontSize: "32px",
-              lineHeight: 1,
-              color: "#CCA662",
-              marginBottom: "6px",
-            }}
-          >
-            {s.value}
-          </p>
-          <p
-            className="font-display uppercase"
-            style={{
-              fontSize: "12px",
-              letterSpacing: "2px",
-              color: "rgba(42, 42, 42, 0.6)",
-              lineHeight: 1.3,
-            }}
-          >
-            {s.label}
-          </p>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 export default function IndustriesMarkets() {
   const sectionRef = useRef<HTMLElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
@@ -71,18 +38,18 @@ export default function IndustriesMarkets() {
 
       tl.fromTo(
         leftRef.current,
-        { opacity: 0, x: -60 },
-        { opacity: 1, x: 0, duration: 0.9, ease: "power2.out" },
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
         0
       );
 
       tl.fromTo(
         rightRef.current,
-        { opacity: 0, x: 60 },
-        { opacity: 1, x: 0, duration: 0.9, ease: "power2.out" },
-        0
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+        0.12
       );
-    });
+    }, sectionRef);
 
     return () => ctx.revert();
   }, []);
@@ -90,203 +57,118 @@ export default function IndustriesMarkets() {
   return (
     <section
       ref={sectionRef}
-      className="industries-markets relative w-full"
-      style={{ backgroundColor: "#F5F4F0", paddingTop: "120px", paddingBottom: "120px" }}
+      className="industries-markets tr-section relative"
+      style={{ backgroundColor: "var(--tr-cream)", color: "var(--tr-navy)" }}
     >
-      <div className="markets-grid relative" style={{ paddingLeft: "80px", paddingRight: "80px" }}>
-        {/* Center gold divider */}
-        <div
-          className="markets-divider hidden md:block"
-          aria-hidden="true"
-        />
+      <div className="tr-container">
+        <div className="markets-grid">
+          {/* LEFT — Industrial */}
+          <div ref={leftRef} className="markets-col" style={{ opacity: 0 }}>
+            <p className="tr-eyebrow">Track One</p>
+            <h2 className="tr-h2" style={{ marginTop: "20px", color: "var(--tr-navy)" }}>
+              Industrial
+            </h2>
+            <p className="tr-body markets-body" style={{ color: "var(--tr-ink)" }}>
+              We&apos;ve spent years working alongside plant managers, operations
+              leads, and skilled tradespeople. We know what good looks like on a
+              job site, and we know the difference between a candidate who
+              looks right on paper and one who&apos;ll actually last.
+            </p>
+            <ul className="markets-stats">
+              {industrialStats.map((s) => (
+                <li key={s.label} className="markets-stat">
+                  <p className="markets-figure font-display">{s.value}</p>
+                  <p className="markets-label font-display">{s.label}</p>
+                </li>
+              ))}
+            </ul>
+            {JOBS_VISIBLE && (
+              <div className="markets-cta">
+                <a href="/jobs" className="tr-btn tr-btn-gold">
+                  See Industrial Roles
+                </a>
+              </div>
+            )}
+          </div>
 
-        {/* LEFT — Industrial */}
-        <div
-          ref={leftRef}
-          className="markets-col"
-          style={{
-            paddingTop: "40px",
-            paddingBottom: "40px",
-            paddingLeft: "40px",
-            paddingRight: "40px",
-            opacity: 0,
-          }}
-        >
-          <p
-            className="font-display font-medium uppercase"
-            style={{
-              fontSize: "11px",
-              letterSpacing: "4px",
-              color: "#CCA662",
-              marginBottom: "16px",
-            }}
-          >
-            Track One
-          </p>
-          <h2
-            className="font-display font-semibold uppercase"
-            style={{
-              fontSize: "clamp(36px, 4.5vw, 52px)",
-              lineHeight: 0.95,
-              color: "#141F31",
-              marginBottom: "20px",
-            }}
-          >
-            Industrial.
-          </h2>
-          <p
-            className="font-body"
-            style={{
-              fontSize: "16px",
-              lineHeight: 1.7,
-              color: "rgba(42, 42, 42, 0.7)",
-              marginBottom: "32px",
-            }}
-          >
-            We&apos;ve spent years working alongside plant managers, operations
-            leads, and skilled tradespeople. We know what good looks like on a
-            job site, and we know the difference between a candidate who
-            looks right on paper and one who&apos;ll actually last.
-          </p>
-          <div
-            className="gold-rule"
-            style={{ marginBottom: "24px" }}
-          />
-          <StatRow stats={industrialStats} />
-          {JOBS_VISIBLE && (
-            <a
-              href="/jobs"
-              className="font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
-              style={{
-                marginTop: "32px",
-                height: "48px",
-                padding: "0 28px",
-                borderRadius: "9999px",
-                backgroundColor: "#CCA662",
-                color: "#141F31",
-                fontSize: "14px",
-                letterSpacing: "3px",
-              }}
-            >
-              See Industrial Roles
-            </a>
-          )}
-        </div>
-
-        {/* RIGHT — Corporate */}
-        <div
-          ref={rightRef}
-          className="markets-col"
-          style={{
-            paddingTop: "40px",
-            paddingBottom: "40px",
-            paddingLeft: "40px",
-            paddingRight: "40px",
-            opacity: 0,
-          }}
-        >
-          <p
-            className="font-display font-medium uppercase"
-            style={{
-              fontSize: "11px",
-              letterSpacing: "4px",
-              color: "#CCA662",
-              marginBottom: "16px",
-            }}
-          >
-            Track Two
-          </p>
-          <h2
-            className="font-display font-semibold uppercase"
-            style={{
-              fontSize: "clamp(36px, 4.5vw, 52px)",
-              lineHeight: 0.95,
-              color: "#141F31",
-              marginBottom: "20px",
-            }}
-          >
-            Corporate.
-          </h2>
-          <p
-            className="font-body"
-            style={{
-              fontSize: "16px",
-              lineHeight: 1.7,
-              color: "rgba(42, 42, 42, 0.7)",
-              marginBottom: "32px",
-            }}
-          >
-            We&apos;ve placed executives, HR leaders, and corporate
-            professionals across industries. We understand what organizations
-            need at every level, and we know how to find the candidates who
-            don&apos;t just fill the role but elevate the team around them.
-          </p>
-          <div
-            className="gold-rule"
-            style={{ marginBottom: "24px" }}
-          />
-          <StatRow stats={corporateStats} />
-          {JOBS_VISIBLE && (
-            <a
-              href="/jobs"
-              className="font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
-              style={{
-                marginTop: "32px",
-                height: "48px",
-                padding: "0 28px",
-                borderRadius: "9999px",
-                backgroundColor: "#CCA662",
-                color: "#141F31",
-                fontSize: "14px",
-                letterSpacing: "3px",
-              }}
-            >
-              See Corporate Roles
-            </a>
-          )}
+          {/* RIGHT — Administrative */}
+          <div ref={rightRef} className="markets-col" style={{ opacity: 0 }}>
+            <p className="tr-eyebrow">Track Two</p>
+            <h2 className="tr-h2" style={{ marginTop: "20px", color: "var(--tr-navy)" }}>
+              Administrative
+            </h2>
+            <p className="tr-body markets-body" style={{ color: "var(--tr-ink)" }}>
+              We&apos;ve placed executives, HR leaders, and administrative
+              professionals across industries. We understand what organizations
+              need at every level, and we know how to find the candidates who
+              don&apos;t just fill the role but elevate the team around them.
+            </p>
+            <ul className="markets-stats">
+              {corporateStats.map((s) => (
+                <li key={s.label} className="markets-stat">
+                  <p className="markets-figure font-display">{s.value}</p>
+                  <p className="markets-label font-display">{s.label}</p>
+                </li>
+              ))}
+            </ul>
+            {JOBS_VISIBLE && (
+              <div className="markets-cta">
+                <a href="/jobs" className="tr-btn tr-btn-gold">
+                  See Administrative Roles
+                </a>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
       <style jsx>{`
         .markets-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          width: 100%;
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+          gap: clamp(32px, 6vw, 96px);
+          align-items: start;
         }
-        .markets-divider {
-          position: absolute;
-          left: 50%;
-          top: 0;
-          bottom: 0;
-          width: 1px;
-          background-color: #cca662;
-          transform: translateX(-50%);
-          z-index: 2;
+        .markets-body {
+          margin-top: 24px;
         }
-        :global(.industries-stat-row) {
-          display: flex;
-          gap: 32px;
-          flex-wrap: wrap;
+        .markets-stats {
+          list-style: none;
+          margin: clamp(32px, 4vw, 48px) 0 0;
+          padding: 0;
+        }
+        .markets-stat {
+          padding: 22px 0;
+          border-bottom: 1px solid rgba(20, 31, 49, 0.14);
+        }
+        .markets-stat:first-child {
+          padding-top: 0;
+        }
+        .markets-figure {
+          font-weight: 700;
+          font-size: clamp(40px, 4.2vw, 60px);
+          line-height: 0.95;
+          letter-spacing: -0.02em;
+          color: var(--tr-navy);
+          font-variant-numeric: tabular-nums;
+        }
+        .markets-label {
+          margin-top: 12px;
+          font-weight: 700;
+          font-size: 14px;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: var(--tr-gold-text);
+          line-height: 1.35;
+        }
+        .markets-cta {
+          margin-top: clamp(32px, 4vw, 48px);
         }
 
-        @media (max-width: 767px) {
+        @media (max-width: 1023px) {
           .markets-grid {
             grid-template-columns: 1fr;
-            padding-left: 24px !important;
-            padding-right: 24px !important;
-          }
-          .markets-col {
-            padding-left: 0 !important;
-            padding-right: 0 !important;
-            padding-top: 0 !important;
-            padding-bottom: 40px !important;
-          }
-          .markets-col:last-of-type {
-            padding-top: 40px !important;
-            border-top: 1px solid rgba(204, 166, 98, 0.3);
-          }
-          .markets-col :global(a) {
-            width: 100% !important;
+            gap: clamp(56px, 8vw, 72px);
           }
         }
       `}</style>

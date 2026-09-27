@@ -18,129 +18,55 @@ const pillars = [
     label: "Vision",
     statement: "Known By Name.",
     supporting:
-      "The firm industrial and corporate leaders trust for every search.",
+      "The firm industrial and administrative leaders trust for every search.",
   },
 ];
 
 export default function AboutMission() {
   const sectionRef = useRef<HTMLElement>(null);
+  const headRef = useRef<HTMLDivElement>(null);
+  const rowRefs = useRef<(HTMLLIElement | null)[]>([]);
   const numberRefs = useRef<(HTMLSpanElement | null)[]>([]);
-  const labelRefs = useRef<(HTMLParagraphElement | null)[]>([]);
-  const statementRefs = useRef<(HTMLHeadingElement | null)[]>([]);
-  const ruleRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const supportingRefs = useRef<(HTMLParagraphElement | null)[]>([]);
-  const dividerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Center divider grows top → bottom
-      if (dividerRef.current) {
-        gsap.fromTo(
-          dividerRef.current,
-          { scaleY: 0, transformOrigin: "top center" },
-          {
-            scaleY: 1,
-            duration: 1.2,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 70%",
-              once: true,
-            },
-          }
-        );
-      }
+      gsap.fromTo(
+        headRef.current,
+        { opacity: 0, y: 24 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: "power2.out",
+          scrollTrigger: { trigger: sectionRef.current, start: "top 75%", once: true },
+        }
+      );
 
-      pillars.forEach((p, i) => {
+      rowRefs.current.forEach((row, i) => {
+        if (!row) return;
         const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: numberRefs.current[i],
-            start: "top 80%",
-            once: true,
-          },
+          scrollTrigger: { trigger: row, start: "top 80%", once: true },
         });
 
-        // Number count-up (00 → 01 / 00 → 02)
+        const content = row.querySelectorAll<HTMLElement>("[data-reveal]");
+        tl.fromTo(content, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.65, ease: "power2.out", stagger: 0.1 }, 0);
+
+        // Number count-up (00 -> 01 / 00 -> 02)
         const numEl = numberRefs.current[i];
         if (numEl) {
           const counter = { val: 0 };
           tl.to(
             counter,
             {
-              val: p.number,
+              val: pillars[i].number,
               duration: 0.9,
               ease: "power2.out",
               onUpdate: () => {
-                numEl.textContent = String(Math.round(counter.val)).padStart(
-                  2,
-                  "0"
-                );
+                numEl.textContent = String(Math.round(counter.val)).padStart(2, "0");
               },
             },
-            0
+            0.1
           );
-          tl.fromTo(
-            numEl,
-            { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
-            0
-          );
-        }
-
-        // Label fades in
-        tl.fromTo(
-          labelRefs.current[i],
-          { opacity: 0, y: 12 },
-          { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
-          0.3
-        );
-
-        // Statement: word-by-word rise with subtle overshoot
-        const statement = statementRefs.current[i];
-        if (statement) {
-          const words = statement.querySelectorAll(".statement-word");
-          tl.fromTo(
-            words,
-            { opacity: 0, y: 30 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.55,
-              ease: "back.out(1.4)",
-              stagger: 0.08,
-            },
-            0.45
-          );
-        }
-
-        // Gold rule draws in
-        tl.fromTo(
-          ruleRefs.current[i],
-          { scaleX: 0, transformOrigin: "left center" },
-          { scaleX: 1, duration: 0.7, ease: "power3.out" },
-          0.75
-        );
-
-        // Supporting copy fades in
-        tl.fromTo(
-          supportingRefs.current[i],
-          { opacity: 0, y: 10 },
-          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-          0.95
-        );
-
-        // Parallax on the big numbers (moves slower than scroll)
-        if (numEl) {
-          gsap.to(numEl, {
-            y: -40,
-            ease: "none",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 0.5,
-            },
-          });
         }
       });
     }, sectionRef);
@@ -151,204 +77,121 @@ export default function AboutMission() {
   return (
     <section
       ref={sectionRef}
-      className="about-mission relative w-full"
-      style={{
-        backgroundColor: "#F5F4F0",
-        paddingTop: "120px",
-        paddingBottom: "120px",
-      }}
+      className="about-mission tr-section relative"
+      aria-labelledby="about-mission-heading"
+      style={{ backgroundColor: "var(--tr-cream)", color: "var(--tr-navy)" }}
     >
-      <div
-        className="about-mission-inner"
-        style={{ paddingLeft: "80px", paddingRight: "80px" }}
-      >
-        <p
-          className="font-display font-medium uppercase"
-          style={{
-            fontSize: "11px",
-            letterSpacing: "4px",
-            color: "#CCA662",
-            marginBottom: "16px",
-          }}
-        >
-          The Foundation
-        </p>
-        <h2
-          className="font-display font-semibold uppercase"
-          style={{
-            fontSize: "clamp(36px, 4.5vw, 52px)",
-            lineHeight: 0.95,
-            color: "#141F31",
-            marginBottom: "80px",
-          }}
-        >
-          Where We Stand.
-        </h2>
+      <div className="tr-container">
+        <div className="mission-grid">
+          <div ref={headRef} className="mission-head" style={{ opacity: 0 }}>
+            <p className="tr-eyebrow">The Foundation</p>
+            <h2 id="about-mission-heading" className="tr-h2" style={{ marginTop: "20px", color: "var(--tr-navy)" }}>
+              Where We Stand
+            </h2>
+          </div>
 
-        <div
-          className="mission-card"
-          style={{
-            backgroundColor: "#141F31",
-            borderRadius: "12px",
-            padding: "80px",
-          }}
-        >
-        <div className="mission-grid relative">
-          {/* Center vertical gold divider */}
-          <div
-            ref={dividerRef}
-            className="mission-divider hidden md:block"
-            aria-hidden="true"
-          />
-
-          {pillars.map((p, i) => (
-            <div key={p.number} className="mission-col">
-              {/* Big atmospheric number */}
-              <span
+          <ol className="mission-rows">
+            {pillars.map((p, i) => (
+              <li
+                key={p.number}
                 ref={(el) => {
-                  numberRefs.current[i] = el;
+                  rowRefs.current[i] = el;
                 }}
-                aria-hidden="true"
-                className="font-display font-bold select-none"
-                style={{
-                  display: "block",
-                  fontSize: "72px",
-                  lineHeight: 1,
-                  color: "#CCA662",
-                  marginBottom: "16px",
-                  opacity: 0,
-                  willChange: "transform",
-                }}
+                className="mission-row"
               >
-                00
-              </span>
+                <span
+                  ref={(el) => {
+                    numberRefs.current[i] = el;
+                  }}
+                  aria-hidden="true"
+                  className="mission-num font-display"
+                  data-reveal
+                >
+                  00
+                </span>
 
-              {/* Small label */}
-              <p
-                ref={(el) => {
-                  labelRefs.current[i] = el;
-                }}
-                className="font-display font-medium uppercase"
-                style={{
-                  fontSize: "11px",
-                  letterSpacing: "4px",
-                  color: "#CCA662",
-                  marginBottom: "20px",
-                  opacity: 0,
-                }}
-              >
-                Our {p.label}
-              </p>
-
-              {/* Bold statement with word-by-word reveal */}
-              <h3
-                ref={(el) => {
-                  statementRefs.current[i] = el;
-                }}
-                className="font-display font-semibold uppercase"
-                style={{
-                  fontSize: "clamp(28px, 3vw, 40px)",
-                  lineHeight: 1.05,
-                  color: "#FFFFFF",
-                  marginBottom: "20px",
-                }}
-              >
-                {p.statement.split(" ").map((word, wi) => (
-                  <span
-                    key={wi}
-                    className="statement-word"
-                    style={{
-                      display: "inline-block",
-                      marginRight: "0.25em",
-                      opacity: 0,
-                    }}
-                  >
-                    {word}
-                  </span>
-                ))}
-              </h3>
-
-              {/* Gold rule */}
-              <div
-                ref={(el) => {
-                  ruleRefs.current[i] = el;
-                }}
-                style={{
-                  width: "48px",
-                  height: "2px",
-                  backgroundColor: "#CCA662",
-                  marginBottom: "20px",
-                  transform: "scaleX(0)",
-                  transformOrigin: "left center",
-                }}
-              />
-
-              {/* Supporting copy */}
-              <p
-                ref={(el) => {
-                  supportingRefs.current[i] = el;
-                }}
-                className="font-body italic"
-                style={{
-                  fontSize: "16px",
-                  lineHeight: 1.6,
-                  color: "rgba(245, 244, 240, 0.7)",
-                  maxWidth: "360px",
-                  opacity: 0,
-                }}
-              >
-                {p.supporting}
-              </p>
-            </div>
-          ))}
-        </div>
+                <div className="mission-text">
+                  <p className="mission-label font-display" data-reveal>
+                    Our {p.label}
+                  </p>
+                  <h3 className="mission-statement font-display" data-reveal>
+                    {p.statement}
+                  </h3>
+                  <p className="mission-support font-body" data-reveal>
+                    {p.supporting}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
 
       <style jsx>{`
         .mission-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+          gap: clamp(40px, 6vw, 96px);
+          align-items: start;
         }
-        .mission-col {
-          padding-left: 80px;
-          padding-right: 80px;
+        .mission-rows {
+          list-style: none;
+          margin: 0;
+          padding: 0;
         }
-        .mission-col:first-of-type {
-          padding-left: 0;
+        .mission-row {
+          display: grid;
+          grid-template-columns: 120px 1fr;
+          gap: clamp(16px, 3vw, 40px);
+          padding: clamp(28px, 3vw, 44px) 0;
+          border-top: 1px solid rgba(20, 31, 49, 0.14);
         }
-        .mission-col:last-of-type {
-          padding-right: 0;
+        .mission-row:last-child {
+          border-bottom: 1px solid rgba(20, 31, 49, 0.14);
         }
-        .mission-divider {
-          position: absolute;
-          left: 50%;
-          top: 0;
-          bottom: 0;
-          width: 1px;
-          background-color: #cca662;
-          transform: translateX(-50%);
+        .mission-num {
+          font-weight: 700;
+          font-size: clamp(56px, 6vw, 88px);
+          line-height: 0.9;
+          letter-spacing: -0.02em;
+          color: var(--tr-navy);
+          font-variant-numeric: tabular-nums;
         }
-
-        @media (max-width: 767px) {
-          .about-mission {
-            padding-top: 80px !important;
-            padding-bottom: 80px !important;
-          }
-          .about-mission-inner {
-            padding-left: 16px !important;
-            padding-right: 16px !important;
-          }
-          .mission-card {
-            padding: 48px 32px !important;
-          }
+        .mission-label {
+          font-weight: 600;
+          font-size: 14px;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--tr-gold-text);
+        }
+        .mission-statement {
+          margin-top: 14px;
+          font-weight: 600;
+          text-transform: uppercase;
+          font-size: clamp(26px, 2.4vw, 34px);
+          line-height: 1;
+          letter-spacing: 0.01em;
+          color: var(--tr-navy);
+        }
+        .mission-support {
+          margin-top: 14px;
+          font-size: 17px;
+          line-height: 1.65;
+          color: var(--tr-ink);
+          max-width: 40ch;
+        }
+        [data-reveal] {
+          opacity: 0;
+        }
+        @media (max-width: 1023px) {
           .mission-grid {
             grid-template-columns: 1fr;
-            gap: 56px;
           }
-          .mission-col {
-            padding-left: 0;
-            padding-right: 0;
+        }
+        @media (max-width: 639px) {
+          .mission-row {
+            grid-template-columns: 1fr;
+            gap: 12px;
           }
         }
       `}</style>

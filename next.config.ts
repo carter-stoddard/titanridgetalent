@@ -7,7 +7,8 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      { source: "/founders", destination: "/leadership", permanent: true },
+      { source: "/founders", destination: "/about", permanent: true },
+      { source: "/leadership", destination: "/about", permanent: true },
     ];
   },
   async headers() {
