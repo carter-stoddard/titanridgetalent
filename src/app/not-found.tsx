@@ -8,78 +8,32 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <div
+    <main
+      id="main"
+      className="tr-section"
       style={{
-        backgroundColor: "#141F31",
+        backgroundColor: "var(--tr-cream)",
+        color: "var(--tr-navy)",
         minHeight: "100dvh",
         display: "flex",
         flexDirection: "column",
-        alignItems: "center",
         justifyContent: "center",
-        padding: "24px",
-        textAlign: "center",
       }}
     >
-      <p
-        style={{
-          fontFamily: "var(--font-barlow-condensed), sans-serif",
-          fontSize: "11px",
-          fontWeight: 500,
-          textTransform: "uppercase",
-          letterSpacing: "4px",
-          color: "#CCA662",
-          marginBottom: "16px",
-        }}
-      >
-        404
-      </p>
-      <h1
-        style={{
-          fontFamily: "var(--font-barlow-condensed), sans-serif",
-          fontSize: "clamp(36px, 5vw, 52px)",
-          fontWeight: 600,
-          textTransform: "uppercase",
-          lineHeight: 0.95,
-          color: "#F5F4F0",
-          marginBottom: "20px",
-        }}
-      >
-        Page Not Found.
-      </h1>
-      <p
-        style={{
-          fontFamily: "var(--font-lora), serif",
-          fontStyle: "italic",
-          fontSize: "17px",
-          lineHeight: 1.6,
-          color: "rgba(245, 244, 240, 0.55)",
-          maxWidth: "480px",
-          marginBottom: "40px",
-        }}
-      >
-        The page you&apos;re looking for doesn&apos;t exist or has been moved.
-      </p>
-      <Link
-        href="/"
-        style={{
-          fontFamily: "var(--font-barlow-condensed), sans-serif",
-          fontWeight: 700,
-          textTransform: "uppercase",
-          fontSize: "14px",
-          letterSpacing: "3px",
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "52px",
-          padding: "0 32px",
-          borderRadius: "9999px",
-          backgroundColor: "#CCA662",
-          color: "#141F31",
-          textDecoration: "none",
-        }}
-      >
-        Back to Home
-      </Link>
-    </div>
+      <div className="tr-container">
+        <p className="tr-eyebrow">404</p>
+        <h1 className="tr-h2" style={{ marginTop: "20px", color: "var(--tr-navy)" }}>
+          Page Not Found
+        </h1>
+        <p className="tr-body" style={{ color: "var(--tr-ink)", marginTop: "24px", maxWidth: "44ch" }}>
+          The page you&apos;re looking for doesn&apos;t exist or has been moved.
+        </p>
+        <div style={{ marginTop: "36px", display: "flex", gap: "16px", flexWrap: "wrap" }}>
+          <Link href="/" className="tr-btn tr-btn-gold">
+            Back to Home
+          </Link>
+        </div>
+      </div>
+    </main>
   );
 }

@@ -8,394 +8,166 @@ import { JOBS_VISIBLE } from "@/lib/features";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function useStaggerReveal(
-  sectionRef: React.RefObject<HTMLElement | null>,
-  imageRef: React.RefObject<HTMLDivElement | null>,
-  textEls: React.RefObject<(HTMLElement | null)[]>
-) {
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          once: true,
-        },
-      });
-
-      tl.fromTo(
-        imageRef.current,
-        { opacity: 0, scale: 0.97 },
-        { opacity: 1, scale: 1, duration: 0.8, ease: "power2.out" },
-        0
-      );
-
-      const delays = [0, 0.12, 0.12, 0.1, 0.15];
-      let acc = 0;
-      textEls.current.forEach((el, i) => {
-        if (!el) return;
-        acc += delays[i] || 0;
-        tl.fromTo(
-          el,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" },
-          acc
-        );
-      });
-    });
-
-    return () => ctx.revert();
-  }, [sectionRef, imageRef, textEls]);
-}
+const panels = [
+  {
+    key: "employers",
+    eyebrow: "For Employers",
+    headline: "Done Sending Resumes That Go Nowhere?",
+    body:
+      "We don't send you a stack of resumes and wish you luck. We learn your operation, your culture, and what good actually looks like in your environment. Then we find the person who fits, and who stays.",
+    descriptor: "Industrial and administrative placements. Every search treated the same way.",
+    cta: { label: "Find Talent", href: "/contact?role=company" },
+    micro: "No commitment. Just a conversation.",
+    image: { src: "/images/hiring-manager-employer-staffing-solutions-orange-county.webp", alt: "Smiling hiring manager holding a laptop in a modern office" },
+  },
+  {
+    key: "candidates",
+    eyebrow: "For Candidates",
+    headline: "Ready For a Recruiter Who Actually Calls You Back?",
+    body:
+      "We're not a job board. We work with you directly, understanding where you've been and where you want to go. When we reach out about a role, it's because we genuinely think it's right for you.",
+    descriptor: "Industrial and administrative roles. We only reach out when it's the right fit.",
+    cta: { label: "Find a Job", href: JOBS_VISIBLE ? "/jobs" : "/careers" },
+    micro: "No forms. No automated responses.",
+    image: { src: "/images/warehouse-worker-industrial-job-seeker-southern-california.webp", alt: "Smiling warehouse worker inspecting inventory in a distribution center" },
+  },
+];
 
 export default function DualSplit() {
-  const empSection = useRef<HTMLElement>(null);
-  const empImage = useRef<HTMLDivElement>(null);
-  const empText = useRef<(HTMLElement | null)[]>([]);
+  const sectionRef = useRef<HTMLElement>(null);
+  const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const candSection = useRef<HTMLElement>(null);
-  const candImage = useRef<HTMLDivElement>(null);
-  const candText = useRef<(HTMLElement | null)[]>([]);
-
-  useStaggerReveal(empSection, empImage, empText);
-  useStaggerReveal(candSection, candImage, candText);
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      rowRefs.current.forEach((row) => {
+        if (!row) return;
+        const img = row.querySelector<HTMLElement>(".pair-media");
+        const items = row.querySelectorAll<HTMLElement>("[data-reveal]");
+        const tl = gsap.timeline({ scrollTrigger: { trigger: row, start: "top 75%", once: true } });
+        if (img) tl.fromTo(img, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.9, ease: "power2.out" }, 0);
+        tl.fromTo(items, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out", stagger: 0.08 }, 0.1);
+      });
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <>
-      {/* ===================== FOR EMPLOYERS ===================== */}
-      <section
-        ref={empSection}
-        className="employer-section relative w-full"
-        style={{
-          backgroundColor: "#F5F4F0",
-          paddingTop: "120px",
-          paddingBottom: "120px",
-        }}
-      >
-        <div
-          className="employer-inner"
-          style={{ paddingLeft: "80px", paddingRight: "80px" }}
-        >
-          <div className="employer-grid">
-            {/* LEFT — Text */}
-            <div className="flex flex-col justify-center">
-              <p
-                ref={(el) => { empText.current[0] = el; }}
-                className="font-display font-medium uppercase"
-                style={{
-                  fontSize: "11px",
-                  letterSpacing: "4px",
-                  color: "#CCA662",
-                  marginBottom: "20px",
-                  opacity: 0,
-                }}
-              >
-                For Employers
-              </p>
-              <h2
-                ref={(el) => { empText.current[1] = el; }}
-                className="font-display font-semibold uppercase"
-                style={{
-                  fontSize: "clamp(36px, 4.5vw, 52px)",
-                  lineHeight: 0.92,
-                  color: "#141F31",
-                  marginBottom: "28px",
-                  opacity: 0,
-                }}
-              >
-                Done Sending Resumes That Go Nowhere?
-              </h2>
-              <p
-                ref={(el) => { empText.current[2] = el; }}
-                className="font-body"
-                style={{
-                  fontSize: "17px",
-                  lineHeight: 1.7,
-                  color: "#2A2A2A",
-                  maxWidth: "480px",
-                  marginBottom: "16px",
-                  opacity: 0,
-                }}
-              >
-                We don&apos;t send you a stack of resumes and wish you luck.
-                We learn your operation, your culture, and what good actually
-                looks like in your environment. Then we find the person who
-                fits, and who stays.
-              </p>
-              <p
-                ref={(el) => { empText.current[3] = el; }}
-                className="font-body italic"
-                style={{
-                  fontSize: "16px",
-                  color: "#CCA662",
-                  marginBottom: "40px",
-                  opacity: 0,
-                }}
-              >
-                Industrial and corporate placements. Every search treated the
-                same way.
-              </p>
-              <div
-                ref={(el) => { empText.current[4] = el; }}
-                style={{ opacity: 0 }}
-              >
-                <Link
-                  href="/contact"
-                  className="font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0 employer-cta"
-                  style={{
-                    height: "56px",
-                    padding: "0 36px",
-                    borderRadius: "9999px",
-                    backgroundColor: "#CCA662",
-                    color: "#141F31",
-                    fontSize: "15px",
-                    letterSpacing: "3px",
-                  }}
-                >
-                  Let&apos;s Talk Hiring
-                </Link>
-                <div
-                  className="flex items-center"
-                  style={{ marginTop: "20px" }}
-                >
-                  <div
-                    style={{
-                      width: "32px",
-                      height: "1px",
-                      backgroundColor: "#CCA662",
-                    }}
-                  />
-                  <span
-                    className="font-display uppercase"
-                    style={{
-                      fontSize: "12px",
-                      letterSpacing: "2px",
-                      color: "#141F31",
-                      marginLeft: "12px",
-                    }}
-                  >
-                    No commitment. Just a conversation.
-                  </span>
-                </div>
-              </div>
+    <section
+      ref={sectionRef}
+      className="pair tr-section relative"
+      aria-label="Who we work with"
+      style={{ backgroundColor: "var(--tr-cream)", color: "var(--tr-navy)", paddingTop: 0 }}
+    >
+      <div className="tr-container">
+        {panels.map((p, i) => (
+          <div
+            key={p.key}
+            ref={(el) => {
+              rowRefs.current[i] = el;
+            }}
+            className={`pair-row ${i % 2 === 1 ? "is-flipped" : ""}`}
+          >
+            <div className="pair-media" style={{ opacity: 0 }}>
+              <img src={p.image.src} alt={p.image.alt} className="pair-img" />
             </div>
 
-            {/* RIGHT — Contained image */}
-            <div
-              className="flex items-center justify-center"
-              style={{ padding: "24px" }}
-            >
-              <div
-                ref={empImage}
-                className="relative w-full overflow-hidden"
-                style={{
-                  borderRadius: "8px",
-                  aspectRatio: "1 / 1",
-                  opacity: 0,
-                }}
-              >
-                <img
-                  src="/images/employer-industrial.webp"
-                  alt="Industrial employer reviewing operations on the floor"
-                  className="absolute inset-0 h-full w-full object-cover"
-                  style={{ objectPosition: "center", opacity: 0.85 }}
-                />
+            <div className="pair-text">
+              <p className="tr-eyebrow" data-reveal>
+                {p.eyebrow}
+              </p>
+              <h2 className="tr-h2" data-reveal style={{ marginTop: "20px", color: "var(--tr-navy)" }}>
+                {p.headline}
+              </h2>
+              <p className="tr-body" data-reveal style={{ color: "var(--tr-ink)", marginTop: "22px" }}>
+                {p.body}
+              </p>
+              <p className="pair-desc font-display" data-reveal>
+                {p.descriptor}
+              </p>
+              <div className="pair-actions" data-reveal>
+                <Link href={p.cta.href} className="tr-btn tr-btn-gold">
+                  {p.cta.label}
+                </Link>
+                <span className="pair-micro font-display">{p.micro}</span>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* ===================== FOR CANDIDATES ===================== */}
-      <section
-        ref={candSection}
-        className="candidate-section relative w-full"
-        style={{
-          backgroundColor: "#F5F4F0",
-          paddingTop: "120px",
-          paddingBottom: "120px",
-        }}
-      >
-
-        <div
-          className="candidate-inner"
-          style={{ paddingLeft: "80px", paddingRight: "80px" }}
-        >
-          <div className="candidate-grid">
-            {/* LEFT — Contained image */}
-            <div
-              className="flex items-center justify-center candidate-image-col"
-              style={{ padding: "24px" }}
-            >
-              <div
-                ref={candImage}
-                className="relative w-full overflow-hidden"
-                style={{
-                  borderRadius: "8px",
-                  aspectRatio: "1 / 1",
-                  opacity: 0,
-                }}
-              >
-                <img
-                  src="/images/candidate-corporate.webp"
-                  alt="Professional candidate in a confident corporate setting"
-                  className="absolute inset-0 h-full w-full object-cover"
-                  style={{ objectPosition: "center", opacity: 0.85 }}
-                />
-              </div>
-            </div>
-
-            {/* RIGHT — Text */}
-            <div className="flex flex-col justify-center candidate-text-col">
-              <p
-                ref={(el) => { candText.current[0] = el; }}
-                className="font-display font-medium uppercase"
-                style={{
-                  fontSize: "11px",
-                  letterSpacing: "4px",
-                  color: "#CCA662",
-                  marginBottom: "20px",
-                  opacity: 0,
-                }}
-              >
-                For Candidates
-              </p>
-              <h2
-                ref={(el) => { candText.current[1] = el; }}
-                className="font-display font-semibold uppercase"
-                style={{
-                  fontSize: "clamp(36px, 4.5vw, 52px)",
-                  lineHeight: 0.92,
-                  color: "#141F31",
-                  marginBottom: "28px",
-                  opacity: 0,
-                }}
-              >
-                Ready For a Recruiter Who Actually Calls You Back?
-              </h2>
-              <p
-                ref={(el) => { candText.current[2] = el; }}
-                className="font-body"
-                style={{
-                  fontSize: "17px",
-                  lineHeight: 1.7,
-                  color: "#2A2A2A",
-                  maxWidth: "480px",
-                  marginBottom: "16px",
-                  opacity: 0,
-                }}
-              >
-                We&apos;re not a job board. We work with you directly,
-                understanding where you&apos;ve been and where you want to
-                go. When we reach out about a role, it&apos;s because we
-                genuinely think it&apos;s right for you.
-              </p>
-              <p
-                ref={(el) => { candText.current[3] = el; }}
-                className="font-body italic"
-                style={{
-                  fontSize: "16px",
-                  color: "#CCA662",
-                  marginBottom: "40px",
-                  opacity: 0,
-                }}
-              >
-                Industrial and corporate roles. We only reach out when
-                it&apos;s the right fit.
-              </p>
-              <div
-                ref={(el) => { candText.current[4] = el; }}
-                style={{ opacity: 0 }}
-              >
-                <Link
-                  href={JOBS_VISIBLE ? "/jobs" : "/contact"}
-                  className="font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-navy/25 hover:-translate-y-0.5 active:translate-y-0 candidate-cta"
-                  style={{
-                    height: "56px",
-                    padding: "0 36px",
-                    borderRadius: "9999px",
-                    backgroundColor: "#141F31",
-                    color: "#F5F4F0",
-                    fontSize: "15px",
-                    letterSpacing: "3px",
-                  }}
-                >
-                  {JOBS_VISIBLE ? "See Open Roles" : "Get in Touch"}
-                </Link>
-                <div
-                  className="flex items-center"
-                  style={{ marginTop: "20px" }}
-                >
-                  <div
-                    style={{
-                      width: "32px",
-                      height: "1px",
-                      backgroundColor: "#CCA662",
-                    }}
-                  />
-                  <span
-                    className="font-display uppercase"
-                    style={{
-                      fontSize: "12px",
-                      letterSpacing: "2px",
-                      color: "#141F31",
-                      marginLeft: "12px",
-                    }}
-                  >
-                    No forms. No automated responses.
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        ))}
+      </div>
 
       <style jsx>{`
-        .employer-grid {
+        .pair-row {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 60px;
+          grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+          gap: clamp(32px, 6vw, 96px);
           align-items: center;
+          padding: clamp(48px, 6vw, 88px) 0;
         }
-        .candidate-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 60px;
+        .pair-row.is-flipped .pair-media {
+          order: 2;
+        }
+        .pair-media {
+          aspect-ratio: 4 / 5;
+          overflow: hidden;
+          background: var(--tr-cream-deep);
+        }
+        .pair-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          filter: saturate(0.9);
+          transform: scale(1.01);
+          transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .pair-row:hover .pair-img {
+          transform: scale(1.05);
+        }
+        .pair-desc {
+          margin-top: 18px;
+          font-size: 14px;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--tr-gold-text);
+          font-weight: 600;
+          max-width: 52ch;
+        }
+        .pair-actions {
+          margin-top: 34px;
+          display: flex;
           align-items: center;
+          gap: 22px;
+          flex-wrap: wrap;
         }
-
-        @media (max-width: 767px) {
-          .employer-section,
-          .candidate-section {
-            padding-top: 40px !important;
-            padding-bottom: 40px !important;
-          }
-          .employer-inner,
-          .candidate-inner {
-            padding-left: 24px !important;
-            padding-right: 24px !important;
-          }
-          .employer-grid {
+        .pair-micro {
+          font-size: 13px;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: rgba(20, 31, 49, 0.65);
+        }
+        [data-reveal] {
+          opacity: 0;
+        }
+        @media (max-width: 1023px) {
+          .pair-row {
             grid-template-columns: 1fr;
             gap: 32px;
           }
-          .candidate-grid {
-            grid-template-columns: 1fr;
-            gap: 32px;
+          .pair-row.is-flipped .pair-media {
+            order: 0;
           }
-          .candidate-image-col {
-            order: 2;
+          .pair-media {
+            aspect-ratio: 16 / 11;
           }
-          .candidate-text-col {
-            order: 1;
-          }
-          .employer-cta,
-          .candidate-cta {
-            width: 100%;
+        }
+        @media (max-width: 639px) {
+          .pair-actions {
+            align-items: stretch;
+            flex-direction: column;
+            gap: 16px;
           }
         }
       `}</style>
-    </>
+    </section>
   );
 }

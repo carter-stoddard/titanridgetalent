@@ -8,30 +8,12 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function MissionStatement() {
   const sectionRef = useRef<HTMLElement>(null);
-  const itemsRef = useRef<(HTMLElement | null)[]>([]);
-  const ruleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const trigger = {
-        trigger: sectionRef.current,
-        start: "top 75%",
-        once: true,
-      };
-
+      const items = sectionRef.current?.querySelectorAll<HTMLElement>("[data-reveal]") ?? [];
       gsap.fromTo(
-        ruleRef.current,
-        { scaleX: 0 },
-        {
-          scaleX: 1,
-          duration: 0.9,
-          ease: "power3.out",
-          scrollTrigger: trigger,
-        }
-      );
-
-      gsap.fromTo(
-        itemsRef.current.filter(Boolean),
+        items,
         { opacity: 0, y: 24 },
         {
           opacity: 1,
@@ -39,8 +21,7 @@ export default function MissionStatement() {
           duration: 0.7,
           ease: "power2.out",
           stagger: 0.1,
-          delay: 0.15,
-          scrollTrigger: trigger,
+          scrollTrigger: { trigger: sectionRef.current, start: "top 75%", once: true },
         }
       );
     }, sectionRef);
@@ -48,100 +29,56 @@ export default function MissionStatement() {
     return () => ctx.revert();
   }, []);
 
-  const setItem = (i: number) => (el: HTMLElement | null) => {
-    itemsRef.current[i] = el;
-  };
-
   return (
     <section
       ref={sectionRef}
-      className="mission-statement relative w-full"
-      style={{
-        backgroundColor: "#F5F4F0",
-        paddingTop: "120px",
-        paddingBottom: "120px",
-      }}
+      className="mission-statement tr-section relative"
+      aria-labelledby="mission-statement-heading"
+      style={{ backgroundColor: "var(--tr-cream)", color: "var(--tr-navy)" }}
     >
-      <div
-        className="mission-statement-inner"
-        style={{ paddingLeft: "80px", paddingRight: "80px" }}
-      >
+      <div className="tr-container">
         <div className="mission-statement-grid">
           {/* LEFT — Eyebrow + headline */}
           <div className="mission-statement-headline">
-            <p
-              ref={setItem(0)}
-              className="font-display font-medium uppercase"
-              style={{
-                fontSize: "11px",
-                letterSpacing: "4px",
-                color: "#CCA662",
-                marginBottom: "16px",
-                opacity: 0,
-              }}
-            >
-              Why We Exist
+            <p className="tr-eyebrow" data-reveal>
+              Our Mission Statement
             </p>
 
             <h2
-              ref={setItem(1)}
-              className="font-display font-semibold uppercase"
-              style={{
-                fontSize: "clamp(36px, 4.5vw, 52px)",
-                lineHeight: 0.95,
-                color: "#141F31",
-                opacity: 0,
-              }}
+              id="mission-statement-heading"
+              className="tr-h2"
+              data-reveal
+              style={{ marginTop: "20px", color: "var(--tr-navy)" }}
             >
-              More than recruiting. A standard.
+              More than recruiting. A standard
             </h2>
           </div>
 
           {/* RIGHT — Body copy */}
           <div className="mission-statement-body">
-            <div
-              ref={ruleRef}
-              aria-hidden="true"
-              style={{
-                width: "60px",
-                height: "2px",
-                backgroundColor: "#CCA662",
-                marginBottom: "32px",
-                transformOrigin: "left center",
-              }}
-            />
-
-            <p
-              ref={setItem(2)}
-              className="font-body"
-              style={{
-                fontSize: "17px",
-                lineHeight: 1.7,
-                color: "#2A2A2A",
-                marginBottom: "20px",
-                opacity: 0,
-              }}
-            >
-              Recruiting is too important to leave to keyword matches and
-              resume blasts. We exist to do this right — for the companies
-              hiring, for the people we place, and for the partnerships that
-              grow from both.
+            <p className="tr-body" data-reveal style={{ color: "var(--tr-ink)" }}>
+              At Titan Ridge, our mission is to build lasting partnerships by
+              connecting great people with the right opportunities. We take a
+              relationship-first approach to recruiting&mdash;learning the needs
+              of our clients, understanding the goals of our candidates, and
+              delivering quality talent built for long-term success.
             </p>
 
-            <p
-              ref={setItem(3)}
-              className="font-body"
-              style={{
-                fontSize: "17px",
-                lineHeight: 1.7,
-                color: "#2A2A2A",
-                opacity: 0,
-              }}
-            >
-              The four principles below aren&apos;t a marketing exercise.
-              They&apos;re the standard we hold ourselves to on every search,
-              every conversation, every placement.
+            <p className="tr-body" data-reveal style={{ color: "var(--tr-ink)", marginTop: "20px" }}>
+              We believe staffing should be about more than filling positions.
+              It should be about strengthening businesses, creating
+              opportunities, and building relationships that last.
             </p>
+
+            <div className="mission-badge" data-reveal>
+              <span className="mission-badge-icon" aria-hidden="true">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </span>
+              <span className="mission-badge-text font-display">Nationwide Staffing</span>
+            </div>
           </div>
         </div>
       </div>
@@ -149,26 +86,44 @@ export default function MissionStatement() {
       <style jsx>{`
         .mission-statement-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 80px;
+          grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+          gap: clamp(40px, 6vw, 96px);
           align-items: start;
         }
-
+        .mission-badge {
+          margin-top: 32px;
+          display: inline-flex;
+          align-items: center;
+          gap: 14px;
+          background-color: var(--tr-navy);
+          border-radius: 9999px;
+          padding: 12px 22px 12px 14px;
+        }
+        .mission-badge-icon {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background-color: var(--tr-gold-text);
+          color: var(--tr-navy);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+        .mission-badge-text {
+          font-weight: 700;
+          font-size: 14px;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: var(--tr-cream);
+        }
+        [data-reveal] {
+          opacity: 0;
+        }
         @media (max-width: 1023px) {
           .mission-statement-grid {
             grid-template-columns: 1fr;
-            gap: 40px;
-          }
-        }
-
-        @media (max-width: 767px) {
-          .mission-statement {
-            padding-top: 80px !important;
-            padding-bottom: 80px !important;
-          }
-          .mission-statement-inner {
-            padding-left: 24px !important;
-            padding-right: 24px !important;
+            gap: 32px;
           }
         }
       `}</style>

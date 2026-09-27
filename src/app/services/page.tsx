@@ -6,9 +6,9 @@ import ServicesHero from "@/components/services/ServicesHero";
 import ServicesOffer from "@/components/services/ServicesOffer";
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: "Staffing Services | Temp, Temp-to-Hire & Direct Hire in Southern California",
   description:
-    "Temporary staffing, direct hire, confidential searches, and more — industrial and corporate placements built on real relationships across the LA/OC market.",
+    "Temporary staffing, temp-to-hire, direct hire, confidential searches, and high-volume manufacturing support for employers across Orange County, LA, the Inland Empire, and San Diego.",
   alternates: { canonical: "/services" },
 };
 

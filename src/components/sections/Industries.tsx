@@ -28,268 +28,66 @@ const corporate = [
   "Sales",
 ];
 
+const groups = [
+  { label: "Industrial", names: industrial },
+  { label: "Administrative", names: corporate },
+];
+
 export default function Industries() {
   const sectionRef = useRef<HTMLElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
-  const eyebrowRef = useRef<HTMLParagraphElement>(null);
-  const headlineRef = useRef<HTMLHeadingElement>(null);
-  const ruleTopRef = useRef<HTMLDivElement>(null);
-  const ruleMidRef = useRef<HTMLDivElement>(null);
-  const namesRef = useRef<(HTMLLIElement | null)[]>([]);
+  const mediaRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-          once: true,
-        },
-      });
-
-      tl.fromTo(
-        imageRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.8, ease: "power2.out" },
-        0
-      );
-
-      tl.fromTo(
-        [eyebrowRef.current, headlineRef.current],
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power2.out",
-          stagger: 0.1,
-        },
-        0
-      );
-
-      tl.fromTo(
-        [ruleTopRef.current, ruleMidRef.current],
-        { width: "0%" },
-        { width: "100%", duration: 0.6, ease: "power2.out" },
-        0.4
-      );
-
-      tl.fromTo(
-        namesRef.current.filter(Boolean),
-        { opacity: 0, y: 15 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          ease: "power2.out",
-          stagger: 0.06,
-        },
-        "-=0.2"
-      );
+      const tl = gsap.timeline({ scrollTrigger: { trigger: sectionRef.current, start: "top 72%", once: true } });
+      tl.fromTo(mediaRef.current, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.9, ease: "power2.out" }, 0);
+      const items = contentRef.current?.querySelectorAll<HTMLElement>("[data-reveal]") ?? [];
+      tl.fromTo(items, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.55, ease: "power2.out", stagger: 0.04 }, 0.1);
     }, sectionRef);
-
     return () => ctx.revert();
   }, []);
-
-  let idx = 0;
-  const renderName = (name: string) => {
-    const i = idx++;
-    return (
-      <li
-        key={name}
-        ref={(el) => {
-          namesRef.current[i] = el;
-        }}
-        className="industry-name group transition-all duration-200"
-        style={{
-          opacity: 0,
-          paddingLeft: "16px",
-          borderLeft: "2px solid transparent",
-          fontSize: "18px",
-        }}
-      >
-        <span
-          className="font-display"
-          style={{
-            fontWeight: 600,
-            color: "#141F31",
-            letterSpacing: "0",
-          }}
-        >
-          {name}
-        </span>
-      </li>
-    );
-  };
 
   return (
     <section
       ref={sectionRef}
-      className="relative w-full"
-      style={{ backgroundColor: "#F5F4F0", paddingTop: "120px", paddingBottom: "120px" }}
+      className="industries tr-section relative"
+      aria-labelledby="industries-heading"
+      style={{ backgroundColor: "var(--tr-cream)", color: "var(--tr-navy)" }}
     >
-      <style jsx>{`
-        .industry-name:hover {
-          border-left-color: #cca662;
-        }
-        .industries-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 60px;
-          align-items: center;
-        }
-        @media (max-width: 767px) {
-          .industries-grid {
-            grid-template-columns: 1fr;
-            gap: 32px;
-          }
-          .industries-grid > div:first-child {
-            order: 2;
-          }
-          .industries-grid > div:last-child {
-            order: 1;
-          }
-          .industries-inner {
-            padding-left: 24px !important;
-            padding-right: 24px !important;
-          }
-        }
-      `}</style>
-
-      <div
-        className="industries-inner"
-        style={{ paddingLeft: "80px", paddingRight: "80px" }}
-      >
-        <div className="industries-grid">
-          {/* LEFT — Contained image */}
-          <div
-            className="flex items-center justify-center"
-            style={{ padding: "24px" }}
-          >
-            <div
-              ref={imageRef}
-              className="relative w-full overflow-hidden"
-              style={{
-                aspectRatio: "1 / 1",
-                borderRadius: "8px",
-                opacity: 0,
-              }}
-            >
-              <img
-                src="/images/where-we-work.webp"
-                alt="Industrial and corporate landscape — where Titan Ridge works"
-                className="absolute inset-0 h-full w-full object-cover"
-                style={{ objectPosition: "center" }}
-              />
-            </div>
+      <div className="tr-container">
+        <div className="ind-grid">
+          <div ref={mediaRef} className="ind-media" style={{ opacity: 0 }}>
+            <img src="/images/plywood-manufacturing-facility-industrial-recruiting.webp" alt="Stacks of plywood inside a factory — where Titan Ridge works" className="ind-img" />
           </div>
 
-          {/* RIGHT — Content */}
-          <div className="flex flex-col justify-center">
-            <p
-              ref={eyebrowRef}
-              className="font-display font-medium uppercase"
-              style={{
-                fontSize: "11px",
-                letterSpacing: "4px",
-                color: "#CCA662",
-                marginBottom: "16px",
-                opacity: 0,
-              }}
-            >
+          <div ref={contentRef} className="ind-content">
+            <p className="tr-eyebrow" data-reveal>
               Where We Work
             </p>
-
-            <h2
-              ref={headlineRef}
-              className="font-display font-semibold uppercase"
-              style={{
-                fontSize: "clamp(36px, 4.5vw, 52px)",
-                lineHeight: 0.95,
-                color: "#141F31",
-                marginBottom: "48px",
-                opacity: 0,
-              }}
-            >
-              From the Floor to the Boardroom.
+            <h2 id="industries-heading" className="tr-h2" data-reveal style={{ marginTop: "20px", color: "var(--tr-navy)" }}>
+              From the Floor to the Boardroom
             </h2>
 
-            {/* Top rule line */}
-            <div
-              ref={ruleTopRef}
-              className="h-[1px]"
-              style={{
-                backgroundColor: "#CCA662",
-                width: "0%",
-                marginBottom: "40px",
-              }}
-            />
+            <div className="ind-groups">
+              {groups.map((g) => (
+                <div key={g.label} className="ind-group">
+                  <p className="ind-label font-display" data-reveal>
+                    {g.label}
+                  </p>
+                  <ul className="ind-list">
+                    {g.names.map((name) => (
+                      <li key={name} className="ind-item font-display" data-reveal>
+                        {name}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
 
-            {/* Industrial group */}
-            <p
-              className="font-display font-bold uppercase"
-              style={{
-                fontSize: "11px",
-                letterSpacing: "4px",
-                color: "#CCA662",
-                marginBottom: "20px",
-              }}
-            >
-              Industrial
-            </p>
-            <ul
-              className="grid grid-cols-2 gap-x-8 gap-y-4"
-              style={{ listStyle: "none", padding: 0 }}
-            >
-              {industrial.map(renderName)}
-            </ul>
-
-            {/* Middle rule line */}
-            <div
-              ref={ruleMidRef}
-              className="h-[1px]"
-              style={{
-                backgroundColor: "#CCA662",
-                width: "0%",
-                marginTop: "36px",
-                marginBottom: "36px",
-              }}
-            />
-
-            {/* Corporate group */}
-            <p
-              className="font-display font-bold uppercase"
-              style={{
-                fontSize: "11px",
-                letterSpacing: "4px",
-                color: "#CCA662",
-                marginBottom: "20px",
-              }}
-            >
-              Corporate
-            </p>
-            <ul
-              className="grid grid-cols-2 gap-x-8 gap-y-4"
-              style={{ listStyle: "none", padding: 0 }}
-            >
-              {corporate.map(renderName)}
-            </ul>
-
-            {/* CTA */}
-            <div className="industries-home-cta-wrapper" style={{ marginTop: "48px" }}>
-              <Link
-                href="/industries"
-                className="industries-home-cta font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
-                style={{
-                  height: "52px",
-                  padding: "0 32px",
-                  borderRadius: "9999px",
-                  backgroundColor: "#CCA662",
-                  color: "#141F31",
-                  fontSize: "14px",
-                  letterSpacing: "3px",
-                }}
-              >
+            <div className="ind-cta" data-reveal>
+              <Link href="/industries" className="tr-btn tr-btn-ghost-dark">
                 See Industries
               </Link>
             </div>
@@ -298,9 +96,75 @@ export default function Industries() {
       </div>
 
       <style jsx>{`
-        @media (max-width: 767px) {
-          .industries-home-cta {
-            width: 100% !important;
+        .ind-grid {
+          display: grid;
+          grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+          gap: clamp(32px, 6vw, 96px);
+          align-items: start;
+        }
+        .ind-media {
+          aspect-ratio: 4 / 5;
+          overflow: hidden;
+          background: var(--tr-cream-deep);
+        }
+        .ind-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          filter: saturate(0.9);
+        }
+        .ind-groups {
+          margin-top: clamp(32px, 4vw, 48px);
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: clamp(24px, 4vw, 48px);
+          padding-top: 8px;
+        }
+        .ind-label {
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 0.28em;
+          text-transform: uppercase;
+          color: var(--tr-gold-text);
+          margin-bottom: 14px;
+        }
+        .ind-list {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+        .ind-item {
+          font-weight: 600;
+          font-size: clamp(19px, 1.6vw, 22px);
+          line-height: 1.15;
+          color: var(--tr-navy);
+          padding: 9px 0;
+          border-bottom: 1px solid rgba(20, 31, 49, 0.14);
+          transition: color 0.25s ease, padding-left 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .ind-item:hover {
+          color: var(--tr-gold-text);
+          padding-left: 6px;
+        }
+        .ind-cta {
+          margin-top: clamp(32px, 4vw, 48px);
+        }
+        [data-reveal] {
+          opacity: 0;
+        }
+        @media (max-width: 1023px) {
+          .ind-grid {
+            grid-template-columns: 1fr;
+            gap: 32px;
+          }
+          .ind-media {
+            aspect-ratio: 16 / 11;
+          }
+        }
+        @media (max-width: 639px) {
+          .ind-groups {
+            grid-template-columns: 1fr;
           }
         }
       `}</style>

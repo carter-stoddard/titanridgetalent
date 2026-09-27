@@ -4,9 +4,9 @@ export default function CareersHero() {
   return (
     <PageHero
       eyebrow="Careers"
-      headline="Find your next opportunity."
-      image="/images/jobs-hero.webp"
-      imageAlt="Candidate exploring career opportunities — Titan Ridge Talent"
+      headline="Find your next opportunity"
+      image="/images/office-jobs-careers-southern-california-titan-ridge.webp"
+      imageAlt="Modern office interior with cubicles and workstations"
     />
   );
 }

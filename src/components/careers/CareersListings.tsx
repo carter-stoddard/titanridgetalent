@@ -35,7 +35,7 @@ export default function CareersListings() {
     };
   }, []);
 
-  // Card entry animation
+  // Entry animation
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
@@ -61,28 +61,14 @@ export default function CareersListings() {
   return (
     <section
       ref={sectionRef}
-      className="careers-listings relative w-full"
-      style={{
-        backgroundColor: "#F5F4F0",
-        paddingTop: "60px",
-        paddingBottom: "120px",
-      }}
+      className="careers-listings tr-section relative w-full"
+      style={{ backgroundColor: "var(--tr-cream)", color: "var(--tr-navy)", paddingTop: 0 }}
     >
-      <div
-        className="careers-listings-inner"
-        style={{ paddingLeft: "80px", paddingRight: "80px" }}
-      >
+      <div className="tr-container">
         <div
           ref={cardRef}
-          className="careers-embed-card relative w-full overflow-hidden"
-          style={{
-            backgroundColor: "#FFFFFF",
-            border: "1px solid #D4D0C8",
-            borderRadius: "12px",
-            padding: "48px",
-            minHeight: "480px",
-            opacity: 0,
-          }}
+          className="careers-embed relative w-full"
+          style={{ minHeight: "480px", opacity: 0 }}
         >
           {/* Avionté / Compas widget renders into this container */}
           <div
@@ -95,15 +81,7 @@ export default function CareersListings() {
 
       <style jsx>{`
         @media (max-width: 767px) {
-          .careers-listings {
-            padding-bottom: 80px !important;
-          }
-          .careers-listings-inner {
-            padding-left: 24px !important;
-            padding-right: 24px !important;
-          }
-          .careers-embed-card {
-            padding: 24px !important;
+          .careers-embed {
             min-height: 380px !important;
           }
         }

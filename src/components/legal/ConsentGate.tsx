@@ -89,7 +89,7 @@ export default function ConsentGate() {
       {showBanner && (
         <div
           ref={bannerRef}
-          role="dialog"
+          role="region"
           aria-labelledby="cookie-consent-title"
           aria-describedby="cookie-consent-body"
           className="cookie-consent"

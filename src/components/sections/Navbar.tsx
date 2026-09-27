@@ -9,7 +9,6 @@ import { JOBS_VISIBLE, CAREERS_VISIBLE } from "@/lib/features";
 const navLinks = [
   { label: "About", href: "/about" },
   { label: "Mission", href: "/mission" },
-  { label: "Leadership", href: "/leadership" },
   ...(JOBS_VISIBLE ? [{ label: "Jobs", href: "/jobs" }] : []),
   { label: "Industries", href: "/industries" },
   { label: "Services", href: "/services" },
@@ -44,14 +43,15 @@ export default function Navbar() {
   return (
     <>
       <nav
+        aria-label="Main"
         className={`fixed top-0 left-0 right-0 z-50 transition-shadow duration-500 ease-out bg-titan-navy/95 backdrop-blur-md ${
           scrolled || menuOpen ? "shadow-lg shadow-black/20" : ""
         }`}
       >
-        <div className="flex w-full items-center justify-between px-6 py-5 sm:px-10 lg:px-20">
+        <div className="tr-container flex items-center justify-between py-5">
           <Link href="/" className="group flex items-center">
             <Image
-              src="/images/titan-ridge-logo.svg"
+              src="/images/titan-ridge-talent-logo.svg"
               alt="Titan Ridge Talent"
               width={180}
               height={115}
@@ -89,7 +89,7 @@ export default function Navbar() {
               href="/contact"
               className="hidden lg:inline-flex font-display rounded-full bg-gold-gradient px-5 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-[0.15em] text-titan-navy transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
             >
-              Hire Talent
+              Contact
             </Link>
 
             {/* Hamburger toggle — visible below lg */}
@@ -205,7 +205,7 @@ export default function Navbar() {
               transition: `opacity 0.4s ease ${navLinks.length * 0.06}s`,
             }}
           >
-            Hire Talent
+            Contact
           </Link>
 
           <div

@@ -8,43 +8,16 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function TestimonialsFeatured() {
   const sectionRef = useRef<HTMLElement>(null);
-  const frameRef = useRef<HTMLDivElement>(null);
   const leftColRef = useRef<HTMLDivElement>(null);
   const rightColRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const trigger = {
-        trigger: sectionRef.current,
-        start: "top 75%",
-        once: true,
-      };
-
-      gsap.fromTo(
-        frameRef.current,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.9,
-          ease: "power3.out",
-          scrollTrigger: trigger,
-        }
-      );
-
-      gsap.fromTo(
-        [leftColRef.current, rightColRef.current],
-        { opacity: 0, y: 24 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          ease: "power2.out",
-          stagger: 0.12,
-          delay: 0.3,
-          scrollTrigger: trigger,
-        }
-      );
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: sectionRef.current, start: "top 75%", once: true },
+      });
+      tl.fromTo(leftColRef.current, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 0);
+      tl.fromTo(rightColRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 0.15);
     }, sectionRef);
 
     return () => ctx.revert();
@@ -53,113 +26,24 @@ export default function TestimonialsFeatured() {
   return (
     <section
       ref={sectionRef}
-      className="testimonials-featured relative w-full"
-      style={{
-        backgroundColor: "#F5F4F0",
-        paddingTop: "120px",
-        paddingBottom: "120px",
-      }}
+      className="testimonials-featured tr-section relative w-full"
+      style={{ backgroundColor: "var(--tr-cream)", color: "var(--tr-navy)" }}
     >
-      <div
-        className="featured-inner"
-        style={{ paddingLeft: "80px", paddingRight: "80px" }}
-      >
-        <div
-          ref={frameRef}
-          className="featured-frame"
-          style={{
-            backgroundColor: "#141F31",
-            borderRadius: "12px",
-            padding: "72px",
-            opacity: 0,
-          }}
-        >
+      <div className="tr-container">
         <div className="featured-grid">
-          {/* LEFT — Headshot + attribution */}
-          <div
-            ref={leftColRef}
-            className="flex flex-col items-center text-center"
-            style={{ opacity: 0 }}
-          >
-            <div
-              className="flex items-center justify-center"
-              style={{ width: "280px", height: "280px" }}
-              aria-hidden="true"
-            >
-              <span
-                className="font-display font-black select-none pointer-events-none"
-                style={{
-                  fontSize: "360px",
-                  lineHeight: 0.8,
-                  color: "#CCA662",
-                  transform: "translateY(0.12em)",
-                  display: "block",
-                }}
-              >
-                &ldquo;
-              </span>
-            </div>
-            <p
-              className="font-display font-bold"
-              style={{
-                fontSize: "20px",
-                color: "#F5F4F0",
-                marginTop: "20px",
-              }}
-            >
-              Sarah M.
-            </p>
-            <p
-              className="font-display"
-              style={{
-                fontSize: "14px",
-                letterSpacing: "1px",
-                color: "#CCA662",
-                marginTop: "6px",
-              }}
-            >
-              VP of Operations
-            </p>
-            <p
-              className="font-display font-medium uppercase"
-              style={{
-                fontSize: "12px",
-                letterSpacing: "3px",
-                color: "#CCA662",
-                marginTop: "8px",
-              }}
-            >
-              Employer
-            </p>
+          {/* LEFT — attribution */}
+          <div ref={leftColRef} className="featured-head" style={{ opacity: 0 }}>
+            <p className="tr-eyebrow">Employer</p>
+            <p className="featured-head-name font-display">Sarah M.</p>
+            <p className="featured-head-title font-display">VP of Operations</p>
           </div>
 
           {/* RIGHT — Quote */}
-          <div ref={rightColRef} className="relative" style={{ opacity: 0 }}>
-            <span
-              aria-hidden="true"
-              className="font-display font-black select-none pointer-events-none"
-              style={{
-                position: "absolute",
-                top: "-40px",
-                left: "-20px",
-                fontSize: "120px",
-                lineHeight: 1,
-                color: "rgba(204, 166, 98, 0.15)",
-                zIndex: 0,
-              }}
-            >
+          <div ref={rightColRef} className="featured-quote" style={{ opacity: 0 }}>
+            <span className="featured-mark font-display" aria-hidden="true">
               &ldquo;
             </span>
-            <p
-              className="font-body italic relative"
-              style={{
-                fontSize: "clamp(20px, 2vw, 24px)",
-                lineHeight: 1.7,
-                color: "#F5F4F0",
-                marginBottom: "32px",
-                zIndex: 1,
-              }}
-            >
+            <p className="featured-text font-body">
               We&apos;d tried four agencies before Titan Ridge. None of them
               took the time to understand what we actually needed. Adrian did.
               He asked questions nobody else had asked, told us when a
@@ -168,61 +52,94 @@ export default function TestimonialsFeatured() {
               That&apos;s the standard we hold every partner to now.
             </p>
 
-            <div
-              className="gold-rule"
-                style={{
-                                marginBottom: "24px",
-              }}
-            />
-
-            <p
-              className="font-display font-bold"
-              style={{
-                fontSize: "16px",
-                color: "#CCA662",
-              }}
-            >
-              Sarah M.
-            </p>
-            <p
-              className="font-display uppercase"
-              style={{
-                fontSize: "14px",
-                letterSpacing: "1px",
-                color: "rgba(245, 244, 240, 0.6)",
-                marginTop: "4px",
-              }}
-            >
-              VP of Operations
-            </p>
+            <div className="featured-attr">
+              <span className="featured-name font-display">Sarah M.</span>
+              <span className="featured-dot" aria-hidden="true" />
+              <span className="featured-title font-display">VP of Operations</span>
+            </div>
           </div>
-        </div>
         </div>
       </div>
 
       <style jsx>{`
         .featured-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 60px;
-          align-items: center;
+          grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+          gap: clamp(40px, 6vw, 96px);
+          align-items: start;
         }
-
-        @media (max-width: 767px) {
-          .testimonials-featured {
-            padding-top: 80px !important;
-            padding-bottom: 80px !important;
-          }
-          .featured-inner {
-            padding-left: 24px !important;
-            padding-right: 24px !important;
-          }
-          .featured-frame {
-            padding: 40px 28px !important;
-          }
+        .featured-head-name {
+          margin-top: 20px;
+          font-weight: 700;
+          font-size: 28px;
+          line-height: 1.1;
+          color: var(--tr-navy);
+        }
+        .featured-head-title {
+          margin-top: 8px;
+          font-size: 13px;
+          font-weight: 600;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: var(--tr-gold-text);
+        }
+        .featured-quote {
+          position: relative;
+          padding-top: clamp(24px, 3vw, 48px);
+          padding-left: clamp(0px, 2vw, 24px);
+        }
+        .featured-mark {
+          position: absolute;
+          top: -0.15em;
+          left: -0.1em;
+          font-weight: 900;
+          font-size: clamp(140px, 16vw, 220px);
+          line-height: 1;
+          color: rgba(204, 166, 98, 0.18);
+          pointer-events: none;
+          user-select: none;
+        }
+        .featured-text {
+          position: relative;
+          font-size: clamp(24px, 2.6vw, 36px);
+          line-height: 1.4;
+          color: var(--tr-navy);
+          max-width: 24em;
+          text-wrap: pretty;
+        }
+        .featured-attr {
+          margin-top: 32px;
+          display: flex;
+          align-items: baseline;
+          gap: 12px;
+          flex-wrap: wrap;
+        }
+        .featured-name {
+          font-weight: 700;
+          font-size: 17px;
+          color: var(--tr-navy);
+        }
+        .featured-dot {
+          width: 4px;
+          height: 4px;
+          border-radius: 50%;
+          background: var(--tr-gold);
+          transform: translateY(-3px);
+        }
+        .featured-title {
+          font-size: 13px;
+          font-weight: 600;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: var(--tr-gold-text);
+        }
+        @media (max-width: 1023px) {
           .featured-grid {
             grid-template-columns: 1fr;
-            gap: 48px;
+            gap: 40px;
+          }
+          .featured-quote {
+            order: -1;
           }
         }
       `}</style>

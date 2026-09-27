@@ -76,46 +76,18 @@ export default function FeaturedListings() {
   return (
     <section
       ref={sectionRef}
-      className="featured-listings relative w-full"
-      style={{
-        backgroundColor: "#F5F4F0",
-        paddingTop: "60px",
-        paddingBottom: "60px",
-      }}
+      className="featured-listings tr-section relative w-full"
+      aria-labelledby="featured-listings-heading"
+      style={{ backgroundColor: "var(--tr-cream)", color: "var(--tr-navy)", paddingTop: 0 }}
     >
-      <div
-        className="featured-listings-inner"
-        style={{ paddingLeft: "80px", paddingRight: "80px" }}
-      >
-        <div
-          className="featured-listings-header"
-          style={{
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "space-between",
-            gap: "24px",
-            marginBottom: "40px",
-          }}
-        >
+      <div className="tr-container">
+        <div className="featured-listings-header">
           <div>
-            <p
-              className="font-display font-medium uppercase"
-              style={{
-                fontSize: "11px",
-                letterSpacing: "4px",
-                color: "#CCA662",
-                marginBottom: "16px",
-              }}
-            >
-              Now Hiring
-            </p>
+            <p className="tr-eyebrow">Now Hiring</p>
             <h2
-              className="font-display font-semibold uppercase"
-              style={{
-                fontSize: "clamp(36px, 4.5vw, 52px)",
-                lineHeight: 0.95,
-                color: "#141F31",
-              }}
+              id="featured-listings-heading"
+              className="tr-h2"
+              style={{ marginTop: "20px", color: "var(--tr-navy)" }}
             >
               Featured Openings
             </h2>
@@ -126,23 +98,13 @@ export default function FeaturedListings() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Follow Titan Ridge Talent on LinkedIn"
-            className="font-display font-medium uppercase"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "10px",
-              fontSize: "12px",
-              letterSpacing: "2px",
-              color: "#141F31",
-              whiteSpace: "nowrap",
-              paddingBottom: "6px",
-            }}
+            className="featured-linkedin font-display uppercase"
           >
             <svg
               width="20"
               height="20"
               viewBox="0 0 24 24"
-              fill="#CCA662"
+              fill="var(--tr-gold)"
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
             >
@@ -157,12 +119,8 @@ export default function FeaturedListings() {
             <div
               key={listing.src}
               ref={setCard(i)}
-              className="featured-listing-card relative overflow-hidden"
-              style={{
-                border: "1px solid #D4D0C8",
-                borderRadius: "12px",
-                opacity: 0,
-              }}
+              className="featured-listing relative overflow-hidden"
+              style={{ opacity: 0 }}
             >
               <button
                 type="button"
@@ -195,13 +153,13 @@ export default function FeaturedListings() {
           style={{
             fontSize: "clamp(20px, 2.2vw, 28px)",
             lineHeight: 1.1,
-            color: "#141F31",
+            color: "var(--tr-navy)",
             textAlign: "center",
             marginTop: "64px",
           }}
         >
           Apply directly below{" "}
-          <span aria-hidden="true" style={{ color: "#CCA662" }}>
+          <span aria-hidden="true" style={{ color: "var(--tr-gold-text)" }}>
             ↓
           </span>
         </p>
@@ -254,7 +212,6 @@ export default function FeaturedListings() {
               margin: "auto",
               width: "min(860px, 100%)",
               cursor: "default",
-              borderRadius: "8px",
               overflow: "hidden",
               boxShadow: "0 24px 80px rgba(0, 0, 0, 0.5)",
             }}
@@ -274,19 +231,38 @@ export default function FeaturedListings() {
       )}
 
       <style jsx>{`
+        .featured-listings-header {
+          display: flex;
+          align-items: flex-end;
+          justify-content: space-between;
+          gap: 24px;
+          margin-bottom: 48px;
+        }
+        .featured-linkedin {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          font-weight: 600;
+          font-size: 13px;
+          letter-spacing: 0.12em;
+          color: var(--tr-navy);
+          white-space: nowrap;
+          padding-bottom: 6px;
+        }
         .featured-listings-grid {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(4, minmax(0, 1fr));
           gap: 24px;
+        }
+        @media (max-width: 1023px) {
+          .featured-listings-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
         }
         @media (max-width: 767px) {
           .featured-listings-header {
-            flex-direction: column !important;
-            align-items: flex-start !important;
-          }
-          .featured-listings-inner {
-            padding-left: 24px !important;
-            padding-right: 24px !important;
+            flex-direction: column;
+            align-items: flex-start;
           }
           .featured-listings-grid {
             grid-template-columns: 1fr;

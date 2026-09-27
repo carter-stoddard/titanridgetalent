@@ -1,13 +1,13 @@
 # Titan Ridge Talent
 
-> Relationship-first recruiting firm for industrial and corporate teams. Based in Fullerton, California. Founder-led searches across aerospace, manufacturing, logistics, finance, HR, executive search, and more.
+> Relationship-first recruiting firm for industrial and administrative teams. Based in Fullerton, California. Founder-led searches across aerospace, manufacturing, logistics, finance, HR, executive search, and more.
 
-Titan Ridge Talent Solutions LLC is an industrial and corporate recruiting firm headquartered in Fullerton, California. We connect employers with vetted candidates through real conversations, not resume blasts. Every search is run personally by founder Adrian Ibarra.
+Titan Ridge Talent Solutions LLC is an industrial and administrative recruiting firm headquartered in Fullerton, California. We connect employers with vetted candidates through real conversations, not resume blasts. Every search is run personally by founder Adrian Ibarra.
 
 ## What we do
 
 - **Industrial recruiting** — Aerospace, Automotive, Food & Beverage, Light Industrial, Manufacturing, Logistics, Skilled Trades, Operations, Warehouses
-- **Corporate recruiting** — Human Resources, Executive Search, Finance, Administration, Technology, Sales
+- **Administrative recruiting** — Human Resources, Executive Search, Finance, Administration, Technology, Sales
 - **Direct placements** — full-time roles, single point of contact, no portals or talent-pool middlemen
 
 ## How we work
@@ -23,7 +23,7 @@ Titan Ridge Talent Solutions LLC is an industrial and corporate recruiting firm 
 - [About](https://titanridgetalent.com/about) — company story and values
 - [Mission](https://titanridgetalent.com/mission) — the four pillars guiding our work
 - [Founder](https://titanridgetalent.com/founders) — Adrian Ibarra, founder bio
-- [Industries](https://titanridgetalent.com/industries) — full sector breakdown for industrial and corporate tracks
+- [Industries](https://titanridgetalent.com/industries) — full sector breakdown for industrial and administrative tracks
 - [Testimonials](https://titanridgetalent.com/testimonials) — client and candidate feedback
 - [Contact](https://titanridgetalent.com/contact) — get in touch, by appointment only
 
@@ -39,4 +39,4 @@ Titan Ridge Talent Solutions LLC is an industrial and corporate recruiting firm 
 - **Legal name**: Titan Ridge Talent Solutions LLC
 - **Brand**: Titan Ridge Talent
 - **Founded**: 2025
-- **Tagline**: Relationships First. Results Always.
+- **Tagline**: Where Talent Meets Its Peaks

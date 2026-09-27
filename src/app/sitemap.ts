@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { JOBS_VISIBLE, CAREERS_VISIBLE } from "@/lib/features";
+import { regions } from "@/lib/locations";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://titanridgetalent.com";
@@ -8,7 +9,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: baseUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
     { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/mission`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${baseUrl}/leadership`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     ...(JOBS_VISIBLE
       ? [{ url: `${baseUrl}/jobs`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.9 }]
       : []),
@@ -17,6 +17,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...(CAREERS_VISIBLE
       ? [{ url: `${baseUrl}/careers`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.9 }]
       : []),
+    { url: `${baseUrl}/locations`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    ...regions.map((r) => ({ url: `${baseUrl}/locations/${r.slug}`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 })),
     { url: `${baseUrl}/testimonials`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
     { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/privacy`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },

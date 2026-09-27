@@ -39,6 +39,8 @@ body {
 
 html {
   scroll-behavior: auto;
+  /* Fixed navbar height so focused/anchored elements never land underneath it (WCAG 2.4.11). */
+  scroll-padding-top: 112px;
 }
 
 /* Safe area padding for notched devices */
@@ -135,10 +137,11 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid var(--titan-gold);
-  outline-offset: 3px;
+  /* Two-tone ring: navy outline reads on cream, the offwhite halo reads on navy. */
+  outline: 3px solid var(--titan-navy);
+  outline-offset: 2px;
   border-radius: 2px;
-  box-shadow: 0 0 0 4px rgba(204, 166, 98, 0.25);
+  box-shadow: 0 0 0 6px var(--titan-offwhite);
 }
 
 /* ──────────────────────────────────────────────────────────
@@ -167,4 +170,132 @@ textarea:focus-visible,
   top: 16px;
   outline: 2px solid var(--titan-navy);
   outline-offset: 2px;
+}
+
+/* ──────────────────────────────────────────────────────────
+   HOME PAGE DESIGN SYSTEM — shared layout + type primitives
+   ────────────────────────────────────────────────────────── */
+:root {
+  --tr-cream: #F5F4F0;
+  --tr-cream-deep: #ECEAE3;
+  --tr-navy: #141F31;
+  --tr-navy-deep: #0E1626;
+  --tr-gold: #CCA662;
+  --tr-ink: #2A2A2A;
+  /* Darker gold for small text on light backgrounds (4.6:1 on cream). #CCA662 stays for fills and for text on navy. */
+  --tr-gold-text: #8C6828;
+  --tr-gutter: clamp(16px, 5vw, 80px);
+  --tr-max: 1440px;
+}
+
+.tr-container {
+  width: 100%;
+  max-width: var(--tr-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--tr-gutter);
+  padding-right: var(--tr-gutter);
+}
+
+.tr-section {
+  padding-top: clamp(80px, 9vw, 140px);
+  padding-bottom: clamp(88px, 10vw, 152px);
+}
+
+.tr-eyebrow {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--tr-gold-text);
+}
+.tr-h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: clamp(40px, 4.8vw, 64px);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.tr-body {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.75;
+  max-width: 52ch;
+  text-wrap: pretty;
+}
+
+.tr-btn {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 54px;
+  padding: 0 34px;
+  border-radius: 9999px;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  will-change: transform;
+}
+.tr-btn:hover { transform: translateY(-2px); }
+.tr-btn:active { transform: translateY(0) scale(0.98); }
+.tr-btn-gold {
+  background: linear-gradient(135deg, var(--gold-start), var(--gold-mid), var(--gold-end));
+  color: var(--tr-navy);
+}
+.tr-btn-gold:hover { box-shadow: 0 14px 34px rgba(204, 166, 98, 0.32); }
+.tr-btn-ghost-light {
+  background: transparent;
+  color: var(--tr-cream);
+  border: 1.5px solid rgba(245, 244, 240, 0.6);
+}
+.tr-btn-ghost-light:hover { border-color: var(--tr-gold); color: var(--tr-gold); }
+.tr-btn-ghost-dark {
+  background: transparent;
+  color: var(--tr-navy);
+  border: 1.5px solid rgba(20, 31, 49, 0.7);
+}
+.tr-btn-ghost-dark:hover { background: var(--tr-navy); color: var(--tr-cream); border-color: var(--tr-navy); }
+
+/* Subtle film grain to break flat surfaces (pointer-events off) */
+.tr-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (max-width: 767px) {
+  .tr-btn { width: 100%; }
+}
+
+/* ──────────────────────────────────────────────────────────
+   ACCESSIBILITY — reduced motion (WCAG 2.3.3 / 2.2.2)
+   Also guarantees scroll-revealed content is visible when
+   animations are off (GSAP starts elements at opacity 0).
+   ────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-reveal],
+  [style*="opacity: 0"] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

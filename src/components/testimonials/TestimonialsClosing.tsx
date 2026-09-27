@@ -10,227 +10,108 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function TestimonialsClosing() {
   const sectionRef = useRef<HTMLElement>(null);
-  const itemsRef = useRef<(HTMLElement | null)[]>([]);
-  const ruleRef = useRef<HTMLDivElement>(null);
+  const mediaRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const trigger = {
-        trigger: sectionRef.current,
-        start: "top 75%",
-        once: true,
-      };
-
-      gsap.fromTo(
-        ruleRef.current,
-        { scaleX: 0 },
-        {
-          scaleX: 1,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: trigger,
-        }
-      );
-
-      gsap.fromTo(
-        itemsRef.current.filter(Boolean),
-        { opacity: 0, y: 24 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          ease: "power2.out",
-          stagger: 0.08,
-          delay: 0.15,
-          scrollTrigger: trigger,
-        }
-      );
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: sectionRef.current, start: "top 72%", once: true },
+      });
+      tl.fromTo(mediaRef.current, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.9, ease: "power2.out" }, 0);
+      const items = contentRef.current?.querySelectorAll<HTMLElement>("[data-reveal]") ?? [];
+      tl.fromTo(items, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.75, ease: "power2.out", stagger: 0.09 }, 0.1);
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
-  const setItem = (i: number) => (el: HTMLElement | null) => {
-    itemsRef.current[i] = el;
-  };
-
   return (
     <section
       ref={sectionRef}
-      className="testimonials-closing relative w-full"
-      style={{
-        backgroundColor: "#F5F4F0",
-        paddingTop: "120px",
-        paddingBottom: "120px",
-      }}
+      className="testimonials-closing tr-section relative w-full"
+      aria-labelledby="testimonials-closing-heading"
+      style={{ backgroundColor: "var(--tr-cream)", color: "var(--tr-navy)" }}
     >
-      <div
-        className="testimonials-closing-outer"
-        style={{ paddingLeft: "80px", paddingRight: "80px" }}
-      >
-        <div
-          className="testimonials-closing-card relative overflow-hidden"
-          style={{
-            borderRadius: "12px",
-            paddingTop: "120px",
-            paddingBottom: "120px",
-          }}
-        >
-          {/* Background image */}
-          <img
-            src="/images/testimonials-closing-bg.webp"
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 h-full w-full object-cover"
-            style={{ objectPosition: "center", zIndex: 0 }}
-          />
-
-          {/* Cinematic gradient overlay — darker at edges, clearer through center */}
-          <div
-            aria-hidden="true"
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(ellipse at center, rgba(20, 31, 49, 0.55) 0%, rgba(20, 31, 49, 0.82) 70%, rgba(20, 31, 49, 0.92) 100%)",
-              zIndex: 1,
-            }}
-          />
-
-      <div
-        className="testimonials-closing-inner relative flex flex-col items-center text-center"
-        style={{ paddingLeft: "60px", paddingRight: "60px", zIndex: 2 }}
-      >
-        {/* Gold accent rule */}
-        <div
-          ref={ruleRef}
-          aria-hidden="true"
-          style={{
-            width: "48px",
-            height: "2px",
-            backgroundColor: "#CCA662",
-            marginBottom: "32px",
-            transformOrigin: "center",
-          }}
-        />
-
-        <p
-          ref={setItem(0)}
-          className="font-display font-medium uppercase"
-          style={{
-            fontSize: "11px",
-            letterSpacing: "4px",
-            color: "#CCA662",
-            marginBottom: "16px",
-            opacity: 0,
-          }}
-        >
-          Your Turn
-        </p>
-
-        <h2
-          ref={setItem(1)}
-          className="font-display font-semibold uppercase"
-          style={{
-            fontSize: "clamp(40px, 5vw, 56px)",
-            lineHeight: 0.95,
-            color: "#FFFFFF",
-            marginBottom: "20px",
-            maxWidth: "900px",
-            textShadow: "0 2px 24px rgba(0, 0, 0, 0.35)",
-            opacity: 0,
-          }}
-        >
-          Ready to Be the Next Success Story?
-        </h2>
-
-        <p
-          ref={setItem(2)}
-          className="font-body italic"
-          style={{
-            fontSize: "17px",
-            lineHeight: 1.6,
-            color: "rgba(255, 255, 255, 0.75)",
-            marginBottom: "40px",
-            maxWidth: "640px",
-            opacity: 0,
-          }}
-        >
-          Whether you&apos;re hiring or looking, let&apos;s have a real
-          conversation.
-        </p>
-
-        <div
-          ref={setItem(3) as (el: HTMLDivElement | null) => void}
-          className="closing-buttons flex"
-          style={{ gap: "16px", opacity: 0 }}
-        >
-          <Link
-            href="/contact"
-            className="closing-cta font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/30 hover:-translate-y-0.5 active:translate-y-0"
-            style={{
-              height: "54px",
-              padding: "0 36px",
-              borderRadius: "9999px",
-              backgroundColor: "#CCA662",
-              color: "#141F31",
-              fontSize: "14px",
-              letterSpacing: "3px",
-            }}
-          >
-            Let&apos;s Talk Hiring
-          </Link>
-          {JOBS_VISIBLE && (
-            <a
-              href="/jobs"
-              className="closing-cta closing-cta-ghost font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
-              style={{
-                height: "54px",
-                padding: "0 36px",
-                borderRadius: "9999px",
-                backgroundColor: "transparent",
-                border: "1.5px solid rgba(255, 255, 255, 0.7)",
-                color: "#FFFFFF",
-                fontSize: "14px",
-                letterSpacing: "3px",
-              }}
+      <div className="tr-container">
+        <div className="tclosing-grid">
+          <div ref={contentRef} className="tclosing-content">
+            <p className="tr-eyebrow" data-reveal>
+              Your Turn
+            </p>
+            <h2
+              id="testimonials-closing-heading"
+              className="tr-h2"
+              data-reveal
+              style={{ marginTop: "20px", color: "var(--tr-navy)" }}
             >
-              See Open Roles
-            </a>
-          )}
-        </div>
-      </div>
+              Ready to Be the Next Success Story?
+            </h2>
+            <p className="tr-body" data-reveal style={{ color: "var(--tr-ink)", marginTop: "24px", maxWidth: "44ch" }}>
+              Whether you&apos;re hiring or looking, let&apos;s have a real
+              conversation.
+            </p>
+            <div className="tclosing-actions" data-reveal>
+              <a href={JOBS_VISIBLE ? "/jobs" : "/careers"} className="tr-btn tr-btn-gold">
+                Find a Job
+              </a>
+              <Link href="/contact?role=company" className="tr-btn tr-btn-ghost-dark">
+                Find Talent
+              </Link>
+            </div>
+          </div>
+
+          <div ref={mediaRef} className="tclosing-media" style={{ opacity: 0 }}>
+            <img
+              src="/images/client-testimonials-titan-ridge-talent-recruiting.webp"
+              alt=""
+              aria-hidden="true"
+              className="tclosing-img"
+            />
+          </div>
         </div>
       </div>
 
-      <style>{`
-        .closing-cta-ghost:hover {
-          border-color: #CCA662 !important;
-          color: #CCA662 !important;
+      <style jsx>{`
+        .tclosing-grid {
+          display: grid;
+          grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+          gap: clamp(32px, 6vw, 96px);
+          align-items: center;
+        }
+        .tclosing-actions {
+          margin-top: 36px;
+          display: flex;
+          gap: 16px;
+          flex-wrap: wrap;
+        }
+        .tclosing-media {
+          aspect-ratio: 4 / 5;
+          overflow: hidden;
+          background: var(--tr-cream-deep);
+        }
+        .tclosing-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          filter: saturate(0.9);
+        }
+        [data-reveal] {
+          opacity: 0;
+        }
+        @media (max-width: 1023px) {
+          .tclosing-grid {
+            grid-template-columns: 1fr;
+            gap: 32px;
+          }
+          .tclosing-media {
+            aspect-ratio: 16 / 11;
+          }
         }
         @media (max-width: 767px) {
-          .testimonials-closing {
-            padding-top: 64px !important;
-            padding-bottom: 64px !important;
-          }
-          .testimonials-closing-outer {
-            padding-left: 24px !important;
-            padding-right: 24px !important;
-          }
-          .testimonials-closing-card {
-            padding-top: 80px !important;
-            padding-bottom: 80px !important;
-          }
-          .testimonials-closing-inner {
-            padding-left: 24px !important;
-            padding-right: 24px !important;
-          }
-          .closing-buttons {
+          .tclosing-actions {
             flex-direction: column;
-            width: 100%;
-            max-width: 360px;
-          }
-          .closing-cta {
-            width: 100%;
           }
         }
       `}</style>

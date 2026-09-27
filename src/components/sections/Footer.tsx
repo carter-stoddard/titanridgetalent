@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { JOBS_VISIBLE } from "@/lib/features";
+import { regions } from "@/lib/locations";
 
 const socials = [
   {
@@ -53,20 +54,24 @@ const socials = [
 const companyLinks = [
   { label: "About", href: "/about" },
   { label: "Mission", href: "/mission" },
-  { label: "Leadership", href: "/leadership" },
   { label: "Industries", href: "/industries" },
   { label: "Services", href: "/services" },
   { label: "Testimonials", href: "/testimonials" },
 ];
 
+const areaLinks = [
+  ...regions.map((r) => ({ label: r.name, href: `/locations/${r.slug}` })),
+  { label: "All Locations", href: "/locations" },
+];
+
 const workLinks = [
-  { label: "I'm Hiring", href: "/contact" },
+  { label: "Find Talent", href: "/contact?role=company" },
   ...(JOBS_VISIBLE
     ? [
-        { label: "I'm Looking for Work", href: "/jobs" },
+        { label: "Find a Job", href: "/jobs" },
         { label: "Jobs Available", href: "/jobs" },
       ]
-    : []),
+    : [{ label: "Find a Job", href: "/careers" }]),
   { label: "Contact Us", href: "/contact" },
 ];
 
@@ -82,7 +87,7 @@ export default function Footer() {
           {/* COLUMN 1 — Brand */}
           <div className="footer-col footer-col-brand">
             <Image
-              src="/images/titan-ridge-logo.svg"
+              src="/images/titan-ridge-talent-logo.svg"
               alt="Titan Ridge Talent"
               width={260}
               height={165}
@@ -94,11 +99,11 @@ export default function Footer() {
               style={{
                 fontSize: "14px",
                 lineHeight: 1.6,
-                color: "rgba(255, 255, 255, 0.45)",
+                color: "rgba(255, 255, 255, 0.72)",
                 marginTop: "20px",
               }}
             >
-              Built on Relationships. Driven by Results.
+              Where Talent Meets Its Peaks
             </p>
 
             {/* Social icons */}
@@ -129,7 +134,7 @@ export default function Footer() {
             <p
               className="font-display font-bold uppercase footer-label"
               style={{
-                fontSize: "11px",
+                fontSize: "12px",
                 letterSpacing: "4px",
                 color: "#CCA662",
                 marginBottom: "20px",
@@ -145,7 +150,7 @@ export default function Footer() {
                     className="footer-link font-display"
                     style={{
                       fontSize: "15px",
-                      color: "rgba(255, 255, 255, 0.65)",
+                      color: "rgba(255, 255, 255, 0.78)",
                       display: "inline-block",
                       borderLeft: "2px solid transparent",
                       paddingLeft: "12px",
@@ -165,7 +170,7 @@ export default function Footer() {
             <p
               className="font-display font-bold uppercase footer-label"
               style={{
-                fontSize: "11px",
+                fontSize: "12px",
                 letterSpacing: "4px",
                 color: "#CCA662",
                 marginBottom: "20px",
@@ -181,7 +186,7 @@ export default function Footer() {
                     className="footer-link font-display"
                     style={{
                       fontSize: "15px",
-                      color: "rgba(255, 255, 255, 0.65)",
+                      color: "rgba(255, 255, 255, 0.78)",
                       display: "inline-block",
                       borderLeft: "2px solid transparent",
                       paddingLeft: "12px",
@@ -196,12 +201,48 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* COLUMN 4 — Get In Touch */}
+          {/* COLUMN 4 — Areas We Serve */}
           <div className="footer-col">
             <p
               className="font-display font-bold uppercase footer-label"
               style={{
-                fontSize: "11px",
+                fontSize: "12px",
+                letterSpacing: "4px",
+                color: "#CCA662",
+                marginBottom: "20px",
+              }}
+            >
+              Areas We Serve
+            </p>
+            <ul className="footer-links">
+              {areaLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="footer-link font-display"
+                    style={{
+                      fontSize: "15px",
+                      color: "rgba(255, 255, 255, 0.78)",
+                      display: "inline-block",
+                      borderLeft: "2px solid transparent",
+                      paddingLeft: "12px",
+                      marginLeft: "-14px",
+                      transition: "all 0.2s ease",
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* COLUMN 5 — Get In Touch */}
+          <div className="footer-col">
+            <p
+              className="font-display font-bold uppercase footer-label"
+              style={{
+                fontSize: "12px",
                 letterSpacing: "4px",
                 color: "#CCA662",
                 marginBottom: "20px",
@@ -218,7 +259,7 @@ export default function Footer() {
                 alignItems: "center",
                 gap: "12px",
                 fontSize: "14px",
-                color: "rgba(255, 255, 255, 0.65)",
+                color: "rgba(255, 255, 255, 0.78)",
                 marginBottom: "12px",
                 transition: "color 0.2s ease",
               }}
@@ -250,7 +291,7 @@ export default function Footer() {
                 alignItems: "center",
                 gap: "12px",
                 fontSize: "14px",
-                color: "rgba(255, 255, 255, 0.65)",
+                color: "rgba(255, 255, 255, 0.78)",
                 marginBottom: "12px",
                 transition: "color 0.2s ease",
               }}
@@ -281,7 +322,7 @@ export default function Footer() {
                 gap: "12px",
                 fontSize: "14px",
                 lineHeight: 1.6,
-                color: "rgba(255, 255, 255, 0.65)",
+                color: "rgba(255, 255, 255, 0.78)",
                 marginBottom: "28px",
               }}
             >
@@ -319,7 +360,7 @@ export default function Footer() {
                 letterSpacing: "3px",
               }}
             >
-              Start the Conversation
+              Contact
             </a>
           </div>
         </div>
@@ -332,9 +373,9 @@ export default function Footer() {
           <p
             className="font-display"
             style={{
-              fontSize: "12px",
+              fontSize: "14px",
               letterSpacing: "1px",
-              color: "rgba(255, 255, 255, 0.35)",
+              color: "rgba(255, 255, 255, 0.7)",
             }}
           >
             © 2026 Titan Ridge Talent Solutions LLC. All rights reserved.
@@ -344,8 +385,8 @@ export default function Footer() {
               href="/privacy"
               className="footer-legal font-display"
               style={{
-                fontSize: "12px",
-                color: "rgba(255, 255, 255, 0.35)",
+                fontSize: "14px",
+                color: "rgba(255, 255, 255, 0.7)",
                 transition: "color 0.2s ease",
               }}
             >
@@ -353,8 +394,8 @@ export default function Footer() {
             </Link>
             <span
               style={{
-                fontSize: "12px",
-                color: "rgba(255, 255, 255, 0.35)",
+                fontSize: "14px",
+                color: "rgba(255, 255, 255, 0.7)",
               }}
             >
               ·
@@ -363,8 +404,8 @@ export default function Footer() {
               href="/terms"
               className="footer-legal font-display"
               style={{
-                fontSize: "12px",
-                color: "rgba(255, 255, 255, 0.35)",
+                fontSize: "14px",
+                color: "rgba(255, 255, 255, 0.7)",
                 transition: "color 0.2s ease",
               }}
             >
@@ -372,8 +413,8 @@ export default function Footer() {
             </Link>
             <span
               style={{
-                fontSize: "12px",
-                color: "rgba(255, 255, 255, 0.35)",
+                fontSize: "14px",
+                color: "rgba(255, 255, 255, 0.7)",
               }}
             >
               ·
@@ -382,8 +423,8 @@ export default function Footer() {
               href="/accessibility"
               className="footer-legal font-display"
               style={{
-                fontSize: "12px",
-                color: "rgba(255, 255, 255, 0.35)",
+                fontSize: "14px",
+                color: "rgba(255, 255, 255, 0.7)",
                 transition: "color 0.2s ease",
               }}
             >
@@ -399,11 +440,13 @@ export default function Footer() {
           width: auto;
         }
         .footer-body {
-          padding: 100px 80px;
+          max-width: var(--tr-max);
+          margin: 0 auto;
+          padding: 100px var(--tr-gutter);
         }
         .footer-grid {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: 1.4fr repeat(4, 1fr);
           gap: 48px;
           align-items: start;
         }
@@ -424,7 +467,9 @@ export default function Footer() {
           flex-direction: row;
           justify-content: space-between;
           align-items: center;
-          padding: 24px 80px;
+          max-width: var(--tr-max);
+          margin: 0 auto;
+          padding: 24px var(--tr-gutter);
           gap: 12px;
         }
         .footer-legal-row {
@@ -442,13 +487,17 @@ export default function Footer() {
         .footer-contact-row:hover {
           color: #cca662 !important;
         }
+        .footer-social-icon {
+          min-width: 44px;
+          min-height: 44px;
+        }
         .footer-social-icon:hover {
           color: #ffffff !important;
         }
 
         @media (max-width: 767px) {
           .footer-body {
-            padding: 60px 24px;
+            padding: 60px var(--tr-gutter);
           }
           .footer-grid {
             grid-template-columns: 1fr;
@@ -492,7 +541,7 @@ export default function Footer() {
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 24px;
+            padding: 24px var(--tr-gutter);
             gap: 8px;
             text-align: center;
           }

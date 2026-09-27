@@ -7,14 +7,14 @@ import { JOBS_VISIBLE } from "@/lib/features";
 // Replace placeholder slides with real WebPs (2400px-wide) when ready.
 // To "fill" a slide, set `src` to the path and clear `placeholder`.
 type HeroSlide =
-  | { src: string; alt: string; placeholder?: false }
+  | { src: string; alt: string; placeholder?: false; position?: string; tall?: string }
   | { placeholder: true; label: string };
 
 const heroImages: HeroSlide[] = [
-  { src: "/images/hero-mountain.webp", alt: "Mountain ridge at golden hour" },
-  { src: "/images/hero-1.webp", alt: "Operator at a CNC machine on the shop floor" },
-  { src: "/images/hero-2.webp", alt: "Professional working in a corporate office" },
-  { src: "/images/hero-3.webp", alt: "Forklift operator in a distribution warehouse" },
+  { src: "/images/staffing-agency-orange-county-mountain-ridge-hero.webp", alt: "Sunlit mountain ridge at golden hour", position: "center top", tall: "150%" },
+  { src: "/images/cnc-machine-operator-manufacturing-staffing-southern-california.webp", alt: "Operator at a CNC machine on the shop floor" },
+  { src: "/images/administrative-professional-office-staffing-orange-county.webp", alt: "Professional working in an administrative office" },
+  { src: "/images/forklift-operator-warehouse-staffing-southern-california.webp", alt: "Forklift operator in a distribution warehouse" },
 ];
 
 const SLIDE_INTERVAL_MS = 4000;
@@ -71,7 +71,7 @@ export default function Hero() {
     setActiveIdx((i) => (i + 1) % heroImages.length);
   };
 
-  const candidateHref = JOBS_VISIBLE ? "/jobs" : "/contact";
+  const candidateHref = JOBS_VISIBLE ? "/jobs" : "/careers";
 
   return (
     <section
@@ -89,7 +89,7 @@ export default function Hero() {
             return (
               <div
                 key={i}
-                aria-hidden={i !== activeIdx}
+                aria-hidden={i !== activeIdx ? true : undefined}
                 className="absolute inset-0 h-full w-full flex items-center justify-center"
                 style={{
                   ...baseStyle,
@@ -115,9 +115,9 @@ export default function Hero() {
               key={i}
               src={slide.src}
               alt={i === 0 ? slide.alt : ""}
-              aria-hidden={i !== activeIdx}
+              aria-hidden={i !== activeIdx ? true : undefined}
               className="hero-image absolute inset-0 h-full w-full object-cover"
-              style={baseStyle}
+              style={{ ...baseStyle, objectPosition: slide.position ?? "center", height: slide.tall ?? "100%" }}
             />
           );
         })}
@@ -127,53 +127,52 @@ export default function Hero() {
 
       {/* Content */}
       <div
-        className="hero-content relative z-10 w-full pt-52 sm:pt-56 md:pt-60 pb-24"
-        style={{ paddingLeft: "80px", paddingRight: "80px" }}
+        className="hero-content tr-container relative z-10 pt-52 sm:pt-56 md:pt-60 pb-24"
       >
-        <div className="max-w-3xl">
-          <p className="font-display mb-8 text-[11px] font-medium uppercase tracking-[0.35em] text-titan-navy">
-            Industrial &amp; Corporate Recruiting
+        <div className="max-w-5xl">
+          <p className="font-display mb-8 text-[12px] font-semibold uppercase tracking-[0.35em] text-titan-gold">
+            Industrial &amp; Administrative Recruiting
           </p>
 
           <h1
             ref={headlineRef}
             className="font-display font-bold uppercase leading-[0.95] tracking-[0.02em]"
-            style={{ fontSize: "clamp(56px, 8vw, 96px)" }}
+            style={{ fontSize: "clamp(60px, 9.5vw, 132px)" }}
           >
-            <span className="block text-titan-navy">
-              THE RIGHT <span className="text-titan-gold">PEOPLE.</span>
+            <span className="block text-titan-offwhite">
+              THE RIGHT <span className="text-titan-gold">PEOPLE</span>
             </span>
-            <span className="block text-titan-navy">
-              THE RIGHT <span className="text-titan-gold">ROLES.</span>
+            <span className="block text-titan-offwhite">
+              THE RIGHT <span className="text-titan-gold">ROLES</span>
             </span>
           </h1>
 
           <p
             ref={subRef}
-            className="font-body mt-8 max-w-xl text-base leading-relaxed sm:text-lg sm:leading-[1.7]"
-            style={{ color: "#2A2A2A" }}
+            className="font-body mt-10 max-w-2xl text-lg leading-relaxed sm:text-[21px] sm:leading-[1.65]"
+            style={{ color: "rgba(245, 244, 240, 0.82)" }}
           >
-            Industrial and corporate recruiting built on real relationships,
+            Industrial and administrative recruiting built on real relationships,
             deep vetting, and placements that last.
           </p>
 
           <div
             ref={ctaRef}
             className="flex flex-col gap-4 sm:flex-row sm:gap-5"
-            style={{ marginTop: "24px" }}
+            style={{ marginTop: "40px" }}
           >
             <a
-              href="/contact"
-              className="font-display inline-flex items-center justify-center rounded-full bg-gold-gradient px-8 py-3.5 text-sm font-bold uppercase tracking-[0.15em] text-titan-navy transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
+              href="/contact?role=company"
+              className="font-display inline-flex items-center justify-center rounded-full bg-gold-gradient px-10 py-4 text-[15px] font-bold uppercase tracking-[0.15em] text-titan-navy transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
             >
-              I&apos;m Hiring
+              Find Talent
             </a>
             <a
               href={candidateHref}
-              className="font-display inline-flex items-center justify-center rounded-full px-8 py-3.5 text-sm font-bold uppercase tracking-[0.15em] text-titan-navy transition-all duration-300 hover:border-titan-gold hover:text-titan-gold hover:-translate-y-0.5 active:translate-y-0"
-              style={{ border: "2px solid #141F31" }}
+              className="font-display inline-flex items-center justify-center rounded-full px-10 py-4 text-[15px] font-bold uppercase tracking-[0.15em] text-titan-offwhite transition-all duration-300 hover:border-titan-gold hover:text-titan-gold hover:-translate-y-0.5 active:translate-y-0"
+              style={{ border: "1.5px solid rgba(245, 244, 240, 0.7)" }}
             >
-              I&apos;m Looking for Work
+              Find a Job
             </a>
           </div>
         </div>
@@ -182,8 +181,21 @@ export default function Hero() {
       {/* Carousel controls — bottom right */}
       {heroImages.length > 1 && (
         <div className="hero-controls absolute z-20 flex flex-col items-end">
-          {/* Dots */}
-          <div className="flex items-center" style={{ gap: "10px" }}>
+          {/* Pause + dots */}
+          <div className="flex items-center" style={{ gap: "6px" }}>
+            <button
+              type="button"
+              onClick={() => setIsPaused((p) => !p)}
+              aria-pressed={isPaused}
+              aria-label={isPaused ? "Resume slideshow" : "Pause slideshow"}
+              className="hero-pause"
+            >
+              {isPaused ? (
+                <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1.5v9l8-4.5z" fill="currentColor" /></svg>
+              ) : (
+                <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1.5" width="3" height="9" fill="currentColor" /><rect x="7" y="1.5" width="3" height="9" fill="currentColor" /></svg>
+              )}
+            </button>
             {heroImages.map((_, i) => (
               <button
                 key={i}
@@ -192,18 +204,18 @@ export default function Hero() {
                 aria-current={i === activeIdx}
                 onClick={() => goTo(i)}
                 className="hero-dot"
-                style={{
-                  width: i === activeIdx ? "28px" : "10px",
-                  height: "2px",
-                  backgroundColor:
-                    i === activeIdx ? "#CCA662" : "rgba(20, 31, 49, 0.35)",
-                  border: "none",
-                  padding: 0,
-                  cursor: "pointer",
-                  transition:
-                    "width 0.35s ease, background-color 0.3s ease",
-                }}
-              />
+              >
+                <span
+                  aria-hidden="true"
+                  style={{
+                    display: "block",
+                    width: i === activeIdx ? "28px" : "10px",
+                    height: "2px",
+                    backgroundColor: i === activeIdx ? "#CCA662" : "rgba(245, 244, 240, 0.55)",
+                    transition: "width 0.35s ease, background-color 0.3s ease",
+                  }}
+                />
+              </button>
             ))}
           </div>
 
@@ -214,7 +226,7 @@ export default function Hero() {
               marginTop: "12px",
               width: "120px",
               height: "1px",
-              backgroundColor: "rgba(20, 31, 49, 0.2)",
+              backgroundColor: "rgba(245, 244, 240, 0.2)",
               overflow: "hidden",
             }}
           >
@@ -242,19 +254,33 @@ export default function Hero() {
           object-position: center;
         }
         .hero-overlay {
-          background: linear-gradient(
-            to right,
-            rgba(245, 244, 240, 0.55) 0%,
-            rgba(245, 244, 240, 0.45) 50%,
-            rgba(245, 244, 240, 0.05) 100%
-          );
+          background:
+            linear-gradient(to right, rgba(14, 22, 38, 0.82) 0%, rgba(14, 22, 38, 0.62) 45%, rgba(14, 22, 38, 0.2) 100%),
+            linear-gradient(to top, rgba(14, 22, 38, 0.55) 0%, rgba(14, 22, 38, 0) 45%),
+            linear-gradient(to bottom, rgba(14, 22, 38, 0.45) 0%, rgba(14, 22, 38, 0) 30%);
         }
         .hero-controls {
-          right: 80px;
+          right: var(--tr-gutter);
           bottom: 40px;
         }
-        .hero-dot:hover {
+        .hero-dot,
+        .hero-pause {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-width: 28px;
+          min-height: 28px;
+          padding: 0 4px;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          color: rgba(245, 244, 240, 0.85);
+        }
+        .hero-dot:hover > span {
           background-color: #cca662 !important;
+        }
+        .hero-pause:hover {
+          color: #cca662;
         }
 
         @keyframes hero-progress {
@@ -271,22 +297,13 @@ export default function Hero() {
             object-position: center center;
           }
           .hero-overlay {
-            background: linear-gradient(
-              to bottom,
-              rgba(245, 244, 240, 0.78) 0%,
-              rgba(245, 244, 240, 0.55) 70%,
-              rgba(245, 244, 240, 0.25) 100%
-            );
-          }
-          .hero-content {
-            padding-left: 24px !important;
-            padding-right: 24px !important;
+            background: linear-gradient(to bottom, rgba(14, 22, 38, 0.7) 0%, rgba(14, 22, 38, 0.6) 55%, rgba(14, 22, 38, 0.85) 100%);
           }
           .hero-content :global(a) {
             width: 100% !important;
           }
           .hero-controls {
-            right: 24px !important;
+            right: var(--tr-gutter) !important;
             bottom: 28px !important;
           }
         }

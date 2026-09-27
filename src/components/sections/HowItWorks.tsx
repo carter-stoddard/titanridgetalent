@@ -30,399 +30,146 @@ const steps = [
 
 export default function HowItWorks() {
   const sectionRef = useRef<HTMLElement>(null);
-  const eyebrowRef = useRef<HTMLParagraphElement>(null);
-  const headlineRef = useRef<HTMLHeadingElement>(null);
-  const stepsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const lineRef = useRef<HTMLDivElement>(null);
-  const stepsContainerRef = useRef<HTMLDivElement>(null);
-  const dotsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const headRef = useRef<HTMLDivElement>(null);
+  const rowRefs = useRef<(HTMLLIElement | null)[]>([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Initial section intro (eyebrow, headline, steps fade in)
-      const intro = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-          once: true,
-        },
-      });
-
-      intro.fromTo(
-        [eyebrowRef.current, headlineRef.current],
-        { opacity: 0, y: 30 },
+      gsap.fromTo(
+        headRef.current,
+        { opacity: 0, y: 24 },
         {
           opacity: 1,
           y: 0,
           duration: 0.7,
           ease: "power2.out",
-          stagger: 0.1,
+          scrollTrigger: { trigger: sectionRef.current, start: "top 75%", once: true },
         }
       );
 
-      intro.fromTo(
-        stepsRef.current.filter(Boolean),
-        { opacity: 0.3, y: 30 },
-        {
-          opacity: 0.4,
-          y: 0,
-          duration: 0.7,
-          ease: "power2.out",
-          stagger: 0.15,
-        },
-        "-=0.2"
-      );
-
-      // Scroll-linked progress line (scrubs with scroll)
-      const isMobile = window.matchMedia("(max-width: 767px)").matches;
-      if (isMobile) {
-        gsap.set(lineRef.current, { transformOrigin: "top center" });
-        gsap.fromTo(
-          lineRef.current,
-          { scaleY: 0 },
-          {
-            scaleY: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: stepsContainerRef.current,
-              start: "top 70%",
-              end: "bottom 60%",
-              scrub: 0.5,
-            },
-          }
-        );
-      } else {
-        gsap.set(lineRef.current, { transformOrigin: "left center" });
-        gsap.fromTo(
-          lineRef.current,
-          { scaleX: 0 },
-          {
-            scaleX: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: stepsContainerRef.current,
-              start: "top 70%",
-              end: "bottom 60%",
-              scrub: 0.5,
-            },
-          }
-        );
-      }
-
-      // Activate each step as the scroll progresses past it
-      stepsRef.current.forEach((step, i) => {
-        if (!step) return;
-        const dot = dotsRef.current[i];
-
-        gsap.to(step, {
-          opacity: 1,
-          scrollTrigger: {
-            trigger: step,
-            start: "top 75%",
-            end: "top 60%",
-            scrub: 0.5,
-          },
+      rowRefs.current.forEach((row) => {
+        if (!row) return;
+        const content = row.querySelectorAll<HTMLElement>("[data-reveal]");
+        const tl = gsap.timeline({
+          scrollTrigger: { trigger: row, start: "top 78%", once: true },
         });
-
-        if (dot) {
-          gsap.to(dot, {
-            backgroundColor: "#CCA662",
-            scale: 1.3,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: step,
-              start: "top 70%",
-              end: "top 55%",
-              scrub: 0.5,
-            },
-          });
-        }
+        tl.fromTo(content, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.65, ease: "power2.out", stagger: 0.08 }, 0.1);
       });
     }, sectionRef);
-
     return () => ctx.revert();
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="relative"
-      style={{
-        backgroundColor: "#F5F4F0",
-        paddingTop: "120px",
-        paddingBottom: "120px",
-      }}
+      className="process tr-section relative"
+      aria-labelledby="process-heading"
+      style={{ backgroundColor: "var(--tr-cream)", color: "var(--tr-navy)" }}
     >
-      <div className="how-it-works-outer" style={{ paddingLeft: "80px", paddingRight: "80px" }}>
-        {/* Eyebrow — on light */}
-        <p
-          ref={eyebrowRef}
-          className="font-display font-medium uppercase"
-          style={{
-            fontSize: "11px",
-            letterSpacing: "4px",
-            color: "#CCA662",
-            marginBottom: "16px",
-            opacity: 0,
-          }}
-        >
-          The Process
-        </p>
+      <div className="tr-container">
+        <div className="process-grid">
+          <div ref={headRef} className="process-head" style={{ opacity: 0 }}>
+            <p className="tr-eyebrow">The Process</p>
+            <h2 id="process-heading" className="tr-h2" style={{ marginTop: "20px", color: "var(--tr-navy)" }}>
+              Simple. Direct. Built on Trust
+            </h2>
+            <div className="process-cta">
+              <Link href="/contact?role=company" className="tr-btn tr-btn-ghost-dark">
+                Find Talent
+              </Link>
+            </div>
+          </div>
 
-        {/* Headline — on light */}
-        <h2
-          ref={headlineRef}
-          className="font-display font-semibold uppercase"
-          style={{
-            fontSize: "clamp(36px, 4.5vw, 52px)",
-            lineHeight: 0.95,
-            color: "#141F31",
-            marginBottom: "60px",
-            opacity: 0,
-          }}
-        >
-          Simple. Direct. Built on Trust.
-        </h2>
-
-      <div
-        className="how-it-works-inner"
-        style={{
-          backgroundColor: "#141F31",
-          borderRadius: "12px",
-          paddingLeft: "80px",
-          paddingRight: "80px",
-          paddingTop: "80px",
-          paddingBottom: "100px",
-        }}
-      >
-        {/* Steps container */}
-        <div
-          ref={stepsContainerRef}
-          className="steps-wrapper"
-          style={{ marginTop: "0", position: "relative" }}
-        >
-          {/* Progress line — track (faint) */}
-          <div
-            className="progress-track"
-            aria-hidden="true"
-            style={{
-              position: "absolute",
-              backgroundColor: "rgba(204, 166, 98, 0.15)",
-            }}
-          />
-          {/* Progress line — fill (scroll-driven) */}
-          <div
-            ref={lineRef}
-            className="progress-fill"
-            aria-hidden="true"
-            style={{
-              position: "absolute",
-              backgroundColor: "#CCA662",
-              transformOrigin: "left center",
-            }}
-          />
-
-          {/* Step dots */}
-          {steps.map((_, i) => (
-            <div
-              key={`dot-${i}`}
-              ref={(el) => {
-                dotsRef.current[i] = el;
-              }}
-              className="step-dot"
-              aria-hidden="true"
-              style={{
-                position: "absolute",
-                width: "14px",
-                height: "14px",
-                borderRadius: "9999px",
-                backgroundColor: "rgba(204, 166, 98, 0.3)",
-                border: "2px solid #141F31",
-                zIndex: 2,
-              }}
-              data-step={i}
-            />
-          ))}
-
-          {/* Steps grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 steps-grid">
+          <ol className="process-steps">
             {steps.map((step, i) => (
-              <div
+              <li
                 key={step.number}
                 ref={(el) => {
-                  stepsRef.current[i] = el;
+                  rowRefs.current[i] = el;
                 }}
-                className="step-col relative"
-                style={{
-                  opacity: 0.3,
-                  paddingLeft: "48px",
-                  paddingRight: "48px",
-                }}
+                className="step"
               >
-                {/* Atmospheric numeral */}
-                <span
-                  aria-hidden="true"
-                  className="font-display font-black select-none pointer-events-none step-numeral"
-                  style={{
-                    position: "absolute",
-                    top: "-30px",
-                    left: "32px",
-                    fontSize: "120px",
-                    lineHeight: 1,
-                    color: "rgba(255, 255, 255, 0.06)",
-                    zIndex: 0,
-                  }}
-                >
+                <span className="step-num font-display" data-reveal>
                   {step.number}
                 </span>
-
-                {/* Content */}
-                <div className="relative" style={{ zIndex: 1, paddingTop: "56px" }}>
-                  <h3
-                    className="font-display uppercase"
-                    style={{
-                      fontSize: "22px",
-                      letterSpacing: "2px",
-                      color: "#CCA662",
-                      fontWeight: 600,
-                      lineHeight: 1.1,
-                    }}
-                  >
+                <div className="step-text">
+                  <h3 className="step-title font-display" data-reveal>
                     {step.title}
                   </h3>
-                  <p
-                    className="font-body"
-                    style={{
-                      fontSize: "15px",
-                      lineHeight: 1.7,
-                      color: "rgba(255, 255, 255, 0.6)",
-                      marginTop: "10px",
-                      maxWidth: "320px",
-                    }}
-                  >
+                  <p className="step-desc font-body" data-reveal>
                     {step.description}
                   </p>
                 </div>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
-
-        {/* CTA */}
-        <div
-          className="process-cta-wrapper flex justify-center"
-          style={{ marginTop: "80px" }}
-        >
-          <Link
-            href="/contact"
-            className="process-cta font-display font-bold uppercase inline-flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
-            style={{
-              height: "56px",
-              padding: "0 36px",
-              borderRadius: "9999px",
-              backgroundColor: "#CCA662",
-              color: "#141F31",
-              fontSize: "15px",
-              letterSpacing: "3px",
-            }}
-          >
-            Start the Process
-          </Link>
-        </div>
-      </div>
       </div>
 
       <style jsx>{`
-        /* Desktop: horizontal progress line above the steps */
-        .progress-track,
-        .progress-fill {
-          top: 32px;
-          left: 8.33%;
-          right: 8.33%;
-          height: 1px;
-          width: auto;
+        .process-grid {
+          display: grid;
+          grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+          gap: clamp(40px, 6vw, 96px);
+          align-items: start;
         }
-        .progress-fill {
-          right: auto;
-          width: 83.34%;
+        .process-cta {
+          margin-top: 40px;
         }
-        .step-dot {
-          top: 26px;
+        .process-steps {
+          list-style: none;
+          margin: 0;
+          padding: 0;
         }
-        .step-dot[data-step="0"] {
-          left: calc(8.33% - 7px);
+        .step {
+          position: relative;
+          display: grid;
+          grid-template-columns: 96px 1fr;
+          gap: clamp(16px, 3vw, 40px);
+          padding: clamp(28px, 3vw, 44px) 0;
+          border-top: 1px solid rgba(20, 31, 49, 0.14);
         }
-        .step-dot[data-step="1"] {
-          left: calc(50% - 7px);
+        .step:last-child {
+          border-bottom: 1px solid rgba(20, 31, 49, 0.14);
         }
-        .step-dot[data-step="2"] {
-          left: calc(91.67% - 7px);
+        .step-num {
+          font-weight: 700;
+          font-size: clamp(44px, 5vw, 72px);
+          line-height: 0.9;
+          letter-spacing: -0.02em;
+          color: var(--tr-gold-text);
+          font-variant-numeric: tabular-nums;
         }
-        .steps-grid {
-          gap: 0;
+        .step-title {
+          font-weight: 600;
+          text-transform: uppercase;
+          font-size: clamp(26px, 2.4vw, 34px);
+          line-height: 1;
+          letter-spacing: 0.01em;
+          color: var(--tr-navy);
         }
-
-        @media (max-width: 767px) {
-          .how-it-works-outer {
-            padding-left: 16px !important;
-            padding-right: 16px !important;
+        .step-desc {
+          margin-top: 14px;
+          font-size: 18px;
+          line-height: 1.75;
+          color: var(--tr-ink);
+          max-width: 46ch;
+        }
+        [data-reveal] {
+          opacity: 0;
+        }
+        @media (max-width: 1023px) {
+          .process-grid {
+            grid-template-columns: 1fr;
           }
-          .how-it-works-inner {
-            padding-left: 32px !important;
-            padding-right: 32px !important;
-            padding-top: 60px !important;
-            padding-bottom: 60px !important;
-            text-align: left;
-          }
-          /* Mobile: vertical progress line on the left */
-          .progress-track,
-          .progress-fill {
-            top: 0;
-            bottom: 0;
-            left: 6px;
-            width: 1px;
-            height: auto;
-            right: auto;
-          }
-          .progress-fill {
-            transform-origin: top center !important;
-            height: auto;
-            width: 1px;
-          }
-          .step-dot {
-            top: 20px;
-            left: 0 !important;
-          }
-          .step-dot[data-step="0"] {
-            top: 20px;
-          }
-          .step-dot[data-step="1"] {
-            top: calc(33% + 20px);
-          }
-          .step-dot[data-step="2"] {
-            top: calc(66% + 20px);
-          }
-          .step-col {
-            padding-left: 40px !important;
-            padding-right: 0 !important;
-            padding-bottom: 48px;
-          }
-          .step-col:last-child {
-            padding-bottom: 0;
-          }
-          .step-numeral {
-            font-size: 72px !important;
-            left: 40px !important;
-          }
-          .process-cta-wrapper {
-            margin-top: 48px !important;
-          }
-          .process-cta {
-            width: 100% !important;
+        }
+        @media (max-width: 639px) {
+          .step {
+            grid-template-columns: 1fr;
+            gap: 10px;
           }
         }
       `}</style>
-
     </section>
   );
 }

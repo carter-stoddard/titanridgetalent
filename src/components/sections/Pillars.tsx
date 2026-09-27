@@ -7,19 +7,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 type Stat =
-  | {
-      type: "count";
-      target: number;
-      suffix: string;
-      label: string;
-      descriptor: string;
-    }
-  | {
-      type: "letters";
-      letters: string[];
-      label: string;
-      descriptor: string;
-    };
+  | { type: "count"; target: number; suffix: string; label: string; descriptor: string }
+  | { type: "letters"; letters: string[]; label: string; descriptor: string };
 
 const stats: Stat[] = [
   {
@@ -27,7 +16,7 @@ const stats: Stat[] = [
     target: 15,
     suffix: "+",
     label: "Years of Combined Experience",
-    descriptor: "Across industrial floors and corporate boardrooms.",
+    descriptor: "Across industrial floors and administrative boardrooms.",
   },
   {
     type: "count",
@@ -46,35 +35,23 @@ const stats: Stat[] = [
 
 export default function Pillars() {
   const sectionRef = useRef<HTMLElement>(null);
-  const colsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const headRef = useRef<HTMLDivElement>(null);
+  const colsRef = useRef<(HTMLLIElement | null)[]>([]);
   const numberRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
-  const underlineRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          once: true,
-        },
+        scrollTrigger: { trigger: sectionRef.current, start: "top 78%", once: true },
       });
+      tl.fromTo(headRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 0);
 
       colsRef.current.forEach((col, i) => {
         if (!col) return;
-        const startTime = i * 0.12;
-
-        tl.fromTo(
-          col,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" },
-          startTime
-        );
-
+        const start = 0.15 + i * 0.12;
+        tl.fromTo(col, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, start);
         const stat = stats[i];
-
-        // Count-up animation for numerical stats
         if (stat.type === "count") {
           const numEl = numberRefs.current[i];
           if (numEl) {
@@ -83,273 +60,150 @@ export default function Pillars() {
               counter,
               {
                 val: stat.target,
-                duration: 1.6,
+                duration: 1.5,
                 ease: "power2.out",
                 onUpdate: () => {
                   numEl.textContent = `${Math.round(counter.val)}${stat.suffix}`;
                 },
               },
-              startTime + 0.2
+              start + 0.15
             );
           }
-        }
-
-        // Domino-fall letter animation for ZERO
-        if (stat.type === "letters") {
+        } else {
           const letters = letterRefs.current.filter(
-            (el): el is HTMLSpanElement =>
-              !!el && el.dataset.col === String(i)
+            (el): el is HTMLSpanElement => !!el && el.dataset.col === String(i)
           );
           if (letters.length) {
-            // Each letter falls from above, rotates slightly, and settles
             tl.fromTo(
               letters,
-              {
-                opacity: 0,
-                y: -60,
-                rotateZ: -25,
-                transformOrigin: "bottom center",
-              },
-              {
-                opacity: 1,
-                y: 0,
-                rotateZ: 0,
-                duration: 0.55,
-                ease: "back.out(1.8)",
-                stagger: 0.12,
-              },
-              startTime + 0.2
+              { opacity: 0, y: -30, transformOrigin: "bottom center" },
+              { opacity: 1, y: 0, duration: 0.45, ease: "back.out(1.4)", stagger: 0.08 },
+              start + 0.15
             );
           }
-        }
-
-        // Animated underline draw beneath each stat
-        const underline = underlineRefs.current[i];
-        if (underline) {
-          tl.fromTo(
-            underline,
-            { scaleX: 0, transformOrigin: "left center" },
-            { scaleX: 1, duration: 0.9, ease: "power2.inOut" },
-            startTime + 0.4
-          );
         }
       });
     }, sectionRef);
-
     return () => ctx.revert();
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="relative"
-      style={{ backgroundColor: "#F5F4F0", paddingTop: "120px", paddingBottom: "120px" }}
+      className="pillars tr-section relative"
+      aria-labelledby="pillars-heading"
+      style={{ backgroundColor: "var(--tr-cream)", color: "var(--tr-navy)" }}
     >
-      <div className="pillars-outer" style={{ paddingLeft: "80px", paddingRight: "80px" }}>
-        {/* Eyebrow */}
-        <p
-          className="font-display font-medium uppercase"
-          style={{
-            fontSize: "11px",
-            letterSpacing: "4px",
-            color: "#CCA662",
-            marginBottom: "16px",
-          }}
-        >
-          By the Numbers
-        </p>
+      <div className="tr-container">
+        <div className="pillars-grid">
+          <div ref={headRef} className="pillars-head" style={{ opacity: 0 }}>
+            <p className="tr-eyebrow">By the Numbers</p>
+            <h2 id="pillars-heading" className="tr-h2" style={{ marginTop: "20px", color: "var(--tr-navy)" }}>
+              Proof Over Promises
+            </h2>
+          </div>
 
-        {/* Headline */}
-        <h2
-          className="font-display font-semibold uppercase"
-          style={{
-            fontSize: "clamp(36px, 4.5vw, 52px)",
-            lineHeight: 0.95,
-            color: "#141F31",
-            marginBottom: "60px",
-          }}
-        >
-          Proof Over Promises.
-        </h2>
-
-      <div
-        className="pillars-grid grid grid-cols-1 md:grid-cols-3 relative"
-        style={{
-          backgroundColor: "#141F31",
-          borderRadius: "12px",
-          paddingLeft: "48px",
-          paddingRight: "48px",
-          paddingTop: "60px",
-          paddingBottom: "60px",
-        }}
-      >
-        {stats.map((stat, i) => (
-          <div
-            key={i}
-            ref={(el) => {
-              colsRef.current[i] = el;
-            }}
-            className={`pillar-card relative flex flex-col items-center text-center justify-start ${
-              i < stats.length - 1 ? "border-b md:border-b-0 md:border-r" : ""
-            }`}
-            style={{
-              opacity: 0,
-              paddingTop: "32px",
-              paddingBottom: "32px",
-              paddingLeft: "48px",
-              paddingRight: "48px",
-              borderColor: "rgba(204, 166, 98, 0.2)",
-              transition: "transform 0.4s ease",
-            }}
-          >
-            {/* Number / Letters */}
-            <div
-              style={{
-                position: "relative",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                height: "96px",
-                marginBottom: "16px",
-              }}
-            >
-              {stat.type === "count" ? (
-                <span
-                  ref={(el) => {
-                    numberRefs.current[i] = el;
-                  }}
-                  className="pillar-number font-display font-bold"
-                  style={{
-                    fontSize: "96px",
-                    lineHeight: 1,
-                    color: "#CCA662",
-                    display: "inline-block",
-                    transition: "transform 0.4s ease",
-                  }}
-                >
-                  0{stat.suffix}
-                </span>
-              ) : (
-                <span
-                  className="pillar-number font-display font-bold"
-                  style={{
-                    fontSize: "96px",
-                    lineHeight: 1,
-                    color: "#CCA662",
-                    display: "inline-block",
-                    transition: "transform 0.4s ease",
-                  }}
-                  aria-label={stat.letters.join("")}
-                >
-                  {stat.letters.map((letter, li) => (
+          <ul className="pillars-list">
+            {stats.map((stat, i) => (
+              <li
+                key={i}
+                ref={(el) => {
+                  colsRef.current[i] = el;
+                }}
+                className="pillar"
+                style={{ opacity: 0 }}
+              >
+                <div className="pillar-figure font-display" role={stat.type === "letters" ? "img" : undefined} aria-label={stat.type === "letters" ? stat.letters.join("") : undefined}>
+                  {stat.type === "count" ? (
                     <span
-                      key={li}
                       ref={(el) => {
-                        letterRefs.current.push(el);
-                        if (el) el.dataset.col = String(i);
-                      }}
-                      style={{
-                        display: "inline-block",
-                        opacity: 0,
+                        numberRefs.current[i] = el;
                       }}
                     >
-                      {letter}
+                      0{stat.suffix}
                     </span>
-                  ))}
-                </span>
-              )}
-
-              {/* Animated gold underline */}
-              <div
-                ref={(el) => {
-                  underlineRefs.current[i] = el;
-                }}
-                className="pillar-underline"
-                aria-hidden="true"
-                style={{
-                  position: "absolute",
-                  left: "10%",
-                  right: "10%",
-                  bottom: "-6px",
-                  height: "2px",
-                  backgroundColor: "#CCA662",
-                  transform: "scaleX(0)",
-                  transformOrigin: "left center",
-                  transition: "box-shadow 0.4s ease",
-                }}
-              />
-            </div>
-
-            {/* Label */}
-            <p
-              className="font-display font-bold uppercase"
-              style={{
-                fontSize: "15px",
-                letterSpacing: "3px",
-                color: "#F5F4F0",
-                marginTop: "16px",
-                marginBottom: "12px",
-                lineHeight: 1.3,
-              }}
-            >
-              {stat.label}
-            </p>
-
-            {/* Descriptor */}
-            <p
-              className="pillar-descriptor font-body italic"
-              style={{
-                fontSize: "15px",
-                lineHeight: 1.65,
-                color: "rgba(245, 244, 240, 0.55)",
-                maxWidth: "220px",
-                transition: "color 0.4s ease",
-              }}
-            >
-              {stat.descriptor}
-            </p>
-          </div>
-        ))}
-      </div>
+                  ) : (
+                    stat.letters.map((letter, li) => (
+                      <span
+                        key={li}
+                        ref={(el) => {
+                          letterRefs.current.push(el);
+                          if (el) el.dataset.col = String(i);
+                        }}
+                        style={{ display: "inline-block", opacity: 0 }}
+                      >
+                        {letter}
+                      </span>
+                    ))
+                  )}
+                </div>
+                <div className="pillar-text">
+                  <p className="pillar-label font-display">{stat.label}</p>
+                  <p className="pillar-desc font-body">{stat.descriptor}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       <style jsx>{`
-        @media (hover: hover) and (min-width: 768px) {
-          .pillar-card:hover .pillar-number {
-            transform: scale(1.06);
-          }
-          .pillar-card:hover .pillar-underline {
-            box-shadow: 0 0 20px rgba(204, 166, 98, 0.5);
-          }
-          .pillar-card:hover .pillar-descriptor {
-            color: rgba(245, 244, 240, 0.85) !important;
+        .pillars-grid {
+          display: grid;
+          grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+          gap: clamp(40px, 6vw, 96px);
+          align-items: start;
+        }
+        .pillars-list {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+        .pillar {
+          display: grid;
+          grid-template-columns: 200px 1fr;
+          gap: clamp(16px, 3vw, 40px);
+          align-items: center;
+          padding: clamp(24px, 2.6vw, 36px) 0;
+          border-top: 1px solid rgba(20, 31, 49, 0.14);
+        }
+        .pillar:last-child {
+          border-bottom: 1px solid rgba(20, 31, 49, 0.14);
+        }
+        .pillar-figure {
+          font-weight: 700;
+          font-size: clamp(52px, 5.2vw, 76px);
+          line-height: 0.9;
+          letter-spacing: -0.02em;
+          color: var(--tr-navy);
+          font-variant-numeric: tabular-nums;
+          white-space: nowrap;
+        }
+        .pillar-label {
+          font-weight: 700;
+          font-size: 14px;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: var(--tr-gold-text);
+          line-height: 1.35;
+        }
+        .pillar-desc {
+          margin-top: 8px;
+          font-size: 17px;
+          line-height: 1.65;
+          color: var(--tr-ink);
+          max-width: 34ch;
+        }
+        @media (max-width: 1023px) {
+          .pillars-grid {
+            grid-template-columns: 1fr;
+            gap: 32px;
           }
         }
-
-        @media (max-width: 767px) {
-          section {
-            padding-top: 80px !important;
-            padding-bottom: 80px !important;
-          }
-          .pillars-outer {
-            padding-left: 16px !important;
-            padding-right: 16px !important;
-          }
-          .pillars-grid {
-            padding-left: 32px !important;
-            padding-right: 32px !important;
-            padding-top: 40px !important;
-            padding-bottom: 40px !important;
-            gap: 0 !important;
-          }
-          .pillars-grid > div {
-            text-align: left !important;
-            align-items: flex-start !important;
-            padding-top: 40px !important;
-            padding-bottom: 40px !important;
-          }
-          .pillars-grid > div p {
-            max-width: none !important;
+        @media (max-width: 639px) {
+          .pillar {
+            grid-template-columns: 1fr;
+            gap: 10px;
           }
         }
       `}</style>

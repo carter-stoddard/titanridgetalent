@@ -5,9 +5,9 @@ import ContactHero from "@/components/contact/ContactHero";
 import ContactMain from "@/components/contact/ContactMain";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Contact a Recruiter in Fullerton, CA",
   description:
-    "Get in touch with Titan Ridge Talent. Whether you're hiring or looking for your next role — the conversation starts here.",
+    "Talk to a Titan Ridge recruiter. Headquartered in Fullerton, serving Orange County and Southern California. Call (714) 552-4334 or send a message. By appointment only.",
   alternates: { canonical: "/contact" },
 };
 
