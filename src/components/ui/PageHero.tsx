@@ -26,8 +26,8 @@ export default function PageHero({
   height = "55vh",
 }: PageHeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const eyebrowRef = useRef<HTMLParagraphElement>(null);
-  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const eyebrowRef = useRef<HTMLSpanElement>(null);
+  const headlineRef = useRef<HTMLSpanElement>(null);
   const subRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
@@ -51,20 +51,31 @@ export default function PageHero({
       className="page-hero relative w-full flex items-center overflow-hidden"
       style={{ height, minHeight: "440px", backgroundColor: "#1E2D45" }}
     >
-      <img src={image} alt={imageAlt} className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition }} />
+      <img
+        src={image}
+        srcSet={`${image.replace(".webp", "-960w.webp")} 960w, ${image} 2200w`}
+        sizes="100vw"
+        fetchPriority="high"
+        alt={imageAlt}
+        className="absolute inset-0 h-full w-full object-cover"
+        style={{ objectPosition }}
+      />
       <div className="absolute inset-0" style={{ backgroundColor: `rgba(20, 31, 49, ${overlayAlpha})` }} />
 
       <div className="tr-container relative" style={{ paddingTop: "96px" }}>
         <div style={{ maxWidth: "820px" }}>
-          <p ref={eyebrowRef} className="tr-eyebrow">
-            {eyebrow}
-          </p>
-          <h1
-            ref={headlineRef}
-            className="tr-h2"
-            style={{ marginTop: "20px", color: "#FFFFFF", marginBottom: subtitle ? "18px" : 0 }}
-          >
-            {headline}
+          {/* One h1 carrying both the keyword label and the headline */}
+          <h1 style={{ margin: 0 }}>
+            <span ref={eyebrowRef} className="tr-eyebrow" style={{ display: "block", color: "var(--tr-gold)" }}>
+              {eyebrow}
+            </span>
+            <span
+              ref={headlineRef}
+              className="tr-h2"
+              style={{ display: "block", marginTop: "20px", color: "#FFFFFF", marginBottom: subtitle ? "18px" : 0 }}
+            >
+              {headline}
+            </span>
           </h1>
           {subtitle ? (
             <p ref={subRef} className="tr-body" style={{ color: "rgba(255, 255, 255, 0.78)", maxWidth: "46ch" }}>

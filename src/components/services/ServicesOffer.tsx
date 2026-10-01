@@ -18,7 +18,7 @@ const services = [
     number: "02",
     title: "Temp-to-Hire",
     description:
-      "Start temporary, convert when you're confident. Evaluate fit before you commit — we handle the transition when you're ready.",
+      "Start temporary, convert when you're confident. Evaluate fit before you commit, we handle the transition when you're ready.",
   },
   {
     number: "03",

@@ -88,7 +88,7 @@ export default function AboutValues() {
         <div ref={headRef} className="values-head" style={{ opacity: 0 }}>
           <p className="tr-eyebrow">What We Stand For</p>
           <h2 id="about-values-heading" className="tr-h2" style={{ marginTop: "20px", color: "var(--tr-navy)" }}>
-            The Six Things That Drive Everything
+            Titan Ridge – Six Principles of Recruitment
           </h2>
         </div>
 

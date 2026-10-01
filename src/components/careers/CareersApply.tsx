@@ -196,7 +196,11 @@ export default function CareersApply() {
               </div>
 
               <p className="font-body" style={{ fontSize: "14px", color: "rgba(42, 42, 42, 0.7)", marginTop: "-8px" }}>
-                Your information is never shared or sold. Ever.
+                We never sell your information. See our{" "}
+                <a href="/privacy" style={{ color: "var(--tr-navy)", textDecoration: "underline", textUnderlineOffset: "3px" }}>
+                  Privacy Policy
+                </a>
+                .
               </p>
             </form>
           </div>

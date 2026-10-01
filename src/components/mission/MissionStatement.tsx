@@ -50,7 +50,7 @@ export default function MissionStatement() {
               data-reveal
               style={{ marginTop: "20px", color: "var(--tr-navy)" }}
             >
-              More than recruiting. A standard
+              More Than a Placement. A Lasting Partnership
             </h2>
           </div>
 

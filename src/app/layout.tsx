@@ -22,19 +22,19 @@ const lora = Lora({
 
 export const metadata: Metadata = {
   title: {
-    default: "Titan Ridge Talent | Staffing & Recruiting Agency in Orange County, CA",
+    default: "Industrial & Administrative Staffing Agency | Titan Ridge",
     template: "%s | Titan Ridge Talent",
   },
   applicationName: "Titan Ridge Talent",
   description:
-    "Relationship-first industrial and administrative staffing headquartered in Fullerton, CA. Serving Orange County, Los Angeles, the Inland Empire, and San Diego, with nationwide searches available.",
+    "Industrial and administrative staffing agency in Fullerton, CA. Temp, temp-to-hire, and direct hire across Orange County, Southern California, and the U.S.",
   metadataBase: new URL("https://titanridgetalent.com"),
   alternates: { canonical: "/" },
   openGraph: {
     siteName: "Titan Ridge Talent",
     type: "website",
     locale: "en_US",
-    images: [{ url: "/images/titan-ridge-talent-staffing-agency-social-share.png", width: 1200, height: 630, alt: "Titan Ridge Talent — The right people. The right roles." }],
+    images: [{ url: "/images/titan-ridge-talent-staffing-agency-social-share.png", width: 1200, height: 630, alt: "Titan Ridge Talent, staffing and recruiting agency in Fullerton, California" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -99,8 +99,13 @@ export default function RootLayout({
       className={`${barlowCondensed.variable} ${lora.variable} antialiased`}
     >
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(sessionStorage.getItem("titan-loaded"))document.documentElement.classList.add("tr-visited")}catch(e){}`,
+          }}
+        />
         <noscript>
-          <style>{`[data-reveal],[style*="opacity: 0"]{opacity:1!important;transform:none!important}`}</style>
+          <style>{`[data-reveal],[style*="opacity: 0"]{opacity:1!important;transform:none!important}.loader-wrapper{display:none!important}`}</style>
         </noscript>
         <script
           type="application/ld+json"

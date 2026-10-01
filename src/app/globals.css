@@ -96,6 +96,11 @@ html {
   background-color: var(--titan-navy);
 }
 
+/* Returning visitors skip the intro overlay before first paint */
+html.tr-visited .loader-wrapper {
+  display: none;
+}
+
 /* Hero scroll indicator looping line */
 @keyframes scroll-indicator {
   0% {

@@ -11,3 +11,8 @@ export const CAREERS_VISIBLE = true;
 // listing graphics + the Avionté widget). Off for now: the page shows a simple
 // application form instead. Flip to true to bring the listings back.
 export const CAREERS_LISTINGS_VISIBLE = false;
+
+// CAREERS_FORM_VISIBLE controls the on-page application form on /careers.
+// Off for now: the page asks candidates to email their resume instead
+// (modeled on a simple "Email Resume" pattern). Flip to true to bring the form back.
+export const CAREERS_FORM_VISIBLE = false;

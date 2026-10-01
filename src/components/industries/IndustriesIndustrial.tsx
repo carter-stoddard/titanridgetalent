@@ -79,7 +79,7 @@ export default function IndustriesIndustrial() {
           <div ref={contentRef} className="industrial-content" style={{ opacity: 0 }}>
             <p className="tr-eyebrow">Industrial Recruiting</p>
             <h2 className="tr-h2" style={{ marginTop: "20px", color: "var(--tr-navy)" }}>
-              We Know What Good Looks Like On a Job Site
+              We Understand the Work Behind the Job Title
             </h2>
             <p className="tr-body industrial-body" style={{ color: "var(--tr-ink)" }}>
               Industrial recruiting requires more than keyword matching. It

@@ -7,20 +7,6 @@ import { JOBS_VISIBLE } from "@/lib/features";
 
 gsap.registerPlugin(ScrollTrigger);
 
-type Stat = { value: string; label: string };
-
-const industrialStats: Stat[] = [
-  { value: "6", label: "Sectors Covered" },
-  { value: "Hands-On", label: "Industry Knowledge" },
-  { value: "Direct", label: "Employer Relationships" },
-];
-
-const corporateStats: Stat[] = [
-  { value: "6", label: "Sectors Covered" },
-  { value: "C-Suite", label: "Placement Experience" },
-  { value: "Retained", label: "Client Relationships" },
-];
-
 export default function IndustriesMarkets() {
   const sectionRef = useRef<HTMLElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
@@ -74,14 +60,6 @@ export default function IndustriesMarkets() {
               job site, and we know the difference between a candidate who
               looks right on paper and one who&apos;ll actually last.
             </p>
-            <ul className="markets-stats">
-              {industrialStats.map((s) => (
-                <li key={s.label} className="markets-stat">
-                  <p className="markets-figure font-display">{s.value}</p>
-                  <p className="markets-label font-display">{s.label}</p>
-                </li>
-              ))}
-            </ul>
             {JOBS_VISIBLE && (
               <div className="markets-cta">
                 <a href="/jobs" className="tr-btn tr-btn-gold">
@@ -103,14 +81,6 @@ export default function IndustriesMarkets() {
               need at every level, and we know how to find the candidates who
               don&apos;t just fill the role but elevate the team around them.
             </p>
-            <ul className="markets-stats">
-              {corporateStats.map((s) => (
-                <li key={s.label} className="markets-stat">
-                  <p className="markets-figure font-display">{s.value}</p>
-                  <p className="markets-label font-display">{s.label}</p>
-                </li>
-              ))}
-            </ul>
             {JOBS_VISIBLE && (
               <div className="markets-cta">
                 <a href="/jobs" className="tr-btn tr-btn-gold">
@@ -131,18 +101,6 @@ export default function IndustriesMarkets() {
         }
         .markets-body {
           margin-top: 24px;
-        }
-        .markets-stats {
-          list-style: none;
-          margin: clamp(32px, 4vw, 48px) 0 0;
-          padding: 0;
-        }
-        .markets-stat {
-          padding: 22px 0;
-          border-bottom: 1px solid rgba(20, 31, 49, 0.14);
-        }
-        .markets-stat:first-child {
-          padding-top: 0;
         }
         .markets-figure {
           font-weight: 700;

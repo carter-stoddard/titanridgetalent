@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
-import { JOBS_VISIBLE } from "@/lib/features";
 
 // Replace placeholder slides with real WebPs (2400px-wide) when ready.
 // To "fill" a slide, set `src` to the path and clear `placeholder`.
@@ -28,6 +27,21 @@ export default function Hero() {
 
   const [activeIdx, setActiveIdx] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  // Slides 2+ are fetched only after the page has loaded, so they never compete with the first slide.
+  const [restReady, setRestReady] = useState(false);
+  useEffect(() => {
+    const go = () => setRestReady(true);
+    if (document.readyState === "complete") {
+      const t = window.setTimeout(go, 300);
+      return () => window.clearTimeout(t);
+    }
+    window.addEventListener("load", go, { once: true });
+    const fallback = window.setTimeout(go, 3500);
+    return () => {
+      window.removeEventListener("load", go);
+      window.clearTimeout(fallback);
+    };
+  }, []);
 
   const reducedMotion = useMemo(() => {
     if (typeof window === "undefined") return false;
@@ -71,7 +85,6 @@ export default function Hero() {
     setActiveIdx((i) => (i + 1) % heroImages.length);
   };
 
-  const candidateHref = JOBS_VISIBLE ? "/jobs" : "/careers";
 
   return (
     <section
@@ -110,10 +123,15 @@ export default function Hero() {
               </div>
             );
           }
+          if (i > 0 && !restReady) return null;
           return (
             <img
               key={i}
               src={slide.src}
+              srcSet={i === 0 ? `${slide.src.replace(".webp", "-960w.webp")} 960w, ${slide.src} 2400w` : undefined}
+              sizes={i === 0 ? "100vw" : undefined}
+              fetchPriority={i === 0 ? "high" : "low"}
+              decoding={i === 0 ? "sync" : "async"}
               alt={i === 0 ? slide.alt : ""}
               aria-hidden={i !== activeIdx ? true : undefined}
               className="hero-image absolute inset-0 h-full w-full object-cover"
@@ -130,20 +148,18 @@ export default function Hero() {
         className="hero-content tr-container relative z-10 pt-52 sm:pt-56 md:pt-60 pb-24"
       >
         <div className="max-w-5xl">
-          <p className="font-display mb-8 text-[12px] font-semibold uppercase tracking-[0.35em] text-titan-gold">
-            Industrial &amp; Administrative Recruiting
-          </p>
-
-          <h1
-            ref={headlineRef}
-            className="font-display font-bold uppercase leading-[0.95] tracking-[0.02em]"
-            style={{ fontSize: "clamp(60px, 9.5vw, 132px)" }}
-          >
-            <span className="block text-titan-offwhite">
-              THE RIGHT <span className="text-titan-gold">PEOPLE</span>
+          <h1 ref={headlineRef} style={{ margin: 0 }}>
+            <span className="font-display mb-8 block text-[12px] font-semibold uppercase tracking-[0.35em] text-titan-gold">
+              Industrial &amp; Administrative Staffing Agency
             </span>
+            <span
+              className="font-display block font-bold uppercase leading-[0.95] tracking-[0.02em]"
+              style={{ fontSize: "clamp(60px, 9.5vw, 132px)" }}
+            >
+              <span className="block text-titan-offwhite">WHERE TALENT</span>
             <span className="block text-titan-offwhite">
-              THE RIGHT <span className="text-titan-gold">ROLES</span>
+              MEETS ITS <span className="text-titan-gold">PEAK</span>
+            </span>
             </span>
           </h1>
 
@@ -166,13 +182,6 @@ export default function Hero() {
               className="font-display inline-flex items-center justify-center rounded-full bg-gold-gradient px-10 py-4 text-[15px] font-bold uppercase tracking-[0.15em] text-titan-navy transition-all duration-300 hover:shadow-lg hover:shadow-titan-gold/25 hover:-translate-y-0.5 active:translate-y-0"
             >
               Find Talent
-            </a>
-            <a
-              href={candidateHref}
-              className="font-display inline-flex items-center justify-center rounded-full px-10 py-4 text-[15px] font-bold uppercase tracking-[0.15em] text-titan-offwhite transition-all duration-300 hover:border-titan-gold hover:text-titan-gold hover:-translate-y-0.5 active:translate-y-0"
-              style={{ border: "1.5px solid rgba(245, 244, 240, 0.7)" }}
-            >
-              Find a Job
             </a>
           </div>
         </div>

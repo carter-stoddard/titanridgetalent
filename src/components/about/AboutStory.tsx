@@ -46,34 +46,21 @@ export default function AboutStory() {
 
             <div className="about-story-copy" data-reveal>
               <p className="tr-body" style={{ color: "var(--tr-ink)" }}>
-                Titan Ridge Talent was built by recruiting professionals
-                who had seen the industry at its best, and watched it drift
-                far from it. Years of experience across industrial floors and
-                administrative boardrooms, placing thousands of people and building
-                relationships that lasted long after the placement. We also
-                watched too many firms reduce that process to a numbers game.
+                Titan Ridge Talent is dedicated to connecting companies and job
+                seekers through mutually beneficial relationships.
               </p>
               <p className="tr-body" style={{ color: "var(--tr-ink)" }}>
-                The problem isn&apos;t that recruiting is hard. It&apos;s that
-                somewhere along the way, the industry decided relationships
-                were inefficient. Resumes in, bodies out, repeat. Candidates
-                became codes in a system. Clients became tickets in a queue.
-                The people on both sides of the equation, the ones whose
-                careers and companies were actually at stake, stopped being
-                treated like people.
+                Our philosophy is simple: we&apos;re not here to choose
+                someone&apos;s next job for them. We listen, understand what
+                they&apos;re looking for, and use our recruiting expertise to
+                guide candidates toward opportunities that align with their
+                skills, experience, and career goals.
               </p>
               <p className="tr-body" style={{ color: "var(--tr-ink)" }}>
-                We built Titan Ridge because we believe the right placement
-                starts with the right conversation. Not a form. Not an
-                automated inbox. A real conversation with someone who actually
-                listens, asks the right questions, and tells you the truth,
-                even when the truth is that it&apos;s not the right fit.
-              </p>
-              <p className="tr-body" style={{ color: "var(--tr-ink)" }}>
-                That&apos;s not a differentiator. That&apos;s just how this
-                should have always worked. We&apos;re not reinventing
-                recruiting. We&apos;re returning it to what it was always
-                supposed to be.
+                From individuals just starting their careers to seasoned
+                professionals, we connect candidates with companies and
+                opportunities where their experience, work values, and goals
+                can align for the long term.
               </p>
             </div>
 

@@ -6,27 +6,21 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const candidates = [
+const candidates: { quote: string; name: string; title?: string }[] = [
   {
     quote:
-      "I wasn't even actively looking. Adrian reached out, we had a real conversation, and he actually listened. Two months later I was in a role that fit better than anything I'd found on my own in two years of searching.",
-    initials: "JS",
-    name: "Jessica S.",
-    title: "Logistics Manager",
+      "I wasn’t looking for a new job when Adrian reached out, but the job he presented sounded great, so I interviewed. That same week I got the job and am now providing more for my family. Appreciate your help, Adrian!",
+    name: "Jessica",
   },
   {
     quote:
-      "Every recruiter I'd dealt with before sent me roles that had nothing to do with what I was looking for. Titan Ridge actually read my resume, asked the right questions, and only reached out when they had something that made sense. That alone was a revelation.",
-    initials: "TM",
-    name: "Thomas M.",
-    title: "Operations Supervisor",
+      "Veronica from Titan Ridge was easy to work with. She actually took the time to read my resume, ask me what I wanted, and only reached out when she had something that made sense. My new job is great! I’d recommend Titan Ridge to anyone looking for a new job.",
+    name: "Thomas",
   },
   {
     quote:
-      "The process was straightforward and honest. They told me what to expect, kept me updated throughout, and when the offer came it was exactly what we'd talked about. No surprises. That's all anyone wants from a recruiter.",
-    initials: "AP",
-    name: "Amanda P.",
-    title: "HR Business Partner",
+      "The whole process was pretty straightforward. They told me what to expect, kept me updated, and when I got the offer, it was exactly what we had talked about. No surprises or runaround. Honestly, that’s all you really want from a recruiter.",
+    name: "Amanda",
   },
 ];
 
@@ -85,8 +79,12 @@ export default function TestimonialsCandidates() {
               <p className="candidate-quote font-body">{t.quote}</p>
               <div className="candidate-attr">
                 <span className="candidate-name font-display">{t.name}</span>
+                {t.title ? (
+                  <>
                 <span className="candidate-dot" aria-hidden="true" />
                 <span className="candidate-title font-display">{t.title}</span>
+                  </>
+                ) : null}
               </div>
             </li>
           ))}

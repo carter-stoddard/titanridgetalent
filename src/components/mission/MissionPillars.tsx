@@ -29,7 +29,7 @@ const pillars = [
     number: "04",
     title: "Industry Standard",
     description:
-      "Set the bar for what recruiting should be — through expertise, transparency, and a people-first approach that the industry has too often abandoned.",
+      "Set the bar for what recruiting should be, through expertise, transparency, and a people-first approach that the industry has too often abandoned.",
   },
 ];
 

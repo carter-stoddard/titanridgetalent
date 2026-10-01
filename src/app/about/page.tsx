@@ -4,12 +4,11 @@ import Footer from "@/components/sections/Footer";
 import AboutHero from "@/components/about/AboutHero";
 import AboutStory from "@/components/about/AboutStory";
 import AboutValues from "@/components/about/AboutValues";
-import AboutMission from "@/components/about/AboutMission";
 
 export const metadata: Metadata = {
-  title: "About | Relationship-First Recruiting in Orange County",
+  title: "About Our Recruiting Agency",
   description:
-    "The story behind Titan Ridge Talent — three recruiting veterans, thirty years of combined experience, and one shared belief.",
+    "Titan Ridge Talent connects companies and job seekers through lasting relationships. Read our philosophy and six principles of recruitment.",
   alternates: { canonical: "/about" },
 };
 
@@ -21,7 +20,6 @@ export default function AboutPage() {
         <AboutHero />
         <AboutStory />
         <AboutValues />
-        <AboutMission />
       </main>
       <Footer />
     </>

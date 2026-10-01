@@ -20,7 +20,12 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     title: region.seoTitle,
     description: region.description,
     alternates: { canonical: `/locations/${region.slug}` },
-    openGraph: { title: `${region.seoTitle} | Titan Ridge Talent`, description: region.description },
+    openGraph: {
+      title: `${region.seoTitle} | Titan Ridge Talent`,
+      description: region.description,
+      url: `/locations/${region.slug}`,
+      images: [{ url: "/images/titan-ridge-talent-staffing-agency-social-share.png", width: 1200, height: 630, alt: "Titan Ridge Talent, staffing and recruiting agency in Fullerton, California" }],
+    },
   };
 }
 

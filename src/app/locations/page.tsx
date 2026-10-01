@@ -7,9 +7,9 @@ import ClosingCTA from "@/components/sections/ClosingCTA";
 import { HQ, regions } from "@/lib/locations";
 
 export const metadata: Metadata = {
-  title: "Locations | Staffing Across Southern California",
+  title: "Southern California Staffing Locations",
   description:
-    "Titan Ridge Talent is headquartered in Fullerton, CA and staffs industrial and administrative roles across Orange County, Los Angeles County, the Inland Empire, and San Diego County. Nationwide searches available.",
+    "Headquartered in Fullerton, CA. Staffing and temp agency services across Orange County, Los Angeles, the Inland Empire, and San Diego. Nationwide searches.",
   alternates: { canonical: "/locations" },
 };
 
@@ -41,7 +41,7 @@ export default function LocationsPage() {
       <Navbar />
       <main id="main">
         <PageHero
-          eyebrow="Where We Work"
+          eyebrow="Staffing Agency Locations"
           headline="Southern California, one conversation at a time"
           image="/images/southern-california-beach-golden-hour-staffing-locations.webp"
           imageAlt="Golden hour on a Southern California beach"

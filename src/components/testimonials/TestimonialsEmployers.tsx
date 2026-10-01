@@ -6,26 +6,28 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const employers = [
+const employers: { quote: string; name: string; title?: string; lang?: string }[] = [
   {
     quote:
-      "We'd worked with three other agencies before Titan Ridge. None of them took the time to actually understand our operation. Within two weeks they sent us one candidate, the right one. He's still with us eighteen months later.",
-    initials: "MR",
-    name: "Michael R.",
-    title: "Operations Director",
+      "We don’t use temp agencies much, but we got slammed last month and needed help yesterday. Called them, they actually showed up the same afternoon, and the person they sent was ready to work. Thanks for the help!",
+    name: "Norma A.",
   },
   {
     quote:
-      "What separates Titan Ridge is accountability. They didn't disappear after the placement. They checked in, they followed up, and when we had a concern they addressed it directly. That's rare in this industry and it's why we keep coming back.",
-    initials: "DK",
-    name: "David K.",
-    title: "VP of Human Resources",
+      "Necesitábamos a alguien que hablara español para nuestro puesto de producción. Llegó rápido y sin complicaciones.",
+    name: "Jen R.",
+    title: "Gerente de Oficina",
+    lang: "es",
+  },
+  {
+    quote: "The temp picked up the job fast and fit the culture. Didn’t feel like we brought in a stranger.",
+    name: "Dave K.",
+    title: "Warehouse Supervisor",
   },
   {
     quote:
-      "I've hired through staffing agencies my entire career. Most of them treat it like a transaction. Titan Ridge treated it like a partnership. The difference shows in the quality of every candidate they've sent our way.",
-    initials: "RL",
-    name: "Rachel L.",
+      "Quality mattered more than speed, and we still got both. Good worker, good attitude, no issues with the crew.",
+    name: "M. Wood",
     title: "Plant Manager",
   },
 ];
@@ -82,11 +84,15 @@ export default function TestimonialsEmployers() {
               style={{ opacity: 0 }}
             >
               <p className="employer-label font-display">Employer</p>
-              <p className="employer-quote font-body">{t.quote}</p>
+              <p className="employer-quote font-body" lang={t.lang}>{t.quote}</p>
               <div className="employer-attr">
                 <span className="employer-name font-display">{t.name}</span>
+                {t.title ? (
+                  <>
                 <span className="employer-dot" aria-hidden="true" />
-                <span className="employer-title font-display">{t.title}</span>
+                <span className="employer-title font-display" lang={t.lang}>{t.title}</span>
+                  </>
+                ) : null}
               </div>
             </li>
           ))}

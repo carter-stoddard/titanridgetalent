@@ -306,7 +306,11 @@ export default function ContactMain() {
                   marginTop: "4px",
                 }}
               >
-                Your information is never shared or sold. Ever.
+                We never sell your information. See our{" "}
+                <a href="/privacy" style={{ color: "var(--tr-navy)", textDecoration: "underline", textUnderlineOffset: "3px" }}>
+                  Privacy Policy
+                </a>
+                .
               </p>
             </form>
           </div>

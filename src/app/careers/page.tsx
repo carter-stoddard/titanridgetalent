@@ -7,12 +7,12 @@ import CareersListings from "@/components/careers/CareersListings";
 import FeaturedListings from "@/components/careers/FeaturedListings";
 import CareersApply from "@/components/careers/CareersApply";
 import CareersCTA from "@/components/careers/CareersCTA";
-import { CAREERS_LISTINGS_VISIBLE } from "@/lib/features";
+import { CAREERS_LISTINGS_VISIBLE, CAREERS_FORM_VISIBLE } from "@/lib/features";
 
 export const metadata: Metadata = {
-  title: "Find a Job | Warehouse, Manufacturing & Office Roles in Southern California",
+  title: "Jobs: Warehouse, Manufacturing & Office",
   description:
-    "Weekly pay and real recruiters. Industrial and administrative jobs across Orange County, Los Angeles, the Inland Empire, and San Diego. Share your info and we reach out when a role fits.",
+    "Weekly pay and opportunities that fit. Administrative and industrial jobs with companies across the U.S. Email your resume to get started.",
   alternates: { canonical: "/careers" },
 };
 
@@ -29,9 +29,9 @@ export default function CareersPage() {
             <CareersListings />
             <CareersCTA />
           </>
-        ) : (
+        ) : CAREERS_FORM_VISIBLE ? (
           <CareersApply />
-        )}
+        ) : null}
       </main>
       <Footer />
     </>

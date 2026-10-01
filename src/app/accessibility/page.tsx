@@ -17,7 +17,7 @@ export default function AccessibilityPage() {
       <main id="main">
         <LegalLayout
           title="Accessibility Statement"
-          lastUpdated="September 27, 2026"
+          lastUpdated="September 30, 2026"
         >
           <div className="legal-divider" aria-hidden="true" />
 
@@ -146,7 +146,7 @@ export default function AccessibilityPage() {
 
           <h2>How We Test</h2>
           <p>
-            The most recent review of this Site was completed on September 27,
+            The most recent review of this Site was completed on September 30,
             2026. It included an automated scan of every page template with
             axe-core against WCAG 2.2 Level A and AA rules, a color-contrast
             audit of the full palette, a keyboard-only pass of navigation,
@@ -168,6 +168,16 @@ export default function AccessibilityPage() {
               alternative text.
             </li>
           </ul>
+
+          <h2>Accommodations in Our Hiring Process</h2>
+          <p>
+            If a disability makes it difficult to use this Site to contact us
+            or send a resume, we will help by phone, email, or another format
+            that works for you. Call (714) 552-4334 or email
+            support@titanridgetalent.com and tell us what you need. Asking
+            for an accommodation will not affect how your application is
+            considered.
+          </p>
 
           <h2>How to Report an Accessibility Issue</h2>
           <p>

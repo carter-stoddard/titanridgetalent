@@ -86,25 +86,16 @@ export default function Footer() {
         <div className="footer-grid">
           {/* COLUMN 1 — Brand */}
           <div className="footer-col footer-col-brand">
-            <Image
-              src="/images/titan-ridge-talent-logo.svg"
-              alt="Titan Ridge Talent"
-              width={260}
-              height={165}
-              className="footer-logo"
-            />
-
-            <p
-              className="font-body italic footer-tagline"
-              style={{
-                fontSize: "14px",
-                lineHeight: 1.6,
-                color: "rgba(255, 255, 255, 0.72)",
-                marginTop: "20px",
-              }}
-            >
-              Where Talent Meets Its Peaks
-            </p>
+            <div className="footer-brand">
+              <Image
+                src="/images/titan-ridge-talent-logo.svg"
+                alt="Titan Ridge Talent"
+                width={260}
+                height={165}
+                className="footer-logo"
+              />
+              <p className="font-body italic footer-tagline">Where Talent Meets Its Peak</p>
+            </div>
 
             {/* Social icons */}
             <div
@@ -378,7 +369,7 @@ export default function Footer() {
               color: "rgba(255, 255, 255, 0.7)",
             }}
           >
-            © 2026 Titan Ridge Talent Solutions LLC. All rights reserved.
+            © 2026 Titan Ridge Talent Solutions LLC. All rights reserved. Equal Opportunity Employer. E-Verify participant.
           </p>
           <div className="footer-legal-row">
             <Link
@@ -435,9 +426,22 @@ export default function Footer() {
       </div>
 
       <style jsx>{`
+        .footer-brand {
+          width: 240px;
+          max-width: 100%;
+        }
         .footer-logo {
-          height: 80px;
-          width: auto;
+          width: 100%;
+          height: auto;
+        }
+        /* Tagline spans the full width of the logo above it */
+        .footer-tagline {
+          margin-top: 18px;
+          /* Sized so the natural text width equals the 240px logo width (no added word spacing) */
+          font-size: 18.75px;
+          line-height: 1.3;
+          color: rgba(255, 255, 255, 0.78);
+          white-space: nowrap;
         }
         .footer-body {
           max-width: var(--tr-max);
@@ -512,11 +516,8 @@ export default function Footer() {
           .footer-col-brand {
             margin-bottom: 0;
           }
-          .footer-logo {
+          .footer-brand {
             margin: 0 auto;
-          }
-          .footer-tagline {
-            text-align: center;
           }
           .footer-socials {
             justify-content: center;

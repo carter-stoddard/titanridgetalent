@@ -15,7 +15,7 @@ export default function PrivacyPage() {
     <>
       <Navbar />
       <main id="main">
-        <LegalLayout title="Privacy Policy" lastUpdated="April 26, 2026">
+        <LegalLayout title="Privacy Policy" lastUpdated="September 30, 2026">
           <div className="legal-divider" aria-hidden="true" />
 
           <h2>Introduction</h2>
@@ -98,6 +98,26 @@ export default function PrivacyPage() {
             information when necessary for a specific permissible purpose, do
             not use it to infer characteristics about you, and protect it with
             appropriate safeguards.
+          </p>
+          <p>
+            For workers we place on assignment, this may also include precise
+            geolocation collected through our timekeeping application when you
+            record your time, the results of a pre-employment drug screen, and
+            the contents of a background report. This Site itself does not
+            collect precise geolocation.
+          </p>
+
+          <h3>Notice at Collection</h3>
+          <p>
+            We collect the categories above at or before the point you submit
+            information to us: identifiers, professional and
+            employment-related information, commercial information,
+            communications, internet and device activity, and, for placed
+            workers and where required for a specific engagement, sensitive
+            personal information. We collect them for the purposes listed
+            under &ldquo;How We Use Information,&rdquo; keep them for the
+            periods listed under &ldquo;Data Retention,&rdquo; and do not sell
+            them or share them for cross-context behavioral advertising.
           </p>
 
           <h2>How We Use Information</h2>
@@ -225,19 +245,60 @@ export default function PrivacyPage() {
             your browser. You can also disable cookies in your browser
             settings, though some features may not function correctly.
           </p>
+          <p>
+            <strong>Do Not Track and Global Privacy Control.</strong> Analytics
+            on this Site load only after you accept them in the consent
+            banner, so no analytics tracking occurs by default. Because we do
+            not sell or share personal information, browser Do Not Track and
+            Global Privacy Control signals do not change how the Site treats
+            your information. We do not allow third parties to collect
+            personal information about your activity across other websites
+            through this Site.
+          </p>
 
           <h2>Data Retention</h2>
           <p>
-            We retain personal information for as long as necessary to fulfill
-            the purposes described in this Policy, including providing
-            services to clients, presenting candidates for current and future
-            opportunities, maintaining records of placements, and complying
-            with our legal, accounting, or reporting obligations. Specific
-            retention periods vary based on the type of information and the
-            nature of the relationship. You may request deletion of your
-            information as described below; we will honor your request unless
-            we are required to retain certain information by law or to
-            establish, exercise, or defend legal claims.
+            We keep personal information only as long as needed for the
+            purposes in this Policy or as the law requires. The criteria we
+            apply are:
+          </p>
+          <ul>
+            <li>
+              <strong>Applicant and candidate records</strong> (resumes,
+              application details, interview and placement notes): at least
+              four years from the date the record was created or the last
+              hiring decision, as California law requires, and longer while
+              you ask us to keep considering you for roles
+            </li>
+            <li>
+              <strong>Payroll, timekeeping, and assignment records</strong>{" "}
+              for workers we place: at least four years after the assignment
+              ends
+            </li>
+            <li>
+              <strong>Form I-9 and work-authorization records</strong>: three
+              years after the date of hire or one year after employment ends,
+              whichever is later
+            </li>
+            <li>
+              <strong>Background reports and drug screen results</strong>:
+              only as long as needed for the engagement and any related legal
+              retention period
+            </li>
+            <li>
+              <strong>Website messages and client inquiries</strong>: as long
+              as needed to respond and to maintain the business relationship
+            </li>
+            <li>
+              <strong>Analytics data</strong>: according to the retention
+              settings of our analytics provider
+            </li>
+          </ul>
+          <p>
+            You may request deletion of your information as described below.
+            We will honor your request unless we are required to retain the
+            information by law or to establish, exercise, or defend legal
+            claims.
           </p>
 
           <h2>Your California Privacy Rights (CCPA / CPRA)</h2>
@@ -288,10 +349,53 @@ export default function PrivacyPage() {
             <a href="mailto:support@titanridgetalent.com">
               support@titanridgetalent.com
             </a>{" "}
-            with the subject line &ldquo;Privacy Rights Request.&rdquo; We
-            will verify your request and respond within the time periods
-            required by applicable law.
+            with the subject line &ldquo;Privacy Rights Request,&rdquo; or
+            call <a href="tel:+17145524334">(714) 552-4334</a>. We will
+            confirm receipt within 10 business days, verify your identity
+            using information we already hold about you, and respond within
+            45 days. If we need more time, we will tell you why and may take
+            up to 45 additional days.
           </p>
+          <p>
+            These rights apply to job applicants, candidates, workers, and
+            business contacts as well as Site visitors. We do not knowingly
+            sell or share the personal information of anyone under 16.
+          </p>
+          <p>
+            <strong>Shine the Light.</strong> We do not disclose personal
+            information to third parties for their own direct marketing
+            purposes.
+          </p>
+
+          <h2>E-Verify and Your Right to Work</h2>
+          <p>
+            Titan Ridge Talent participates in E-Verify. For workers we hire,
+            we provide the Social Security Administration and, if necessary,
+            the Department of Homeland Security with information from your
+            Form I-9 to confirm work authorization.
+          </p>
+          <ul>
+            <li>
+              <a
+                href="https://www.e-verify.gov/sites/default/files/everify/posters/EVerifyParticipationPoster.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                E-Verify Participation Poster (PDF, English and Spanish, opens
+                in a new tab)
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.e-verify.gov/sites/default/files/everify/posters/IER_RightToWorkPoster%20Eng_Es.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Right to Work Poster (PDF, English and Spanish, opens in a new
+                tab)
+              </a>
+            </li>
+          </ul>
 
           <h2>EU/UK Visitors (GDPR)</h2>
           <p>

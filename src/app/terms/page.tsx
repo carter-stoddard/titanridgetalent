@@ -15,7 +15,7 @@ export default function TermsPage() {
     <>
       <Navbar />
       <main id="main">
-        <LegalLayout title="Terms of Use" lastUpdated="April 26, 2026">
+        <LegalLayout title="Terms of Use" lastUpdated="September 30, 2026">
           <div className="legal-divider" aria-hidden="true" />
 
           <h2>Acceptance of These Terms</h2>
@@ -35,10 +35,10 @@ export default function TermsPage() {
           <h2>Who We Are</h2>
           <p>
             Titan Ridge Talent Solutions LLC is a recruiting and staffing firm
-            headquartered in Fullerton, California, offering temporary
-            staffing, temp-to-hire, direct hire, confidential search,
-            professional search, and high-volume manufacturing support
-            services. The Site provides information about our services and a
+            headquartered in Fullerton, California, offering direct hire,
+            executive search, temp-to-hire, temporary assignments,
+            confidential searches, high-volume manufacturing support, and
+            nationwide recruitment services. The Site provides information about our services and a
             way to contact us. Use of the Site does not, by itself, create a
             candidate-recruiter, client-firm, or employment relationship.
             Engagement of our services is governed by a separate written
@@ -58,6 +58,50 @@ export default function TermsPage() {
             other basis protected by federal, state, or local law. All
             placement, sourcing, and screening decisions are made on the basis
             of legitimate, job-related qualifications.
+          </p>
+          <p>
+            <strong>Reasonable accommodation.</strong> If you need an
+            accommodation because of a disability or religious practice to
+            apply, interview, or complete any part of our process, email{" "}
+            <a href="mailto:support@titanridgetalent.com">
+              support@titanridgetalent.com
+            </a>{" "}
+            or call <a href="tel:+17145524334">(714) 552-4334</a>. Requesting
+            an accommodation will not affect how your application is
+            considered.
+          </p>
+          <p>
+            <strong>Fair chance hiring.</strong> We consider qualified
+            applicants with arrest or conviction records in a manner
+            consistent with the California Fair Chance Act and applicable
+            local fair chance ordinances.
+          </p>
+          <p>
+            <strong>E-Verify.</strong> Titan Ridge Talent participates in
+            E-Verify to confirm the work authorization of workers we hire.
+            See our <a href="/privacy">Privacy Policy</a> for the
+            participation and right-to-work notices.
+          </p>
+
+          <h2>Communications</h2>
+          <p>
+            When you contact us or send a resume, you agree that we may reply
+            by email or phone at the contact details you provide about your
+            inquiry and about roles that may fit you. You can ask us to stop
+            at any time by replying to any message or emailing{" "}
+            <a href="mailto:support@titanridgetalent.com">
+              support@titanridgetalent.com
+            </a>
+            .
+          </p>
+
+          <h2>Recruitment Fraud Notice</h2>
+          <p>
+            Scammers sometimes impersonate staffing firms. Our emails come
+            from addresses ending in @titanridgetalent.com. If a message
+            claiming to be from us seems suspicious, call{" "}
+            <a href="tel:+17145524334">(714) 552-4334</a> before responding
+            or sharing any personal or financial information.
           </p>
 
           <h2>Use of the Site</h2>

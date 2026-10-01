@@ -56,62 +56,76 @@ export default function CareersIntro() {
               className="tr-h2"
               style={{ marginTop: "20px", color: "var(--tr-navy)", opacity: 0 }}
             >
-              Get paid weekly. Get placed right
+              Weekly Pay. Opportunities That Fit
             </h2>
           </div>
 
           <div className="careers-intro-body">
             <p ref={setItem(2)} className="tr-body" style={{ color: "var(--tr-ink)", opacity: 0 }}>
-              We place people in industrial and administrative roles across the
-              LA/OC market, and every search we run is for a real client. No
-              ghost postings, no resume traps.
+              We partner with companies across the U.S. to connect great people
+              with opportunities in both Administrative and Industrial roles.
             </p>
             <p ref={setItem(3)} className="tr-body" style={{ color: "var(--tr-ink)", marginTop: "20px", opacity: 0 }}>
-              Tell us who you are and what you do, and share your resume if you
-              have one handy. We&apos;ll reach out when the right role comes up.
+              We take the time to understand your experience, what you&apos;re
+              looking for, and what matters most in your next role. When we find
+              an opportunity that matches your skills and goals, we&apos;ll
+              reach out and walk you through the details.
             </p>
-            <div
-              ref={setItem(4)}
-              className="careers-perk inline-flex items-center"
-              style={{
-                marginTop: "36px",
-                gap: "14px",
-                backgroundColor: "var(--tr-navy)",
-                borderRadius: "9999px",
-                padding: "12px 22px 12px 14px",
-                opacity: 0,
-              }}
-            >
-              <span
-                aria-hidden="true"
-                className="font-display"
-                style={{
-                  width: "30px",
-                  height: "30px",
-                  borderRadius: "50%",
-                  backgroundColor: "var(--tr-gold)",
-                  color: "var(--tr-navy)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontWeight: 700,
-                  fontSize: "16px",
-                }}
-              >
-                $
-              </span>
-              <span
-                className="font-display font-bold uppercase"
-                style={{ fontSize: "14px", letterSpacing: "0.2em", color: "var(--tr-cream)" }}
-              >
-                Weekly Pay
-              </span>
+            <div ref={setItem(4)} className="careers-intro-cta" style={{ marginTop: "40px", opacity: 0 }}>
+              <h3 className="careers-intro-sub font-display">Looking for your next opportunity?</h3>
+              <p className="tr-body" style={{ color: "var(--tr-ink)", marginTop: "10px" }}>
+                Send your resume to{" "}
+                <a href="mailto:support@titanridgetalent.com?subject=Resume%20for%20Titan%20Ridge%20Talent" className="careers-intro-mail">
+                  Support@titanridgetalent.com
+                </a>
+              </p>
+              <div style={{ marginTop: "26px" }}>
+                <a href="mailto:support@titanridgetalent.com?subject=Resume%20for%20Titan%20Ridge%20Talent" className="tr-btn tr-btn-gold">
+                  Email Resume
+                </a>
+              </div>
+              <p className="careers-intro-note font-body">
+                By emailing your resume you agree to our{" "}
+                <a href="/privacy" className="careers-intro-mail">
+                  Privacy Policy
+                </a>
+                . Titan Ridge Talent is an Equal Opportunity Employer and
+                participates in E-Verify. Need an accommodation to apply? Call{" "}
+                <a href="tel:+17145524334" className="careers-intro-mail">
+                  (714) 552-4334
+                </a>
+                .
+              </p>
             </div>
           </div>
         </div>
       </div>
 
       <style jsx>{`
+        .careers-intro-sub {
+          font-weight: 600;
+          text-transform: uppercase;
+          font-size: clamp(22px, 2vw, 28px);
+          line-height: 1.05;
+          letter-spacing: 0.01em;
+          color: var(--tr-navy);
+        }
+        .careers-intro-note {
+          margin-top: 22px;
+          font-size: 16px;
+          line-height: 1.6;
+          color: var(--tr-ink);
+          max-width: 56ch;
+        }
+        .careers-intro-mail {
+          color: var(--tr-navy);
+          font-weight: 500;
+          text-decoration: underline;
+          text-underline-offset: 4px;
+        }
+        .careers-intro-mail:hover {
+          color: var(--tr-gold-text);
+        }
         .careers-intro-grid {
           display: grid;
           grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);

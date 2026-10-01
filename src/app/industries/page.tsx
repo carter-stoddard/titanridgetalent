@@ -7,9 +7,9 @@ import IndustriesIndustrial from "@/components/industries/IndustriesIndustrial";
 import IndustriesCorporate from "@/components/industries/IndustriesCorporate";
 
 export const metadata: Metadata = {
-  title: "Industries | Industrial & Administrative Staffing in Southern California",
+  title: "Industrial & Administrative Staffing",
   description:
-    "Warehouse, manufacturing, logistics, aerospace, and skilled trades staffing, plus HR, finance, administrative, technology, and sales recruiting across Southern California.",
+    "Manufacturing, logistics, food and beverage, skilled trades, and administrative staffing. See the industries Titan Ridge Talent recruits for.",
   alternates: { canonical: "/industries" },
 };
 

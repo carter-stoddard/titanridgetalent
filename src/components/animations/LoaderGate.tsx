@@ -1,44 +1,29 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Loader from "./Loader";
 
-export default function LoaderGate({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const [loading, setLoading] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    const hasVisited = sessionStorage.getItem("titan-loaded");
-    if (!hasVisited) {
-      setLoading(true);
-    }
-    setMounted(true);
-  }, []);
+// The intro loader is an overlay on top of the page, never a gate around it.
+// Page content is always rendered and painted underneath, so first paint and
+// Largest Contentful Paint are not held back until JavaScript hydrates.
+// Returning visitors (sessionStorage "titan-loaded") get the overlay hidden
+// before first paint by the inline script in layout.tsx (html.tr-visited).
+export default function LoaderGate({ children }: { children: React.ReactNode }) {
+  const [done, setDone] = useState(false);
 
   const handleComplete = () => {
-    sessionStorage.setItem("titan-loaded", "true");
-    setLoading(false);
+    try {
+      sessionStorage.setItem("titan-loaded", "true");
+    } catch {
+      /* storage unavailable (private mode) — loader simply shows each load */
+    }
+    setDone(true);
   };
-
-  // Avoid hydration mismatch — show nothing until mounted
-  if (!mounted) {
-    return <div className="opacity-0">{children}</div>;
-  }
 
   return (
     <>
-      {loading && <Loader onComplete={handleComplete} />}
-      <div
-        className={`transition-opacity duration-500 ${
-          loading ? "opacity-0" : "opacity-100"
-        }`}
-      >
-        {children}
-      </div>
+      {!done && <Loader onComplete={handleComplete} />}
+      {children}
     </>
   );
 }
